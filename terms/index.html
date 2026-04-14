@@ -4,31 +4,40 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="Marshall VPN Terms of Use — Terms and conditions for using the Marshall VPN app.">
-<meta name="theme-color" content="#0A0A0F">
+<meta name="theme-color" content="#0D0D14">
 <title>Terms of Use — Marshall VPN</title>
-<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="icon" type="image/png" href="../assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0A0A0F;--bg-alt:#0D0D16;--surface:rgba(255,255,255,0.04);--border:rgba(255,255,255,0.06);
-  --border-light:rgba(255,255,255,0.10);--text:#E8E8ED;--text-dim:rgba(255,255,255,0.45);
-  --text-muted:rgba(255,255,255,0.25);--accent:#6C5CE7;--accent-light:#A855F7;
+  --bg:#0C0C14;--bg-alt:#101018;--surface:rgba(255,255,255,0.055);--border:rgba(255,255,255,0.07);
+  --border-light:rgba(255,255,255,0.12);--text:#E8E8ED;--text-dim:rgba(255,255,255,0.48);
+  --text-muted:rgba(255,255,255,0.28);--accent:#6C5CE7;--accent-light:#A855F7;
   --success:#00D2A0;--radius-lg:20px;--radius-md:14px;
 }
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sans-serif;line-height:1.7}
+.terms-bg-glow{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 90% 55% at 15% 8%,rgba(108,92,231,.2),transparent 58%),
+    radial-gradient(ellipse 75% 50% at 92% 22%,rgba(168,85,247,.16),transparent 52%),
+    radial-gradient(ellipse 65% 45% at 48% 88%,rgba(0,210,160,.1),transparent 48%);
+  filter:blur(72px);opacity:.95;
+}
+body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sans-serif;line-height:1.7;position:relative;min-height:100vh}
+.nav,.content,.footer{position:relative;z-index:1}
 a{color:var(--accent-light);text-decoration:none;transition:color .3s}
 a:hover{color:#c084fc}
 
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:1000;
   padding:14px 0;
-  background:rgba(10,10,15,0.85);
+  background:rgba(14,14,20,0.78);
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(255,255,255,0.06);
+  border-bottom:1px solid rgba(255,255,255,0.07);
 }
 .nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:800px;margin:0 auto;padding:0 24px}
 .nav-logo{display:flex;align-items:center;gap:10px}
@@ -75,14 +84,16 @@ a:hover{color:#c084fc}
 </head>
 <body>
 
+<div class="terms-bg-glow" aria-hidden="true"></div>
+
 <nav class="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
-      <img src="assets/logo.png" alt="Marshall VPN">
+    <a href="../" class="nav-logo">
+      <img src="../assets/logo.png" alt="Marshall VPN">
       <span class="nav-logo-text">Marshall</span>
     </a>
     <div class="nav-right">
-      <a href="index.html" class="nav-back">
+      <a href="../" class="nav-back">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
         <span data-en="Back to Home" data-ru="На главную">Back to Home</span>
       </a>
