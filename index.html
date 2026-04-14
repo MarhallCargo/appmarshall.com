@@ -66,28 +66,29 @@ img{max-width:100%;display:block}
 .nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;background:rgba(10,10,15,.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.04);transition:all .4s}
 .nav.scrolled{padding:10px 0;background:rgba(10,10,15,.85);border-bottom-color:rgba(255,255,255,.06)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:0 24px}
-.nav-logo{display:flex;align-items:center;gap:10px}
-.nav-logo img{width:36px;height:36px;border-radius:9px}
-.nav-logo-text{font-size:16px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text)}
+.nav-logo{display:flex;align-items:center;gap:10px;min-height:36px}
+.nav-logo img{width:36px;height:36px;border-radius:9px;flex-shrink:0}
+.nav-logo-text{font-size:16px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text);height:36px;display:inline-flex;align-items:center;line-height:1;box-sizing:border-box}
 .nav-links{display:flex;align-items:center;gap:24px}
 .nav-links a{font-size:13px;font-weight:500;color:var(--text-dim);transition:color .3s}
 .nav-links a:hover{color:var(--text)}
-.nav-cta{padding:8px 20px;border-radius:20px;font-size:13px;font-weight:600;background:linear-gradient(135deg,var(--accent),var(--accent-light));color:#fff;border:none;cursor:pointer;transition:transform .3s,box-shadow .3s}
+.nav-cta{height:36px;min-height:36px;padding:0 18px;border-radius:20px;font-size:13px;font-weight:600;background:linear-gradient(135deg,var(--accent),var(--accent-light));color:#fff;border:none;cursor:pointer;transition:transform .3s,box-shadow .3s;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;font-family:'Inter',sans-serif;white-space:nowrap}
 .nav-cta:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(108,92,231,.3)}
-.nav-lang{padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;background:var(--surface);color:var(--text-dim);border:1px solid var(--border-light);cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif;letter-spacing:1px}
+.nav-lang{height:36px;min-height:36px;padding:0 14px;border-radius:8px;font-size:12px;font-weight:600;background:var(--surface);color:var(--text-dim);border:1px solid var(--border-light);cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif;letter-spacing:1px;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box}
 .nav-lang:hover{background:var(--surface-hover);color:var(--text)}
 .nav-mobile-right{display:none;align-items:center;gap:10px}
-.nav-mobile-lang{padding:5px 12px;border-radius:7px;font-size:11px;font-weight:600;background:rgba(255,255,255,.05);color:var(--text-dim);border:1px solid rgba(255,255,255,.12);cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif;letter-spacing:1px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.nav-mobile-lang{height:32px;min-height:32px;padding:0 12px;border-radius:7px;font-size:11px;font-weight:600;background:rgba(255,255,255,.05);color:var(--text-dim);border:1px solid rgba(255,255,255,.12);cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif;letter-spacing:1px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box}
 .nav-mobile-lang:hover{background:rgba(255,255,255,.08);color:var(--text)}
-.nav-mobile-right .nav-cta{padding:7px 16px;font-size:12px;border-radius:20px;white-space:nowrap}
+.nav-mobile-right .nav-cta{height:32px;min-height:32px;padding:0 14px;font-size:12px;border-radius:20px;white-space:nowrap}
 @media(max-width:768px){.nav-links{display:none}.nav-mobile-right{display:flex}}
 @media(max-width:768px){
   .nav{padding:11px 0;background:rgba(10,10,15,.42);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom-color:rgba(255,255,255,.03)}
   .nav.scrolled{padding:8px 0;background:rgba(10,10,15,.62);border-bottom-color:rgba(255,255,255,.05)}
   .nav-inner{padding:0 20px}
+  .nav-logo{min-height:32px}
   .nav-logo img{width:32px;height:32px;border-radius:8px}
-  .nav-logo-text{font-size:15px;letter-spacing:1.6px}
-  .nav-mobile-lang{padding:4px 11px;font-size:10px}
+  .nav-logo-text{font-size:15px;letter-spacing:1.6px;height:32px}
+  .nav-mobile-lang{font-size:10px;padding:0 10px}
 }
 
 /* Hero — desktop (classic 2-col) vs mobile (phone + benefit tiles) */
@@ -464,7 +465,7 @@ img{max-width:100%;display:block}
 /* Map */
 .map-section{position:relative;z-index:2;padding:80px 0 60px}
 .map-wrapper{margin-top:40px;border-radius:var(--radius-lg);overflow:hidden;background:linear-gradient(180deg,#0a0f1a,#0f1628,#0a0f1a);border:1px solid var(--border);box-shadow:0 40px 80px rgba(0,0,0,.4)}
-.map-header{padding:20px 24px 0;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px}
+.map-header{padding:10px 24px 0;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px}
 .map-header-text{display:none}
 .map-header h3{margin:0;font-size:18px;font-weight:700;letter-spacing:-.02em;color:#f0f4f8}
 .map-header p{margin:4px 0 0;font-size:11px;color:#5a7a9f;letter-spacing:.03em}
@@ -472,7 +473,7 @@ img{max-width:100%;display:block}
 .map-toggle button{padding:7px 14px;font-size:11px;font-weight:500;border:none;border-radius:8px;cursor:pointer;transition:all .3s;color:#5a7a9f;background:transparent;font-family:'Inter',sans-serif}
 .map-toggle button.active-srv{background:linear-gradient(135deg,#0a7a44,#00d67e);color:#fff}
 .map-toggle button.active-heat{background:linear-gradient(135deg,#6C5CE7,#A855F7);color:#fff}
-#map-container{padding:8px 12px 0;position:relative}
+#map-container{padding:4px 12px 0;position:relative}
 #map-svg{width:100%;display:block}
 .map-tooltip{position:absolute;background:rgba(10,15,25,.92);backdrop-filter:blur(14px);border-radius:9px;padding:8px 12px;pointer-events:none;z-index:100;display:none}
 .map-tooltip-label{font-size:10px;color:#6a84a5;text-transform:uppercase;letter-spacing:.08em;font-weight:500;margin-bottom:3px}
@@ -481,7 +482,7 @@ img{max-width:100%;display:block}
 .map-tooltip-val{font-size:13px;font-weight:600;color:#e8edf3}
 .map-tooltip-bar{margin-top:6px;height:2.5px;border-radius:2px;background:#1a2030;overflow:hidden}
 .map-tooltip-bar-fill{height:100%;border-radius:2px}
-.map-legend{padding:8px 24px 16px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.map-legend{padding:4px 24px 8px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
 .map-legend-item{display:flex;align-items:center;gap:5px;font-size:10px;color:#5a7a9f;font-weight:500}
 .map-legend-dot{width:8px;height:8px;border-radius:3px}
 .map-legend-dot-round{border-radius:50%;width:7px;height:7px}
@@ -1755,7 +1756,7 @@ function renderMap(){
   svg.attr("viewBox",`0 0 ${w} ${h}`);svg.selectAll("*").remove();
   if(!geo)return;
   const isH=mapMode==="heatmap",L=currentLang;
-  const proj=d3.geoNaturalEarth1().fitSize([w-28,h-28],{type:"Sphere"}).translate([w/2,h/2]);
+  const proj=d3.geoNaturalEarth1().fitSize([w-14,h-14],{type:"Sphere"}).translate([w/2,h/2]);
   const path=d3.geoPath().projection(proj);
   const defs=svg.append("defs");
   defs.append("radialGradient").attr("id","ocean").attr("cx","50%").attr("cy","42%").html('<stop offset="0%" stop-color="#111d30"/><stop offset="100%" stop-color="#0a1020"/>');
@@ -1818,7 +1819,7 @@ function renderMap(){
 
   const leg=document.getElementById("map-legend");const labelsMap=L==='ru'?lLabRu:lLab;
   if(isH){
-    leg.innerHTML=[1,2,3,4,5].map(lv=>`<div class="map-legend-item"><div class="map-legend-dot" style="background:${hCol[lv]}"></div>${labelsMap[lv]}</div>`).join("");
+    leg.innerHTML=[2,3,4,5].map(lv=>`<div class="map-legend-item"><div class="map-legend-dot" style="background:${hCol[lv]}"></div>${labelsMap[lv]}</div>`).join("");
   }else{
     const srvText=L==='ru'?"Наши серверы":"Our servers";
     leg.innerHTML=`<div class="map-legend-item"><div class="map-legend-dot map-legend-dot-round" style="background:${GREEN};box-shadow:0 0 5px rgba(0,214,126,.4)"></div>${srvText}</div>`;
