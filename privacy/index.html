@@ -52,10 +52,6 @@ a:hover{color:#c084fc}
   transition:all .3s;font-family:'Inter',sans-serif;letter-spacing:0.5px;
 }
 .nav-lang:hover{background:rgba(255,255,255,0.07);color:var(--text)}
-.privacy-nav .nav-lang.active{
-  background:rgba(108,92,231,0.14);color:var(--text);
-  border-color:rgba(168,85,247,0.35);
-}
 
 .privacy-main{max-width:800px;margin:0 auto;padding:100px 24px 40px}
 
@@ -105,8 +101,7 @@ code{font-size:13px;background:rgba(255,255,255,0.06);padding:2px 6px;border-rad
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
         <span>Back to home</span>
       </a>
-      <button type="button" class="nav-lang active" data-lang="en" onclick="switchLang('en')">English</button>
-      <button type="button" class="nav-lang" data-lang="ru" onclick="switchLang('ru')">Русский</button>
+      <button type="button" class="nav-lang" onclick="togglePrivacyLang()" id="privacyLangBtn">RU</button>
     </div>
   </div>
 </nav>
@@ -360,17 +355,18 @@ code{font-size:13px;background:rgba(255,255,255,0.06);padding:2px 6px;border-rad
 </footer>
 
     <script>
-        function switchLang(lang) {
-            document.querySelectorAll('.content-block').forEach(el => el.classList.remove('active'));
-            document.getElementById(lang).classList.add('active');
-            document.querySelectorAll('.privacy-nav .nav-lang').forEach(function (btn) {
-                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-            });
-            document.documentElement.lang = lang === 'ru' ? 'ru' : 'en';
+        var privacyLang = 'en';
+        function togglePrivacyLang() {
+            privacyLang = privacyLang === 'en' ? 'ru' : 'en';
+            document.querySelectorAll('.content-block').forEach(function (el) { el.classList.remove('active'); });
+            document.getElementById(privacyLang).classList.add('active');
+            var btn = document.getElementById('privacyLangBtn');
+            if (btn) btn.textContent = privacyLang === 'en' ? 'RU' : 'EN';
+            document.documentElement.lang = privacyLang;
             var back = document.getElementById('privacyBackLink');
             if (back) {
                 var label = back.querySelector('span');
-                if (label) label.textContent = lang === 'ru' ? 'На главную' : 'Back to home';
+                if (label) label.textContent = privacyLang === 'ru' ? 'На главную' : 'Back to home';
             }
         }
     </script>
