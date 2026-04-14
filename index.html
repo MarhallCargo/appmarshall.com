@@ -7,6 +7,7 @@
 <meta name="theme-color" content="#0A0A0F">
 <title>Marshall VPN — Your Connection. Your Rules.</title>
 <link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="apple-touch-icon" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -78,15 +79,7 @@ img{max-width:100%;display:block}
 .nav-mobile-right{display:none;align-items:center;gap:10px}
 .nav-mobile-lang{padding:5px 12px;border-radius:7px;font-size:11px;font-weight:600;background:rgba(255,255,255,.05);color:var(--text-dim);border:1px solid rgba(255,255,255,.12);cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif;letter-spacing:1px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
 .nav-mobile-lang:hover{background:rgba(255,255,255,.08);color:var(--text)}
-.nav-mobile-burger{cursor:pointer;background:none;border:none;padding:8px}
-.nav-mobile-burger span{display:block;width:22px;height:2px;background:var(--text);margin:5px 0;border-radius:2px;transition:all .3s}
-.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:28px;overflow:hidden}
-.mobile-menu::before{content:'';position:absolute;inset:0;background:linear-gradient(160deg,#0A0A0F 0%,#0f0a1e 30%,#0a0f1a 60%,#0A0A0F 100%);z-index:0}
-.mobile-menu::after{content:'';position:absolute;inset:-18%;z-index:0;pointer-events:none;background:radial-gradient(circle at 18% 22%,rgba(108,92,231,.34),transparent 28%),radial-gradient(circle at 82% 18%,rgba(168,85,247,.26),transparent 24%),radial-gradient(circle at 72% 78%,rgba(0,210,160,.16),transparent 24%),radial-gradient(circle at 28% 84%,rgba(108,92,231,.18),transparent 22%);filter:blur(46px);animation:orbFloat 14s ease-in-out infinite}
-.mobile-menu.open{display:flex}
-.mobile-menu a,.mobile-menu button{position:relative;z-index:1}
-.mobile-menu a{font-size:20px;font-weight:500;color:var(--text)}
-.mobile-menu-close{position:absolute;top:20px;right:24px;font-size:28px;color:var(--text);background:none;border:none;cursor:pointer;z-index:1}
+.nav-mobile-right .nav-cta{padding:7px 16px;font-size:12px;border-radius:20px;white-space:nowrap}
 @media(max-width:768px){.nav-links{display:none}.nav-mobile-right{display:flex}}
 @media(max-width:768px){
   .nav{padding:11px 0;background:rgba(10,10,15,.42);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom-color:rgba(255,255,255,.03)}
@@ -95,7 +88,6 @@ img{max-width:100%;display:block}
   .nav-logo img{width:32px;height:32px;border-radius:8px}
   .nav-logo-text{font-size:15px;letter-spacing:1.6px}
   .nav-mobile-lang{padding:4px 11px;font-size:10px}
-  .nav-mobile-burger{padding:6px}
 }
 
 /* Hero — desktop (classic 2-col) vs mobile (phone + benefit tiles) */
@@ -119,6 +111,10 @@ img{max-width:100%;display:block}
 .hero-phone-inline{display:none}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 .hero-layout--desktop .hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;animation:fadeInUp .8s ease-out .3s both}
+.hero-layout--desktop .hero-actions.hero-actions--split{flex-direction:column;align-items:stretch;gap:14px;max-width:100%}
+.hero-download-row{display:flex;gap:14px;align-items:stretch;width:100%;flex-wrap:wrap}
+.hero-download-row .btn-primary{flex:1;min-width:min(200px,100%);justify-content:center;box-sizing:border-box}
+.hero-layout--desktop .hero-actions--split .hero-learn-more{width:100%;justify-content:center;box-sizing:border-box}
 .hero-layout--desktop .hero-visual{display:flex;justify-content:flex-end;align-items:center;justify-self:end;animation:fadeInUp .8s ease-out .4s both;width:100%}
 .hero-layout--mobile .hero-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(16px,3vw,28px);width:100%}
 .hero-layout--mobile .hero-top{position:relative;z-index:2;text-align:center}
@@ -139,8 +135,11 @@ img{max-width:100%;display:block}
 }
 .hero-benefits-title .gradient-text-accent{display:inline}
 .hero-benefits-grid{margin-top:0}
-.btn-primary{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:14px;font-size:16px;font-weight:600;background:linear-gradient(135deg,var(--accent),var(--accent-light));color:#fff;border:none;cursor:pointer;transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden}
-.btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);opacity:0;transition:opacity .3s}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:14px;font-size:16px;font-weight:600;background:linear-gradient(135deg,var(--accent),var(--accent-light));color:#fff;border:none;cursor:pointer;transition:transform .3s,box-shadow .3s;position:relative;overflow:visible}
+.btn-primary > svg:first-of-type{flex:0 0 auto;width:20px;height:20px;min-width:20px;min-height:20px;max-width:20px;max-height:20px;align-self:center;display:block;overflow:visible}
+.btn-primary .icon-android{flex:0 0 auto;width:20px;height:20px;min-width:20px;min-height:20px;max-width:20px;max-height:20px}
+.btn-primary::before{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);opacity:0;transition:opacity .3s;pointer-events:none;z-index:0}
+.btn-primary > *{position:relative;z-index:1}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 60px rgba(108,92,231,.35)}
 .btn-primary:hover::before{opacity:1}
 .btn-secondary{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:14px;font-size:16px;font-weight:600;background:var(--surface);color:var(--text);border:1px solid var(--border-light);cursor:pointer;transition:all .3s}
@@ -197,12 +196,18 @@ img{max-width:100%;display:block}
     gap:clamp(10px,2.5vw,14px);width:100%;max-width:min(400px,100%);margin:0 auto;
     animation:fadeInUp .8s ease-out .4s both
   }
-  .hero-layout--mobile .hero-mobile-actions .btn-primary,.hero-layout--mobile .hero-mobile-actions .btn-secondary{
+  .hero-mobile-download-row{display:flex;gap:10px;align-items:stretch;width:100%}
+  .hero-layout--mobile .hero-mobile-download-row .btn-primary{
+    flex:1;min-width:0;width:auto;justify-content:center;box-sizing:border-box;
+    padding:clamp(14px,3.5vw,18px) clamp(10px,3vw,16px);font-size:clamp(12px,3.2vw,15px);font-weight:600;
+    border-radius:14px;gap:8px;min-height:0
+  }
+  .hero-layout--mobile .hero-mobile-download-row .btn-primary svg{width:20px;height:20px;flex-shrink:0}
+  .hero-layout--mobile .hero-mobile-actions > .btn-secondary{
     width:100%;justify-content:center;box-sizing:border-box;
     padding:clamp(16px,4vw,20px) clamp(20px,5vw,28px);font-size:clamp(14px,3.8vw,16px);font-weight:600;
     border-radius:14px;gap:10px;min-height:0
   }
-  .hero-layout--mobile .hero-mobile-actions .btn-primary svg{width:22px;height:22px;flex-shrink:0}
   .hero-layout--mobile .hero-mobile-actions .btn-secondary svg{width:18px;height:18px;flex-shrink:0}
   #hero .hero-layout--mobile .hero-mobile-copy-block .hero-benefits-title{
     font-size:clamp(20px,5.2vw,26px);margin-bottom:0;line-height:1.18
@@ -536,7 +541,12 @@ img{max-width:100%;display:block}
 .cta-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top,rgba(108,92,231,.1),transparent 60%);pointer-events:none}
 .cta-box h2{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.03em;margin-bottom:12px;position:relative;z-index:1}
 .cta-box p{font-size:16px;color:var(--text-dim);max-width:460px;margin:0 auto 28px;position:relative;z-index:1}
-.cta-buttons{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;position:relative;z-index:1}
+.cta-buttons{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;position:relative;z-index:1;width:100%}
+.cta-download-stack{display:flex;flex-direction:column;align-items:stretch;width:100%;max-width:400px;gap:12px}
+.cta-download-stack .btn-primary{width:100%;justify-content:center;box-sizing:border-box}
+.cta-download-stack .btn-primary > svg:first-of-type{width:18px;height:18px;min-width:18px;min-height:18px;max-width:18px;max-height:18px}
+.cta-download-stack .btn-primary .icon-android{width:18px;height:18px;min-width:18px;min-height:18px;max-width:18px;max-height:18px}
+.cta-buttons .btn-telegram{width:100%;max-width:400px;justify-content:center;box-sizing:border-box}
 .btn-telegram{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border-radius:14px;font-size:15px;font-weight:600;background:rgba(0,136,204,.15);color:#29b6f6;border:1px solid rgba(0,136,204,.25);cursor:pointer;transition:all .3s}
 .btn-telegram:hover{background:rgba(0,136,204,.25);border-color:rgba(0,136,204,.4);transform:translateY(-2px)}
 
@@ -638,20 +648,11 @@ img{max-width:100%;display:block}
       <button class="nav-lang" onclick="toggleLang()" id="langBtn">RU</button>
     </div>
     <div class="nav-mobile-right">
+      <button type="button" class="nav-cta" onclick="smoothScrollTo('#cta')" data-en="Get Started" data-ru="Начать">Get Started</button>
       <button class="nav-mobile-lang" onclick="toggleLang()" id="langBtnMobile">RU</button>
-      <button class="nav-mobile-burger" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
-
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-menu-close" onclick="toggleMobileMenu()">&times;</button>
-  <a href="#app" onclick="toggleMobileMenu()" data-en="Features" data-ru="Возможности">Features</a>
-  <a href="#pricing" onclick="toggleMobileMenu()" data-en="Pricing" data-ru="Тарифы">Pricing</a>
-  <a href="#security" onclick="toggleMobileMenu()" data-en="Security" data-ru="Безопасность">Security</a>
-  <button class="btn-primary" onclick="toggleMobileMenu();smoothScrollTo('#cta')" data-en="Get Started" data-ru="Начать">Get Started</button>
-</div>
 
 <!-- ============ BLOCK 1: HERO (desktop: classic 2-col | mobile: phone + tiles) ============ -->
 <section class="hero" id="hero">
@@ -660,12 +661,18 @@ img{max-width:100%;display:block}
       <div class="hero-content">
         <h1 data-en="Your Connection.<br><span class='gradient-text'>Your Rules.</span>" data-ru="Ваш интернет.<br><span class='gradient-text'>Ваши правила.</span>">Your Connection.<br><span class="gradient-text">Your Rules.</span></h1>
         <p data-en="Fast, private VPN for iOS. Our servers worldwide, modern encryption, and 30 days free — no credit card required." data-ru="Быстрый и приватный VPN для iOS. Наши серверы по всему миру, современное шифрование и 30 дней бесплатно — без привязки карты.">Fast, private VPN for iOS. Our servers worldwide, modern encryption, and 30 days free — no credit card required.</p>
-        <div class="hero-actions">
-          <button type="button" class="btn-primary" onclick="openIosComingSoonModal()">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            <span data-en="Download for iOS" data-ru="Скачать для iOS">Download for iOS</span>
-          </button>
-          <a href="#stats" class="btn-secondary">
+        <div class="hero-actions hero-actions--split">
+          <div class="hero-download-row">
+            <button type="button" class="btn-primary" onclick="openIosComingSoonModal()">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" preserveAspectRatio="xMidYMid meet"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              <span data-en="Download for iOS or macOS" data-ru="Скачать для iOS и macOS">Download for iOS or macOS</span>
+            </button>
+            <button type="button" class="btn-primary" onclick="openAndroidComingSoonModal()">
+              <svg class="icon-android" width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg>
+              <span data-en="Download for Android" data-ru="Скачать для Android">Download for Android</span>
+            </button>
+          </div>
+          <a href="#stats" class="btn-secondary hero-learn-more">
             <span data-en="Learn More" data-ru="Узнать больше">Learn More</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7.8H7.8"/></svg>
           </a>
@@ -734,10 +741,16 @@ img{max-width:100%;display:block}
         </div>
       </div>
       <div class="hero-actions hero-mobile-actions">
-        <button type="button" class="btn-primary" onclick="openIosComingSoonModal()">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          <span data-en="Download for iOS" data-ru="Скачать для iOS">Download for iOS</span>
-        </button>
+        <div class="hero-mobile-download-row">
+          <button type="button" class="btn-primary" onclick="openIosComingSoonModal()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" preserveAspectRatio="xMidYMid meet"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <span data-en="for iOS and macOS" data-ru="для iOS и macOS">for iOS and macOS</span>
+          </button>
+          <button type="button" class="btn-primary" onclick="openAndroidComingSoonModal()">
+            <svg class="icon-android" width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg>
+            <span data-en="for Android" data-ru="для Android">for Android</span>
+          </button>
+        </div>
         <a href="#security" class="btn-secondary">
           <span data-en="Learn More" data-ru="Узнать больше">Learn More</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7.8H7.8"/></svg>
@@ -1236,12 +1249,18 @@ img{max-width:100%;display:block}
       <h2 data-en="Ready to take control of your <span class='gradient-text'>connection</span>?" data-ru="Готовы взять контроль над <span class='gradient-text'>соединением</span>?">Ready to take control of your <span class="gradient-text">connection</span>?</h2>
       <p data-en="Download Marshall VPN and get 30 days of free access. No credit card required." data-ru="Скачайте Marshall VPN и получите 30 дней бесплатного доступа. Без привязки карты.">Download Marshall VPN and get 30 days of free access. No credit card required.</p>
       <div class="cta-buttons">
-        <button type="button" class="btn-primary" onclick="openIosComingSoonModal()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          <span data-en="Download for iOS" data-ru="Скачать для iOS">Download for iOS</span>
-        </button>
-        <a href="https://t.me/MarshallVPNBot" target="_blank" class="btn-telegram">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        <div class="cta-download-stack">
+          <button type="button" class="btn-primary" onclick="openIosComingSoonModal()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" preserveAspectRatio="xMidYMid meet"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <span data-en="Download for iOS or macOS" data-ru="Скачать для iOS и macOS">Download for iOS or macOS</span>
+          </button>
+          <button type="button" class="btn-primary" onclick="openAndroidComingSoonModal()">
+            <svg class="icon-android" width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg>
+            <span data-en="Download for Android" data-ru="Скачать для Android">Download for Android</span>
+          </button>
+        </div>
+        <a href="https://t.me/MarshallVPNBot" target="_blank" class="btn-telegram" rel="noopener noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
           <span data-en="Get Started via Telegram" data-ru="Начать через Telegram">Get Started via Telegram</span>
         </a>
       </div>
@@ -1270,7 +1289,7 @@ img{max-width:100%;display:block}
       </div>
       <div class="footer-col footer-col--contact">
         <h4 data-en="Contact" data-ru="Контакты">Contact</h4>
-        <a href="mailto:support@marshallbe.online" data-en="Email Us" data-ru="Написать нам">Email Us</a>
+        <a href="mailto:support@appmarshall.com" data-en="Email Us" data-ru="Написать нам">Email Us</a>
         <a href="https://t.me/MarshallVPNBot" target="_blank">Telegram</a>
         <a href="privacy/" data-en="Privacy Policy" data-ru="Конфиденциальность">Privacy Policy</a>
         <a href="terms/" data-en="Terms of Use" data-ru="Условия использования">Terms of Use</a>
@@ -1310,6 +1329,34 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
+<!-- Android: Google Play release pending -->
+<div class="ios-soon-modal" id="androidSoonModal" role="dialog" aria-modal="true" aria-labelledby="androidSoonTitle" aria-hidden="true">
+  <div class="ios-soon-modal__backdrop" onclick="closeAndroidComingSoonModal()" aria-hidden="true"></div>
+  <div class="ios-soon-modal__panel">
+    <button type="button" class="ios-soon-modal__close" onclick="closeAndroidComingSoonModal()" aria-label="Close" data-en="×" data-ru="×">×</button>
+    <div class="ios-soon-visual" aria-hidden="true">
+      <div class="ios-soon-orbit">
+        <div class="ios-soon-ring"></div>
+        <div class="ios-soon-ring ios-soon-ring--2"></div>
+        <div class="ios-soon-dots">
+          <span class="ios-soon-dot"></span>
+          <span class="ios-soon-dot"></span>
+          <span class="ios-soon-dot"></span>
+        </div>
+        <div class="ios-soon-core">
+          <div class="ios-soon-scan"></div>
+          <img src="assets/logo.png" alt="" width="40" height="40">
+        </div>
+      </div>
+    </div>
+    <div class="ios-soon-bar" aria-hidden="true"></div>
+    <h3 id="androidSoonTitle" data-en="Almost there — Google Play release in progress" data-ru="Почти готово — релиз в Google Play в процессе">Almost there — Google Play release in progress</h3>
+    <p data-en="Marshall VPN for Android is going through Google’s review on Google Play. When it’s approved, you’ll install it from the store in one tap — just like any trusted app." data-ru="Marshall VPN для Android проходит проверку Google в Google Play. После одобрения вы установите приложение из магазина в одно касание — как любое проверенное приложение.">Marshall VPN for Android is going through Google’s review on Google Play. When it’s approved, you’ll install it from the store in one tap — just like any trusted app.</p>
+    <span class="ios-soon-date" data-en="Target launch · May 1, 2026" data-ru="Ориентир запуска · 1 мая 2026">Target launch · May 1, 2026</span>
+    <p class="ios-soon-foot" data-en="We’re preparing the Play build — thanks for waiting." data-ru="Готовим сборку для Google Play — спасибо за ожидание.">We’re preparing the Play build — thanks for waiting.</p>
+  </div>
+</div>
+
 <!-- ============ SCRIPTS ============ -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script>
@@ -1329,6 +1376,7 @@ window.toggleLang=function(){
     if(t!==null){if(el.tagName==='INPUT'||el.tagName==='TEXTAREA')el.placeholder=t;else el.innerHTML=t}
   });
   syncIosSoonModalAria();
+  syncAndroidSoonModalAria();
   if(typeof updateMapLabels==='function')updateMapLabels();
   if(geo)renderMap();
 };
@@ -1343,7 +1391,13 @@ function syncIosSoonModalAria(){
   const closeBtn=document.querySelector('#iosSoonModal .ios-soon-modal__close');
   if(closeBtn)closeBtn.setAttribute('aria-label',currentLang==='en'?'Close':'Закрыть');
 }
+function syncAndroidSoonModalAria(){
+  const closeBtn=document.querySelector('#androidSoonModal .ios-soon-modal__close');
+  if(closeBtn)closeBtn.setAttribute('aria-label',currentLang==='en'?'Close':'Закрыть');
+}
 window.openIosComingSoonModal=function(){
+  const a=document.getElementById('androidSoonModal');
+  if(a&&a.classList.contains('is-open'))closeAndroidComingSoonModal();
   const m=document.getElementById('iosSoonModal');
   if(!m)return;
   syncIosSoonModalAria();
@@ -1358,8 +1412,27 @@ window.closeIosComingSoonModal=function(){
   m.setAttribute('aria-hidden','true');
   document.body.style.overflow='';
 };
+window.openAndroidComingSoonModal=function(){
+  const i=document.getElementById('iosSoonModal');
+  if(i&&i.classList.contains('is-open'))closeIosComingSoonModal();
+  const m=document.getElementById('androidSoonModal');
+  if(!m)return;
+  syncAndroidSoonModalAria();
+  m.classList.add('is-open');
+  m.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+};
+window.closeAndroidComingSoonModal=function(){
+  const m=document.getElementById('androidSoonModal');
+  if(!m)return;
+  m.classList.remove('is-open');
+  m.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+};
 document.addEventListener('keydown',function(e){
-  if(e.key==='Escape'&&document.getElementById('iosSoonModal')&&document.getElementById('iosSoonModal').classList.contains('is-open'))closeIosComingSoonModal();
+  if(e.key!=='Escape')return;
+  if(document.getElementById('iosSoonModal')&&document.getElementById('iosSoonModal').classList.contains('is-open'))closeIosComingSoonModal();
+  else if(document.getElementById('androidSoonModal')&&document.getElementById('androidSoonModal').classList.contains('is-open'))closeAndroidComingSoonModal();
 });
 
 /* ===== THEME (dark only — clear legacy preference) ===== */
@@ -1634,8 +1707,6 @@ document.querySelectorAll('.counter').forEach(el=>counterObserver.observe(el));
 
 /* ===== NAV ===== */
 addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',scrollY>50)});
-window.toggleMobileMenu=function(){document.getElementById('mobileMenu').classList.toggle('open')};
-
 /* ===== PRICING TABS ===== */
 window.switchPricing=function(tab){
   document.querySelectorAll('.pricing-tab').forEach(t=>t.classList.remove('active'));
