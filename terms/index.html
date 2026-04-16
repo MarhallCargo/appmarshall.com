@@ -253,16 +253,19 @@ a:hover{color:#c084fc}
 <script>
 (function(){
 'use strict';
-let currentLang='en';
-window.toggleLang=function(){
-  currentLang=currentLang==='en'?'ru':'en';
-  document.getElementById('langBtn').textContent=currentLang==='en'?'RU':'EN';
-  document.documentElement.lang=currentLang;
+let currentLang=(function(){try{return localStorage.getItem('mvpn-lang')||'ru';}catch(e){return'ru';}})();
+function applyLang(l){
+  currentLang=l;
+  try{localStorage.setItem('mvpn-lang',l);}catch(e){}
+  document.getElementById('langBtn').textContent=l==='en'?'RU':'EN';
+  document.documentElement.lang=l;
   document.querySelectorAll('[data-en][data-ru]').forEach(el=>{
-    const text=el.getAttribute('data-'+currentLang);
+    const text=el.getAttribute('data-'+l);
     if(text!==null) el.innerHTML=text;
   });
-};
+}
+window.toggleLang=function(){applyLang(currentLang==='en'?'ru':'en');};
+applyLang(currentLang);
 })();
 </script>
 </body>
