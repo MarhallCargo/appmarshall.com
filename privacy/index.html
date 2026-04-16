@@ -355,20 +355,23 @@ code{font-size:13px;background:rgba(255,255,255,0.06);padding:2px 6px;border-rad
 </footer>
 
     <script>
-        var privacyLang = 'en';
-        function togglePrivacyLang() {
-            privacyLang = privacyLang === 'en' ? 'ru' : 'en';
+        var privacyLang = (function(){try{return localStorage.getItem('mvpn-lang')||'ru';}catch(e){return'ru';}})();
+        function applyPrivacyLang(l) {
+            privacyLang = l;
+            try{localStorage.setItem('mvpn-lang',l);}catch(e){}
             document.querySelectorAll('.content-block').forEach(function (el) { el.classList.remove('active'); });
-            document.getElementById(privacyLang).classList.add('active');
+            document.getElementById(l).classList.add('active');
             var btn = document.getElementById('privacyLangBtn');
-            if (btn) btn.textContent = privacyLang === 'en' ? 'RU' : 'EN';
-            document.documentElement.lang = privacyLang;
+            if (btn) btn.textContent = l === 'en' ? 'RU' : 'EN';
+            document.documentElement.lang = l;
             var back = document.getElementById('privacyBackLink');
             if (back) {
                 var label = back.querySelector('span');
-                if (label) label.textContent = privacyLang === 'ru' ? 'На главную' : 'Back to home';
+                if (label) label.textContent = l === 'ru' ? 'На главную' : 'Back to home';
             }
         }
+        function togglePrivacyLang() { applyPrivacyLang(privacyLang === 'en' ? 'ru' : 'en'); }
+        applyPrivacyLang(privacyLang);
     </script>
 </body>
 </html>
