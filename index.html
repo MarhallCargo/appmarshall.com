@@ -1382,22 +1382,25 @@ const MARSHALL_APK_URL='https://marshallcargo.pythonanywhere.com/static/appmarsh
 })();
 
 /* ===== LANGUAGE ===== */
-let currentLang='en';
-window.toggleLang=function(){
-  currentLang=currentLang==='en'?'ru':'en';
-  const btn=currentLang==='en'?'RU':'EN';
+let currentLang=(function(){try{return localStorage.getItem('mvpn-lang')||'ru';}catch(e){return'ru';}}());
+function applyLang(l){
+  currentLang=l;
+  try{localStorage.setItem('mvpn-lang',l);}catch(e){}
+  const btn=l==='en'?'RU':'EN';
   const lb=document.getElementById('langBtn'),lm=document.getElementById('langBtnMobile');
   if(lb)lb.textContent=btn;if(lm)lm.textContent=btn;
-  document.documentElement.lang=currentLang;
+  document.documentElement.lang=l;
   document.querySelectorAll('[data-en][data-ru]').forEach(el=>{
-    const t=el.getAttribute('data-'+currentLang);
+    const t=el.getAttribute('data-'+l);
     if(t!==null){if(el.tagName==='INPUT'||el.tagName==='TEXTAREA')el.placeholder=t;else el.innerHTML=t}
   });
   syncIosSoonModalAria();
   syncAndroidSoonModalAria();
   if(typeof updateMapLabels==='function')updateMapLabels();
   if(geo)renderMap();
-};
+}
+window.toggleLang=function(){applyLang(currentLang==='en'?'ru':'en');};
+applyLang(currentLang);
 
 /* ===== SCROLL TO ===== */
 window.smoothScrollTo=function(sel){
