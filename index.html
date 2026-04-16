@@ -1740,13 +1740,21 @@ const lLab={1:"Lowest exposure",2:"Low",3:"Moderate",4:"High",5:"Severe"};
 const lLabRu={1:"Минимальная",2:"Низкая",3:"Средняя",4:"Высокая",5:"Критическая"};
 const hCol={1:"#1a2540",2:"#3b5998",3:"#d4841e",4:"#e04535",5:"#ff2a5e"};
 const GREEN="#00d67e";
+const YELLOW="#fbbf24";
 
 const servers=[
-  {lat:49.45,lon:11.08},{lat:48.86,lon:2.35},{lat:60.17,lon:24.94},
-  {lat:52.37,lon:4.90},{lat:1.35,lon:103.82},{lat:43.65,lon:-79.38},
-  {lat:13.76,lon:100.50},{lat:35.68,lon:139.65},{lat:-33.87,lon:151.21},
-  {lat:40.71,lon:-74.01},{lat:51.51,lon:-0.13},{lat:55.75,lon:37.62},
-  {lat:-23.55,lon:-46.63}
+  {lat:43.30,lon:5.37},{lat:52.37,lon:4.90},{lat:49.45,lon:11.08},
+  {lat:-33.87,lon:151.21},{lat:60.17,lon:24.94},{lat:13.76,lon:100.50},
+  {lat:43.65,lon:-79.38},{lat:39.04,lon:-77.49},{lat:1.35,lon:103.82},
+  {lat:35.68,lon:139.65},{lat:-23.55,lon:-46.63},{lat:51.51,lon:-0.13}
+];
+const futureServers=[
+  {lat:37.57,lon:126.98},{lat:19.43,lon:-99.13},
+  {lat:-26.20,lon:28.05},{lat:22.32,lon:114.17}
+];
+const netLinks=[
+  [0,1],[0,2],[0,11],[1,2],[1,4],[1,11],[4,2],
+  [11,6],[6,7],[7,10],[5,8],[5,9],[8,9],[8,3],[9,3]
 ];
 
 function topoF(t,n){
@@ -1815,6 +1823,14 @@ function renderMap(){
 
   const dotBg='#0a1020';
   if(!isH){
+    const sCoords=servers.map(s=>proj([s.lon,s.lat]));
+    netLinks.forEach(([a,b],i)=>{
+      const[x1,y1]=sCoords[a],[x2,y2]=sCoords[b];
+      const ln=svg.append("line").attr("x1",x1).attr("y1",y1).attr("x2",x2).attr("y2",y2)
+        .attr("stroke",GREEN).attr("stroke-width",.35).attr("opacity",.1).attr("stroke-dasharray","4 6");
+      ln.append("animate").attr("attributeName","stroke-dashoffset").attr("values","0;-20")
+        .attr("dur",(4+i*.3)+"s").attr("repeatCount","indefinite");
+    });
     servers.forEach((s,i)=>{
       const[px,py]=proj([s.lon,s.lat]);const g=svg.append("g");
       const pr=g.append("circle").attr("cx",px).attr("cy",py).attr("r",6).attr("fill","none").attr("stroke",GREEN).attr("stroke-width",.3).attr("opacity",.2);
@@ -1822,6 +1838,14 @@ function renderMap(){
       pr.append("animate").attr("attributeName","opacity").attr("values",".2;0;.2").attr("dur",(3+i*.2)+"s").attr("repeatCount","indefinite");
       g.append("circle").attr("cx",px).attr("cy",py).attr("r",5).attr("fill",GREEN).attr("opacity",.08).attr("filter","url(#gl)");
       g.append("circle").attr("cx",px).attr("cy",py).attr("r",2.8).attr("fill",GREEN).attr("stroke",dotBg).attr("stroke-width",.8);
+    });
+    futureServers.forEach((s,i)=>{
+      const[px,py]=proj([s.lon,s.lat]);const g=svg.append("g");
+      const pr=g.append("circle").attr("cx",px).attr("cy",py).attr("r",3.5).attr("fill","none").attr("stroke",YELLOW).attr("stroke-width",.25).attr("opacity",.18);
+      pr.append("animate").attr("attributeName","r").attr("values","2;5;2").attr("dur",(3.5+i*.25)+"s").attr("repeatCount","indefinite");
+      pr.append("animate").attr("attributeName","opacity").attr("values",".18;0;.18").attr("dur",(3.5+i*.25)+"s").attr("repeatCount","indefinite");
+      g.append("circle").attr("cx",px).attr("cy",py).attr("r",2.5).attr("fill",YELLOW).attr("opacity",.06).attr("filter","url(#gl)");
+      g.append("circle").attr("cx",px).attr("cy",py).attr("r",1.4).attr("fill",YELLOW).attr("stroke",dotBg).attr("stroke-width",.6);
     });
   }
 
@@ -1838,8 +1862,10 @@ function renderMap(){
   if(isH){
     leg.innerHTML=[2,3,4,5].map(lv=>`<div class="map-legend-item"><div class="map-legend-dot" style="background:${hCol[lv]}"></div>${labelsMap[lv]}</div>`).join("");
   }else{
-    const srvText=L==='ru'?"Наши серверы":"Our servers";
-    leg.innerHTML=`<div class="map-legend-item"><div class="map-legend-dot map-legend-dot-round" style="background:${GREEN};box-shadow:0 0 5px rgba(0,214,126,.4)"></div>${srvText}</div>`;
+    const srvText=L==='ru'?"Активные серверы":"Active servers";
+    const futText=L==='ru'?"Скоро":"Coming soon";
+    leg.innerHTML=`<div class="map-legend-item"><div class="map-legend-dot map-legend-dot-round" style="background:${GREEN};box-shadow:0 0 5px rgba(0,214,126,.4)"></div>${srvText}</div>`+
+      `<div class="map-legend-item"><div class="map-legend-dot map-legend-dot-round" style="background:${YELLOW};box-shadow:0 0 5px rgba(251,191,36,.4);width:5px;height:5px"></div>${futText}</div>`;
   }
   updateMapLabels();
 }
