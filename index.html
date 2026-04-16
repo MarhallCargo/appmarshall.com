@@ -1397,7 +1397,7 @@ function applyLang(l){
   syncIosSoonModalAria();
   syncAndroidSoonModalAria();
   if(typeof updateMapLabels==='function')updateMapLabels();
-  if(geo)renderMap();
+  try{if(geo)renderMap();}catch(e){}
 }
 window.toggleLang=function(){applyLang(currentLang==='en'?'ru':'en');};
 applyLang(currentLang);
