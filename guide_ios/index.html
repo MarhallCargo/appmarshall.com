@@ -3,6 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Скрины лежат рядом с этим файлом (step-01.png …). Без завершающего / в URL (…/guide_ios) браузер иначе резолвит относительные пути — задаём каталог через <base>. -->
+<base id="mvpn-guide-base" href="./">
+<script>
+(function(){
+  var b=document.getElementById('mvpn-guide-base');
+  if(!b)return;
+  var u=new URL(location.href);
+  u.hash='';u.search='';
+  var p=u.pathname;
+  if(/\/index\.html?$/i.test(p)){u.pathname=p.replace(/\/index\.html?$/i,'/');}
+  else if(p&&p.slice(-1)!=='/'){u.pathname=p+'/';}
+  b.href=u.href;
+})();
+</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGDQ35MMZB"></script>
 <script>
@@ -69,9 +83,11 @@ img{max-width:100%;display:block}
 .nav-home:hover{color:var(--text);background:var(--surface)}
 .nav-lang{height:36px;min-height:36px;padding:0 12px;border-radius:8px;font-size:11px;font-weight:600;background:var(--surface);color:var(--text-dim);border:1px solid var(--border-light);cursor:pointer;transition:all .25s;font-family:inherit;letter-spacing:1px}
 .nav-lang:hover{background:var(--surface-hover);color:var(--text)}
+@media(max-width:720px){
+  .nav-inner{padding:0 12px}
+}
 @media(max-width:520px){
   .nav-home span{display:none}
-  .nav-inner{padding:0 16px}
   .nav-logo-mark{width:32px;height:32px}
   .nav-logo-mark img{width:42px;border-radius:11px}
   .nav-logo-text{font-size:14px;letter-spacing:1.5px}
@@ -114,37 +130,84 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
 .phase-label{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-light);margin-bottom:6px}
 .phase-title{font-size:clamp(20px,3.5vw,28px);font-weight:800;letter-spacing:-.03em}
 
-/* Step cards */
+/* Step cards — mobile first */
 .step-list{display:flex;flex-direction:column;gap:0}
-.step-card{border-top:1px solid var(--border);padding:22px 0;display:grid;grid-template-columns:52px minmax(0,1fr) minmax(200px,320px);gap:20px 28px;align-items:start}
-.step-card:first-of-type{border-top:0;padding-top:8px}
-.step-num{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);padding-top:4px}
-.step-num b{display:block;font-size:28px;font-weight:800;color:var(--text);letter-spacing:-.04em;line-height:1;margin-top:4px;font-variant-numeric:tabular-nums}
-.step-body h2{font-size:clamp(17px,2.2vw,20px);font-weight:700;letter-spacing:-.02em;margin-bottom:10px;line-height:1.25}
-.step-body p{font-size:14px;color:var(--text-dim);margin-bottom:10px}
+.step-pair-wrap{display:block}
+.step-card{border-top:1px solid var(--border);padding:18px 0;display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px 14px;align-items:start}
+.step-card:first-of-type{border-top:0;padding-top:6px}
+.step-num{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);padding-top:2px;grid-row:1;grid-column:1}
+.step-num b{display:block;font-size:22px;font-weight:800;color:var(--text);letter-spacing:-.04em;line-height:1;margin-top:2px;font-variant-numeric:tabular-nums}
+.step-body{grid-column:2;grid-row:1 / span 1}
+.step-body h2{font-size:15px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px;line-height:1.28}
+.step-body p{font-size:12.5px;color:var(--text-dim);margin-bottom:8px;line-height:1.5}
 .step-body p:last-child{margin-bottom:0}
 .step-body strong{color:var(--text);font-weight:600}
-.step-body code{font-size:12px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;background:rgba(255,255,255,.06);border:1px solid var(--border-light);padding:2px 7px;border-radius:6px;color:var(--text)}
+.step-body code{font-size:11px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;background:rgba(255,255,255,.06);border:1px solid var(--border-light);padding:2px 6px;border-radius:6px;color:var(--text)}
 
-.addr-box{margin:12px 0;padding:14px 16px;border-radius:var(--radius-md);border:1px solid var(--border-light);background:rgba(255,255,255,.03);font-size:12px;font-family:ui-monospace,monospace;line-height:1.65}
-.addr-row{display:grid;grid-template-columns:88px 1fr;gap:8px;border-bottom:1px solid var(--border);padding:5px 0}
+.addr-box{margin:10px 0;padding:12px 12px;border-radius:var(--radius-md);border:1px solid var(--border-light);background:rgba(255,255,255,.03);font-size:11px;font-family:ui-monospace,monospace;line-height:1.6}
+.addr-row{display:grid;grid-template-columns:76px 1fr;gap:6px;border-bottom:1px solid var(--border);padding:4px 0}
 .addr-row:last-child{border-bottom:0}
-.addr-row span:first-child{color:var(--text-muted);text-transform:uppercase;font-size:10px;letter-spacing:.06em}
+.addr-row span:first-child{color:var(--text-muted);text-transform:uppercase;font-size:9px;letter-spacing:.06em}
 
-.step-media{align-self:start;justify-self:end;width:100%;max-width:300px}
-.phone-frame{position:relative;border-radius:32px;overflow:hidden;background:#111;border:2px solid rgba(255,255,255,.08);box-shadow:0 0 0 1px rgba(255,255,255,.03),0 24px 56px rgba(0,0,0,.55),0 0 80px rgba(108,92,231,.1)}
+.step-media{grid-column:1 / -1;grid-row:2;justify-self:center;width:100%;max-width:min(88vw,240px)}
+.phone-frame{position:relative;border-radius:24px;overflow:hidden;background:#111;border:2px solid rgba(255,255,255,.08);box-shadow:0 0 0 1px rgba(255,255,255,.03),0 18px 44px rgba(0,0,0,.5),0 0 60px rgba(108,92,231,.08)}
 .phone-frame img{width:100%;height:auto;display:block}
-/* Mobile: two narrow frames can sit side by side in one row */
-.step-media--pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:100%}
-.step-media--pair .phone-frame{border-radius:22px}
+.step-media--pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:100%}
+.step-media--pair .phone-frame{border-radius:18px}
+
+/* Пара шагов: сверху оба текста по очереди, снизу два скрина в ряд (order + display:contents) */
 @media(max-width:720px){
-  .step-card{grid-template-columns:44px 1fr;grid-template-rows:auto auto}
-  .step-num b{font-size:24px}
-  .step-media{grid-column:1/-1;justify-self:center;max-width:min(88vw,300px)}
-  .step-media--pair{max-width:min(100%,360px);grid-template-columns:1fr 1fr}
-  .phone-frame{border-radius:26px}
-  .step-media .phone-frame{max-width:min(72vw,260px);margin-left:auto;margin-right:auto}
-  .step-media--pair .phone-frame{max-width:100%}
+  .guide-hero{padding:20px 0 6px}
+  .guide-hero .container{padding-left:12px;padding-right:12px}
+  .phase-bar{padding-left:12px;padding-right:12px}
+  .guide-main .container,.finale .container,.footer .container{padding-left:12px;padding-right:12px}
+  .phase-head{margin-bottom:12px}
+  .phase-section{padding:18px 0 4px}
+  .step-pair-wrap:not(.step-pair-wrap--stack-sm){
+    display:flex;flex-wrap:wrap;column-gap:8px;row-gap:0;padding-bottom:14px;margin-bottom:4px;border-bottom:1px solid var(--border)
+  }
+  .step-pair-wrap:not(.step-pair-wrap--stack-sm) > .step-card{display:contents}
+  .step-pair-wrap:not(.step-pair-wrap--stack-sm) > .step-card:first-child .step-num{order:1;flex:0 0 100%;width:100%;padding-top:0}
+  .step-pair-wrap:not(.step-pair-wrap--stack-sm) > .step-card:first-child .step-body{order:2;flex:0 0 100%;width:100%}
+  .step-pair-wrap:not(.step-pair-wrap--stack-sm) > .step-card:last-child .step-num{order:3;flex:0 0 100%;width:100%;padding-top:10px}
+  .step-pair-wrap:not(.step-pair-wrap--stack-sm) > .step-card:last-child .step-body{order:4;flex:0 0 100%;width:100%}
+  .step-pair-wrap:not(.step-pair-wrap--stack-sm) > .step-card:first-child .step-media{order:5;flex:1 1 calc(50% - 4px);max-width:calc(50% - 4px);min-width:0;margin-top:10px}
+  .step-pair-wrap:not(.step-pair-wrap--stack-sm) > .step-card:last-child .step-media{order:6;flex:1 1 calc(50% - 4px);max-width:calc(50% - 4px);min-width:0;margin-top:10px}
+  .step-pair-wrap:not(.step-pair-wrap--stack-sm) .step-media .phone-frame{max-width:100%;border-radius:20px}
+  /* Шаги 7–8: полноширинные карточки подряд; скрин шага 8 не сжимаем; таблица адреса только на десктопе */
+  .step-pair-wrap--stack-sm{display:flex;flex-direction:column;gap:0;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:4px}
+  .step-pair-wrap--stack-sm > .step-card{display:grid;grid-template-columns:40px minmax(0,1fr);padding:14px 0;border-top:1px solid var(--border)}
+  .step-pair-wrap--stack-sm > .step-card:first-of-type{border-top:0;padding-top:0}
+  .step-pair-wrap--stack-sm .step-body{grid-column:2}
+  .step-pair-wrap--stack-sm .step-media{grid-column:1 / -1;grid-row:auto;max-width:min(92vw,300px)}
+  .step-pair-wrap--stack-sm .step-media .phone-frame{max-width:100%}
+  #step-08 .addr-box{display:none!important}
+}
+
+/* Планшет и десктоп: сетка карточек, текст сверху — скрин снизу (~½ ширины от прежнего) */
+@media(min-width:721px){
+  .step-list{display:grid;gap:18px 16px;align-items:stretch}
+  .step-pair-wrap{display:contents}
+  .step-card{
+    display:flex;flex-direction:column;gap:10px;border:1px solid var(--border);border-radius:var(--radius-md);padding:14px 12px;border-top:1px solid var(--border);min-height:0
+  }
+  .step-card:first-of-type{border-top:1px solid var(--border)}
+  .step-num{padding-top:0;flex-shrink:0}
+  .step-num b{font-size:22px}
+  .step-body{flex:1 1 auto}
+  .step-body h2{font-size:clamp(15px,1.6vw,17px);margin-bottom:8px}
+  .step-body p{font-size:13px;line-height:1.55}
+  .step-media{
+    align-self:center;margin-top:auto;max-width:150px;width:100%;justify-self:center
+  }
+  .step-media .phone-frame{max-width:150px;margin-left:auto;margin-right:auto;border-radius:28px}
+  .phone-frame img{max-width:100%}
+}
+@media(min-width:721px) and (max-width:1020px){
+  .step-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(min-width:1021px){
+  .step-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 18px}
 }
 
 .finale{position:relative;z-index:2;padding:56px 24px 48px;border-top:1px solid var(--border);overflow:hidden}
@@ -238,6 +301,7 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
         <h2 class="phase-title" data-en="Switch storefront to Canada" data-ru="Магазин на Канаду">Магазин на Канаду</h2>
       </header>
       <div class="step-list">
+        <div class="step-pair-wrap">
         <article class="step-card" id="step-01">
           <div class="step-num">Step<b>01</b></div>
           <div class="step-body">
@@ -254,6 +318,8 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
           </div>
           <div class="step-media"><div class="phone-frame"><img src="step-02.png" alt="Шаг 2" data-step="2" loading="lazy" width="750" height="1624" decoding="async"></div></div>
         </article>
+        </div>
+        <div class="step-pair-wrap">
         <article class="step-card" id="step-03">
           <div class="step-num">Step<b>03</b></div>
           <div class="step-body">
@@ -270,6 +336,8 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
           </div>
           <div class="step-media"><div class="phone-frame"><img src="step-04.png" alt="Шаг 4" data-step="4" loading="lazy" width="750" height="1624" decoding="async"></div></div>
         </article>
+        </div>
+        <div class="step-pair-wrap">
         <article class="step-card" id="step-05">
           <div class="step-num">Step<b>05</b></div>
           <div class="step-body">
@@ -286,6 +354,8 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
           </div>
           <div class="step-media"><div class="phone-frame"><img src="step-06.png" alt="Шаг 6" data-step="6" loading="lazy" width="750" height="1624" decoding="async"></div></div>
         </article>
+        </div>
+        <div class="step-pair-wrap step-pair-wrap--stack-sm">
         <article class="step-card" id="step-07">
           <div class="step-num">Step<b>07</b></div>
           <div class="step-body">
@@ -310,6 +380,7 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
           </div>
           <div class="step-media"><div class="phone-frame"><img src="step-08.png" alt="Шаг 8" data-step="8" loading="lazy" width="750" height="1624" decoding="async"></div></div>
         </article>
+        </div>
       </div>
     </div>
   </section>
@@ -322,6 +393,7 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
         <h2 class="phase-title" data-en="Install V2Box" data-ru="Установка V2Box">Установка V2Box</h2>
       </header>
       <div class="step-list">
+        <div class="step-pair-wrap">
         <article class="step-card" id="step-09">
           <div class="step-num">Step<b>09</b></div>
           <div class="step-body">
@@ -338,6 +410,7 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
           </div>
           <div class="step-media"><div class="phone-frame"><img src="step-10.png" alt="Шаг 10" data-step="10" loading="lazy" width="750" height="1624" decoding="async"></div></div>
         </article>
+        </div>
       </div>
     </div>
   </section>
@@ -350,6 +423,7 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
         <h2 class="phase-title" data-en="Subscription &amp; connect" data-ru="Подписка и подключение">Подписка и подключение</h2>
       </header>
       <div class="step-list">
+        <div class="step-pair-wrap">
         <article class="step-card" id="step-11">
           <div class="step-num">Step<b>11</b></div>
           <div class="step-body">
@@ -366,6 +440,7 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
           </div>
           <div class="step-media"><div class="phone-frame"><img src="step-12.png" alt="Шаг 12" data-step="12" loading="lazy" width="750" height="1624" decoding="async"></div></div>
         </article>
+        </div>
         <article class="step-card" id="step-13">
           <div class="step-num">Step<b>13</b></div>
           <div class="step-body">
