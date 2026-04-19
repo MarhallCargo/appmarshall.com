@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RGDQ35MMZB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RGDQ35MMZB');
+</script>
+<meta id="meta-desc" name="description" content="Как сменить регион App Store, установить V2Box и подключить Marshall VPN через Telegram — пошаговый гайд для iPhone.">
+<meta name="theme-color" content="#0A0A0F">
+<title>Marshall VPN — Гайд для iOS (App Store · V2Box · Telegram)</title>
+<link rel="icon" type="image/png" href="../assets/logo.png">
+<link rel="apple-touch-icon" href="../assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0A0A0F;
+  --bg-alt:#0D0D16;
+  --surface:rgba(255,255,255,0.04);
+  --surface-hover:rgba(255,255,255,0.07);
+  --border:rgba(255,255,255,0.06);
+  --border-light:rgba(255,255,255,0.10);
+  --text:#E8E8ED;
+  --text-dim:rgba(255,255,255,0.45);
+  --text-muted:rgba(255,255,255,0.25);
+  --accent:#6C5CE7;
+  --accent-light:#A855F7;
+  --success:#00D2A0;
+  --radius-lg:20px;
+  --radius-md:14px;
+  --radius-sm:8px;
+  --nav-h:64px;
+  --phase-h:48px;
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:clip;max-width:100%}
+body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,'Helvetica Neue',sans-serif;overflow-x:clip;line-height:1.55;max-width:100%;position:relative;padding-top:var(--nav-h)}
+a{color:var(--accent-light);text-decoration:none;transition:color .25s}
+a:hover{color:#c084fc}
+img{max-width:100%;display:block}
+.container{max-width:1120px;margin:0 auto;padding:0 24px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.gradient-text{background:linear-gradient(135deg,#A855F7 0%,#6C5CE7 40%,#00D2A0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.bg-glow{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.bg-glow .orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.14;animation:orbFloat 20s ease-in-out infinite}
+.bg-glow .orb-1{width:600px;height:600px;background:#6C5CE7;top:-10%;left:-10%}
+.bg-glow .orb-2{width:500px;height:500px;background:#A855F7;bottom:-10%;right:-10%;animation-delay:-7s}
+.bg-glow .orb-3{width:400px;height:400px;background:#00D2A0;top:40%;left:50%;animation-delay:-14s;opacity:.08}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(30px,-40px) scale(1.05)}50%{transform:translate(-20px,30px) scale(.95)}75%{transform:translate(40px,20px) scale(1.02)}}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:12px 0;background:rgba(10,10,15,.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.04);transition:background .35s,border-color .35s}
+.nav.scrolled{background:rgba(10,10,15,.9);border-bottom-color:rgba(255,255,255,.07)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:0 24px}
+.nav-logo{display:flex;align-items:center;gap:10px;min-height:36px}
+.nav-logo-mark{position:relative;width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.nav-logo-mark img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:48px;height:auto;max-width:none;border-radius:12px;object-fit:contain}
+.nav-logo-text{font-size:15px;font-weight:700;letter-spacing:1.75px;text-transform:uppercase;color:var(--text);height:36px;display:inline-flex;align-items:center;line-height:1}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-home{font-size:13px;font-weight:500;color:var(--text-dim);padding:8px 12px;border-radius:8px;transition:background .2s,color .2s}
+.nav-home:hover{color:var(--text);background:var(--surface)}
+.nav-lang{height:36px;min-height:36px;padding:0 12px;border-radius:8px;font-size:11px;font-weight:600;background:var(--surface);color:var(--text-dim);border:1px solid var(--border-light);cursor:pointer;transition:all .25s;font-family:inherit;letter-spacing:1px}
+.nav-lang:hover{background:var(--surface-hover);color:var(--text)}
+@media(max-width:520px){
+  .nav-home span{display:none}
+  .nav-inner{padding:0 16px}
+  .nav-logo-mark{width:32px;height:32px}
+  .nav-logo-mark img{width:42px;border-radius:11px}
+  .nav-logo-text{font-size:14px;letter-spacing:1.5px}
+}
+
+/* Phase bar — 3 segments */
+.phase-wrap{position:sticky;top:var(--nav-h);z-index:900;background:rgba(10,10,15,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.phase-bar{max-width:1120px;margin:0 auto;padding:10px 24px 12px}
+.phase-track{display:flex;height:3px;border-radius:999px;background:var(--surface);overflow:hidden;margin-bottom:10px}
+.phase-fill{flex:1;min-width:0;background:transparent;transition:background .35s ease,box-shadow .35s ease}
+.phase-fill.is-active{background:linear-gradient(90deg,var(--accent),var(--accent-light));box-shadow:0 0 12px rgba(108,92,231,.35)}
+.phase-tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.phase-tab{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);padding:8px 14px;border-radius:999px;border:1px solid transparent;background:transparent;cursor:pointer;font-family:inherit;transition:color .2s,background .2s,border-color .2s}
+.phase-tab:hover{color:var(--text-dim)}
+.phase-tab.is-active{color:var(--text);background:var(--surface);border-color:var(--border-light)}
+@media(max-width:520px){.phase-tab{padding:7px 10px;font-size:10px}}
+
+/* Hero */
+.guide-hero{position:relative;z-index:2;padding:28px 24px 8px}
+.guide-hero .container{max-width:1120px}
+.guide-kicker{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-light);margin-bottom:12px}
+.guide-kicker::before{content:'';width:20px;height:1px;background:var(--accent-light)}
+.guide-hero h1{font-size:clamp(26px,5vw,44px);font-weight:800;line-height:1.08;letter-spacing:-.03em;margin-bottom:14px;max-width:18ch}
+.guide-lead{font-size:clamp(14px,1.8vw,17px);color:var(--text-dim);max-width:560px;margin-bottom:18px}
+.guide-meta{display:flex;flex-wrap:wrap;gap:16px 28px;font-size:12px;color:var(--text-muted)}
+.guide-meta strong{display:block;font-size:13px;font-weight:600;color:var(--text);margin-top:2px}
+
+/* Sections */
+main.guide-main{position:relative;z-index:2;padding-bottom:48px}
+.phase-section{padding:28px 24px 8px;scroll-margin-top:calc(var(--nav-h) + var(--phase-h) + 8px)}
+.phase-head{margin-bottom:18px}
+.phase-label{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-light);margin-bottom:6px}
+.phase-title{font-size:clamp(20px,3.5vw,28px);font-weight:800;letter-spacing:-.03em}
+
+/* Step cards */
+.step-list{display:flex;flex-direction:column;gap:0}
+.step-card{border-top:1px solid var(--border);padding:22px 0;display:grid;grid-template-columns:52px minmax(0,1fr) minmax(200px,320px);gap:20px 28px;align-items:start}
+.step-card:first-of-type{border-top:0;padding-top:8px}
+.step-num{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);padding-top:4px}
+.step-num b{display:block;font-size:28px;font-weight:800;color:var(--text);letter-spacing:-.04em;line-height:1;margin-top:4px;font-variant-numeric:tabular-nums}
+.step-body h2{font-size:clamp(17px,2.2vw,20px);font-weight:700;letter-spacing:-.02em;margin-bottom:10px;line-height:1.25}
+.step-body p{font-size:14px;color:var(--text-dim);margin-bottom:10px}
+.step-body p:last-child{margin-bottom:0}
+.step-body strong{color:var(--text);font-weight:600}
+.step-body code{font-size:12px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;background:rgba(255,255,255,.06);border:1px solid var(--border-light);padding:2px 7px;border-radius:6px;color:var(--text)}
+
+.addr-box{margin:12px 0;padding:14px 16px;border-radius:var(--radius-md);border:1px solid var(--border-light);background:rgba(255,255,255,.03);font-size:12px;font-family:ui-monospace,monospace;line-height:1.65}
+.addr-row{display:grid;grid-template-columns:88px 1fr;gap:8px;border-bottom:1px solid var(--border);padding:5px 0}
+.addr-row:last-child{border-bottom:0}
+.addr-row span:first-child{color:var(--text-muted);text-transform:uppercase;font-size:10px;letter-spacing:.06em}
+
+.step-media{align-self:start;justify-self:end;width:100%;max-width:300px}
+.phone-frame{position:relative;border-radius:32px;overflow:hidden;background:#111;border:2px solid rgba(255,255,255,.08);box-shadow:0 0 0 1px rgba(255,255,255,.03),0 24px 56px rgba(0,0,0,.55),0 0 80px rgba(108,92,231,.1)}
+.phone-frame img{width:100%;height:auto;display:block}
+/* Mobile: two narrow frames can sit side by side in one row */
+.step-media--pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:100%}
+.step-media--pair .phone-frame{border-radius:22px}
+@media(max-width:720px){
+  .step-card{grid-template-columns:44px 1fr;grid-template-rows:auto auto}
+  .step-num b{font-size:24px}
+  .step-media{grid-column:1/-1;justify-self:center;max-width:min(88vw,300px)}
+  .step-media--pair{max-width:min(100%,360px);grid-template-columns:1fr 1fr}
+  .phone-frame{border-radius:26px}
+  .step-media .phone-frame{max-width:min(72vw,260px);margin-left:auto;margin-right:auto}
+  .step-media--pair .phone-frame{max-width:100%}
+}
+
+.finale{position:relative;z-index:2;padding:56px 24px 48px;border-top:1px solid var(--border);overflow:hidden}
+.finale::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(520px,80%);height:1px;background:linear-gradient(90deg,transparent,rgba(168,85,247,.5),rgba(0,210,160,.35),transparent);pointer-events:none}
+.finale-inner{max-width:560px;margin:0 auto;text-align:center;position:relative;padding:40px 32px 36px;border-radius:var(--radius-lg);background:linear-gradient(165deg,rgba(108,92,231,.12) 0%,rgba(255,255,255,.03) 42%,rgba(0,210,160,.06) 100%);border:1px solid rgba(255,255,255,.09);box-shadow:0 0 0 1px rgba(0,0,0,.2) inset,0 24px 80px rgba(0,0,0,.35),0 0 100px rgba(108,92,231,.12)}
+.finale-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-light);margin-bottom:16px}
+.finale-badge::before,.finale-badge::after{content:'';width:24px;height:1px;background:linear-gradient(90deg,transparent,var(--accent-light));opacity:.7}
+.finale-badge::after{background:linear-gradient(90deg,var(--accent-light),transparent)}
+.finale h2{font-size:clamp(34px,6.5vw,52px);font-weight:800;letter-spacing:-.045em;line-height:1.06;margin:0}
+.finale h2 .finale-title-text{display:inline-block}
+.finale-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
+.finale-actions .btn-primary{box-shadow:0 4px 24px rgba(108,92,231,.25)}
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;border-radius:14px;font-size:15px;font-weight:600;background:linear-gradient(135deg,var(--accent),var(--accent-light));color:#fff;border:none;cursor:pointer;transition:transform .25s,box-shadow .25s;font-family:inherit;text-decoration:none}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 44px rgba(108,92,231,.35)}
+.btn-secondary{display:inline-flex;align-items:center;justify-content:center;padding:14px 28px;border-radius:14px;font-size:15px;font-weight:600;background:var(--surface);color:var(--text);border:1px solid var(--border-light);cursor:pointer;transition:background .25s,border-color .25s;font-family:inherit;text-decoration:none}
+.btn-secondary:hover{background:var(--surface-hover);border-color:rgba(255,255,255,.15)}
+
+.footer{position:relative;z-index:2;padding:36px 0 24px;border-top:1px solid var(--border)}
+.footer-inner{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:32px;margin-bottom:24px}
+.footer-brand p{font-size:13px;color:var(--text-dim);line-height:1.65;margin-top:10px;max-width:280px}
+.footer-col h4{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--text-muted);margin-bottom:12px}
+.footer-col a{display:block;font-size:13px;color:var(--text-dim);margin-bottom:8px;transition:color .2s}
+.footer-col a:hover{color:var(--text)}
+.footer-bottom{padding-top:16px;border-top:1px solid var(--border);font-size:11px;color:var(--text-muted);line-height:1.5}
+@media(max-width:768px){
+  .footer-inner{grid-template-columns:1fr 1fr}
+  .footer-brand{grid-column:1/-1}
+}
+@media(max-width:520px){
+  .finale{padding:40px 16px 36px}
+  .finale-inner{padding:28px 20px 26px}
+  .finale-badge{font-size:10px;letter-spacing:.16em}
+  .finale-badge::before,.finale-badge::after{width:16px}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-glow" aria-hidden="true"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <span class="nav-logo-mark"><img src="../assets/logo.png" width="48" height="48" alt="Marshall VPN"></span>
+      <span class="nav-logo-text">Marshall</span>
+    </a>
+    <div class="nav-right">
+      <a class="nav-home" href="../index.html"><span data-en="← Home" data-ru="← Главная">← Главная</span></a>
+      <button type="button" class="nav-lang" id="langBtn" aria-label="Switch language">EN</button>
+    </div>
+  </div>
+</nav>
+
+<header class="guide-hero">
+  <div class="container">
+    <p class="guide-kicker"><span data-en="iPhone · step by step" data-ru="iPhone · по шагам">iPhone · по шагам</span></p>
+    <h1><span data-en="Marshall VPN on <span class='gradient-text'>iPhone</span>" data-ru="Marshall VPN на <span class='gradient-text'>iPhone</span>">Marshall VPN на <span class="gradient-text">iPhone</span></span></h1>
+    <p class="guide-lead" data-en="Canada App Store → V2Box → paste the link from Telegram. About 5–10 minutes." data-ru="Канадский App Store → V2Box → ссылка из Telegram. Примерно 5–10 минут.">Канадский App Store → V2Box → ссылка из Telegram. Примерно 5–10 минут.</p>
+    <div class="guide-meta">
+      <div><span data-en="Time" data-ru="Время">Время</span><strong data-en="5–10 min" data-ru="5–10 мин">5–10 мин</strong></div>
+      <div><span data-en="Cost" data-ru="Стоимость">Стоимость</span><strong data-en="Free" data-ru="Бесплатно">Бесплатно</strong></div>
+      <div><span data-en="Device" data-ru="Устройство">Устройство</span><strong>iPhone</strong></div>
+    </div>
+  </div>
+</header>
+
+<div class="phase-wrap">
+  <div class="phase-bar">
+    <div class="phase-track" aria-hidden="true">
+      <div class="phase-fill" id="phaseFill0"></div>
+      <div class="phase-fill" id="phaseFill1"></div>
+      <div class="phase-fill" id="phaseFill2"></div>
+    </div>
+    <div class="phase-tabs" role="tablist" aria-label="Guide sections">
+      <button type="button" class="phase-tab is-active" id="phaseTab0" data-phase="0" data-target="#phase-store" data-en="App Store region" data-ru="Регион App Store">Регион App Store</button>
+      <button type="button" class="phase-tab" id="phaseTab1" data-phase="1" data-target="#phase-v2box" data-en="V2Box" data-ru="V2Box">V2Box</button>
+      <button type="button" class="phase-tab" id="phaseTab2" data-phase="2" data-target="#phase-sub" data-en="Subscription" data-ru="Подписка">Подписка</button>
+    </div>
+  </div>
+</div>
+
+<main class="guide-main">
+  <!-- Phase 1: Steps 1–8 -->
+  <section class="phase-section" id="phase-store" data-phase-index="0">
+    <div class="container">
+      <header class="phase-head">
+        <p class="phase-label" data-en="Part 1" data-ru="Часть 1">Часть 1</p>
+        <h2 class="phase-title" data-en="Switch storefront to Canada" data-ru="Магазин на Канаду">Магазин на Канаду</h2>
+      </header>
+      <div class="step-list">
+        <article class="step-card" id="step-01">
+          <div class="step-num">Step<b>01</b></div>
+          <div class="step-body">
+            <h2 data-en="Open Settings and your Apple Account" data-ru="Откройте «Настройки» и учётную запись Apple">Откройте «Настройки» и учётную запись Apple</h2>
+            <p data-en="At the top of Settings, tap your name or photo — this opens your Apple Account (Apple ID)." data-ru="Вверху «Настройки» нажмите своё имя или фото — откроется учётная запись Apple (Apple ID).">Вверху «Настройки» нажмите своё имя или фото — откроется учётная запись Apple (Apple ID).</p>
+          </div>
+          <div class="step-media"><div class="phone-frame"><img src="step-01.png" alt="Шаг 1" data-step="1" loading="eager" width="750" height="1624"></div></div>
+        </article>
+        <article class="step-card" id="step-02">
+          <div class="step-num">Step<b>02</b></div>
+          <div class="step-body">
+            <h2 data-en="Open Media &amp; Purchases or Payment &amp; Shipping" data-ru="«Медиа и покупки» или «Оплата и доставка»">«Медиа и покупки» или «Оплата и доставка»</h2>
+            <p data-en="Depending on your iOS version, open <strong>Media &amp; Purchases</strong> or <strong>Payment &amp; Shipping</strong>. You need the path that leads to your account’s country or region settings." data-ru="В зависимости от версии iOS откройте <strong>«Медиа и покупки»</strong> или <strong>«Оплата и доставка»</strong> — нужен раздел, откуда можно перейти к стране/региону магазина.">В зависимости от версии iOS откройте <strong>«Медиа и покупки»</strong> или <strong>«Оплата и доставка»</strong> — нужен раздел, откуда можно перейти к стране/региону магазина.</p>
+          </div>
+          <div class="step-media"><div class="phone-frame"><img src="step-02.png" alt="Шаг 2" data-step="2" loading="lazy" width="750" height="1624"></div></div>
+        </article>
+        <article class="step-card" id="step-03">
+          <div class="step-num">Step<b>03</b></div>
+          <div class="step-body">
+            <h2 data-en="Sign in to view account settings" data-ru="Войдите, чтобы открыть данные учётной записи">Войдите, чтобы открыть данные учётной записи</h2>
+            <p data-en="If asked, authenticate with Face ID, Touch ID, or your password. Choose the option that <strong>views</strong> or <strong>manages</strong> your account — not Sign Out." data-ru="При запросе подтвердите вход Face ID, Touch ID или паролем. Выберите действие, которое <strong>открывает</strong> или <strong>управляет</strong> учётной записью, а не «Выйти».">При запросе подтвердите вход Face ID, Touch ID или паролем. Выберите действие, которое <strong>открывает</strong> или <strong>управляет</strong> учётной записью, а не «Выйти».</p>
+          </div>
+          <div class="step-media"><div class="phone-frame"><img src="step-03.png" alt="Шаг 3" data-step="3" loading="lazy" width="750" height="1624"></div></div>
+        </article>
+        <article class="step-card" id="step-04">
+          <div class="step-num">Step<b>04</b></div>
+          <div class="step-body">
+            <h2 data-en="Open Country / Region" data-ru="Откройте «Страна или регион»">Откройте «Страна или регион»</h2>
+            <p data-en="On the account settings screen, find <strong>Country/Region</strong> (wording may vary slightly) and tap it." data-ru="На экране настроек учётной записи найдите <strong>«Страна или регион»</strong> (формулировка может чуть отличаться) и нажмите.">На экране настроек учётной записи найдите <strong>«Страна или регион»</strong> (формулировка может чуть отличаться) и нажмите.</p>
+          </div>
+          <div class="step-media"><div class="phone-frame"><img src="step-04.png" alt="Шаг 4" data-step="4" loading="lazy" width="750" height="1624"></div></div>
+        </article>
+        <article class="step-card" id="step-05">
+          <div class="step-num">Step<b>05</b></div>
+          <div class="step-body">
+            <h2 data-en="Choose Canada" data-ru="Выберите Канаду">Выберите Канаду</h2>
+            <p data-en="Start the change, then search for and select <strong>Canada</strong>." data-ru="Начните смену региона, затем найдите и выберите <strong>Canada</strong> / <strong>Канада</strong>.">Начните смену региона, затем найдите и выберите <strong>Canada</strong> / <strong>Канада</strong>.</p>
+          </div>
+          <div class="step-media"><div class="phone-frame"><img src="step-05.png" alt="Шаг 5" data-step="5" loading="lazy" width="750" height="1624"></div></div>
+        </article>
+        <article class="step-card" id="step-06">
+          <div class="step-num">Step<b>06</b></div>
+          <div class="step-body">
+            <h2 data-en="Continue past the notice" data-ru="Продолжите после предупреждения">Продолжите после предупреждения</h2>
+            <p data-en="Read Apple’s notice about subscriptions and content. If you accept the implications, tap <strong>Continue</strong> (or the equivalent)." data-ru="Прочитайте предупреждение Apple о подписках и контенте. Если согласны с последствиями, нажмите <strong>«Продолжить»</strong> (или аналог).">Прочитайте предупреждение Apple о подписках и контенте. Если согласны с последствиями, нажмите <strong>«Продолжить»</strong> (или аналог).</p>
+          </div>
+          <div class="step-media"><div class="phone-frame"><img src="step-06.png" alt="Шаг 6" data-step="6" loading="lazy" width="750" height="1624"></div></div>
+        </article>
+        <article class="step-card" id="step-07">
+          <div class="step-num">Step<b>07</b></div>
+          <div class="step-body">
+            <h2 data-en="Accept the terms" data-ru="Примите условия">Примите условия</h2>
+            <p data-en="Accept the Apple Media Services terms when prompted (e.g. <strong>Agree</strong>)." data-ru="Примите условия Apple Media Services — кнопка вроде <strong>«Принять»</strong> / <strong>Agree</strong>.">Примите условия Apple Media Services — кнопка вроде <strong>«Принять»</strong> / <strong>Agree</strong>.</p>
+          </div>
+          <div class="step-media"><div class="phone-frame"><img src="step-07.png" alt="Шаг 7" data-step="7" loading="lazy" width="750" height="1624"></div></div>
+        </article>
+        <article class="step-card" id="step-08">
+          <div class="step-num">Step<b>08</b></div>
+          <div class="step-body">
+            <h2 data-en="Billing: None + Canadian address" data-ru="Оплата: «Нет» и адрес в Канаде">Оплата: «Нет» и адрес в Канаде</h2>
+            <p data-en="Pick <strong>None</strong> as the payment method if available. Enter a real Canadian address — example below. Use Latin letters for name fields if the form requires them." data-ru="Выберите способ оплаты <strong>«Нет»</strong> / <strong>None</strong>, если доступно. Укажите реальный канадский адрес — пример ниже. Имя и фамилия латиницей, если так требует форма.">Выберите способ оплаты <strong>«Нет»</strong> / <strong>None</strong>, если доступно. Укажите реальный канадский адрес — пример ниже. Имя и фамилия латиницей, если так требует форма.</p>
+            <div class="addr-box" aria-label="Example address">
+              <div class="addr-row"><span>Street</span><span>1517 Halsey Avenue</span></div>
+              <div class="addr-row"><span>City</span><span>Toronto</span></div>
+              <div class="addr-row"><span>Province</span><span>Ontario</span></div>
+              <div class="addr-row"><span>Postal</span><span>M3B 2W6</span></div>
+              <div class="addr-row"><span>Phone</span><span>416 438 3543</span></div>
+            </div>
+            <p data-en="Tap <strong>Done</strong> / <strong>Next</strong> when the form is complete." data-ru="Нажмите <strong>«Готово»</strong> / <strong>Done</strong>, когда форма заполнена.">Нажмите <strong>«Готово»</strong> / <strong>Done</strong>, когда форма заполнена.</p>
+          </div>
+          <div class="step-media"><div class="phone-frame"><img src="step-08.png" alt="Шаг 8" data-step="8" loading="lazy" width="750" height="1624"></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Phase 2: Steps 9–10 -->
+  <section class="phase-section" id="phase-v2box" data-phase-index="1">
+    <div class="container">
+      <header class="phase-head">
+        <p class="phase-label" data-en="Part 2" data-ru="Часть 2">Часть 2</p>
+        <h2 class="phase-title" data-en="Install V2Box" data-ru="Установка V2Box">Установка V2Box</h2>
+      </header>
+      <div class="step-list">
+        <article class="step-card" id="step-09">
+          <div class="step-num">Step<b>09</b></div>
+          <div class="step-body">
+            <h2 data-en="Install V2Box from the App Store" data-ru="Установите V2Box из App Store">Установите V2Box из App Store</h2>
+            <p data-en="Open the App Store, search for <code>v2box</code>, then install <strong>V2Box — V2ray Client</strong> (tap <strong>Get</strong> / cloud icon and confirm)." data-ru="Откройте App Store, найдите <code>v2box</code> и установите <strong>V2Box — V2ray Client</strong> (кнопка «Загрузить» / облачко и подтверждение).">Откройте App Store, найдите <code>v2box</code> и установите <strong>V2Box — V2ray Client</strong> (кнопка «Загрузить» / облачко и подтверждение).</p>
+          </div>
+          <div class="step-media"><div class="phone-frame"><img src="step-09.png" alt="Шаг 9" data-step="9" loading="lazy" width="750" height="1624"></div></div>
+        </article>
+        <article class="step-card" id="step-10">
+          <div class="step-num">Step<b>10</b></div>
+          <div class="step-body">
+            <h2 data-en="Open V2Box" data-ru="Откройте V2Box">Откройте V2Box</h2>
+            <p data-en="Launch the app. You should see the main screen with no profile selected and a disconnected state — that’s expected until you import your subscription." data-ru="Запустите приложение. На главном экране может быть «конфигурация не выбрана» и статус отключения — так и должно быть до импорта подписки.">Запустите приложение. На главном экране может быть «конфигурация не выбрана» и статус отключения — так и должно быть до импорта подписки.</p>
+          </div>
+          <div class="step-media"><div class="phone-frame"><img src="step-10.png" alt="Шаг 10" data-step="10" loading="lazy" width="750" height="1624"></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Phase 3: Steps 11–13 -->
+  <section class="phase-section" id="phase-sub" data-phase-index="2">
+    <div class="container">
+      <header class="phase-head">
+        <p class="phase-label" data-en="Part 3" data-ru="Часть 3">Часть 3</p>
+        <h2 class="phase-title" data-en="Subscription &amp; connect" data-ru="Подписка и подключение">Подписка и подключение</h2>
+      </header>
+      <div class="step-list">
+        <article class="step-card" id="step-11">
+          <div class="step-num">Step<b>11</b></div>
+          <div class="step-body">
+            <h2 data-en="Copy your link from the Telegram bot" data-ru="Скопируйте ссылку в Telegram-боте">Скопируйте ссылку в Telegram-боте</h2>
+            <p data-en="Open <a href=&quot;https://t.me/MarshallVPNBot&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Marshall&rsquo;s Telegram bot</a>, send <strong>Start</strong>. The bot sends your personal subscription URL (often a long <code>https://&hellip;/sub/&hellip;</code> link) and may include a QR code. Tap the link once to copy it." data-ru="Откройте <a href=&quot;https://t.me/MarshallVPNBot&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Telegram-бот Marshall</a>, нажмите <strong>Start</strong>. Бот пришлёт персональную ссылку подписки (часто длинный адрес вида <code>https://&hellip;/sub/&hellip;</code>) и может приложить QR. Один тап по ссылке обычно копирует её в буфер.">Откройте <a href="https://t.me/MarshallVPNBot" target="_blank" rel="noopener">Telegram-бот Marshall</a>, нажмите <strong>Start</strong>. Бот пришлёт персональную ссылку подписки (часто длинный адрес вида <code>https://…/sub/…</code>) и может приложить QR. Один тап по ссылке обычно копирует её в буфер.</p>
+          </div>
+          <div class="step-media"><div class="phone-frame"><img src="step-11.png" alt="Шаг 11" data-step="11" loading="lazy" width="750" height="1624"></div></div>
+        </article>
+        <article class="step-card" id="step-12">
+          <div class="step-num">Step<b>12</b></div>
+          <div class="step-body">
+            <h2 data-en="Import subscription in V2Box" data-ru="Импортируйте подписку в V2Box">Импортируйте подписку в V2Box</h2>
+            <p data-en="In V2Box, open the <strong>Configurations</strong> / profiles section. Tap <strong>+</strong>, then choose import from clipboard (wording like <strong>Import v2ray URI from clipboard</strong>). If iOS asks to allow paste from Telegram, tap <strong>Allow Paste</strong> — this is normal and may appear once." data-ru="В V2Box откройте раздел <strong>«Конфигурации»</strong> / профили. Нажмите <strong>+</strong> и выберите импорт из буфера (пункт вроде <strong>«Импортировать v2ray URI из буфера»</strong>). Если iOS спросит разрешение на вставку из Telegram — нажмите <strong>«Разрешить вставку»</strong>; это штатный запрос, часто однократный.">В V2Box откройте раздел <strong>«Конфигурации»</strong> / профили. Нажмите <strong>+</strong> и выберите импорт из буфера (пункт вроде <strong>«Импортировать v2ray URI из буфера»</strong>). Если iOS спросит разрешение на вставку из Telegram — нажмите <strong>«Разрешить вставку»</strong>; это штатный запрос, часто однократный.</p>
+          </div>
+          <div class="step-media"><div class="phone-frame"><img src="step-12.png" alt="Шаг 12" data-step="12" loading="lazy" width="750" height="1624"></div></div>
+        </article>
+        <article class="step-card" id="step-13">
+          <div class="step-num">Step<b>13</b></div>
+          <div class="step-body">
+            <h2 data-en="Select a server and connect" data-ru="Выберите сервер и подключитесь">Выберите сервер и подключитесь</h2>
+            <p data-en="After the list loads, pick a server, then turn the VPN on using the app’s main toggle (often a swipe on the round control). Wait until the status shows connected." data-ru="Когда список загрузится, выберите сервер и включите VPN основным переключателем в приложении (часто свайп по круглой кнопке). Дождитесь статуса подключения.">Когда список загрузится, выберите сервер и включите VPN основным переключателем в приложении (часто свайп по круглой кнопке). Дождитесь статуса подключения.</p>
+          </div>
+          <div class="step-media"><div class="phone-frame"><img src="step-13.png" alt="Шаг 13" data-step="13" loading="lazy" width="750" height="1624"></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<section class="finale" aria-labelledby="finale-title">
+  <div class="container">
+    <div class="finale-inner">
+      <p class="finale-badge"><span data-en="All steps done" data-ru="Все шаги пройдены">Все шаги пройдены</span></p>
+      <h2 id="finale-title" class="finale-title-wrap"><span class="finale-title-text gradient-text"><span data-en="You’re connected" data-ru="Вы подключены">Вы подключены</span></span></h2>
+      <div class="finale-actions">
+        <a class="btn-primary" href="https://t.me/MarshallVPNBot" target="_blank" rel="noopener"><span data-en="Open Telegram bot" data-ru="Открыть бота в Telegram">Открыть бота в Telegram</span></a>
+        <a class="btn-secondary" href="../index.html"><span data-en="Back to home" data-ru="На главную">На главную</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo">
+          <span class="nav-logo-mark"><img src="../assets/logo.png" width="48" height="48" alt=""></span>
+          <span class="nav-logo-text" style="font-size:14px">Marshall</span>
+        </a>
+        <p data-en="Fast, private VPN for iOS. Your connection, your rules." data-ru="Быстрый и приватный VPN для iOS. Ваше соединение, ваши правила.">Быстрый и приватный VPN для iOS. Ваше соединение, ваши правила.</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-en="Product" data-ru="Продукт">Продукт</h4>
+        <a href="../index.html#benefits" data-en="Features" data-ru="Возможности">Возможности</a>
+        <a href="../index.html#pricing" data-en="Pricing" data-ru="Тарифы">Тарифы</a>
+        <a href="../index.html#network" data-en="Network" data-ru="Сеть">Сеть</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-en="Contact" data-ru="Контакты">Контакты</h4>
+        <a href="mailto:support@appmarshall.com" data-en="Email" data-ru="Почта">Почта</a>
+        <a href="https://t.me/MarshallVPNBot" target="_blank" rel="noopener">Telegram</a>
+        <a href="../privacy/" data-en="Privacy" data-ru="Конфиденциальность">Конфиденциальность</a>
+        <a href="../terms/" data-en="Terms" data-ru="Условия">Условия</a>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Marshall Relay Ltd. Hong Kong S.A.R.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+
+const TITLES={ru:'Marshall VPN — Гайд для iOS (App Store · V2Box · Telegram)',en:'Marshall VPN — iOS guide (App Store · V2Box · Telegram)'};
+const DESCS={
+  ru:'Как сменить регион App Store, установить V2Box и подключить Marshall VPN через Telegram — пошаговый гайд для iPhone.',
+  en:'Change App Store region, install V2Box, and connect Marshall VPN via Telegram — step-by-step for iPhone.'
+};
+
+let currentLang=(function(){try{return localStorage.getItem('mvpn-lang')||'ru';}catch(e){return'ru';}})();
+
+function applyLang(l){
+  currentLang=l;
+  try{localStorage.setItem('mvpn-lang',l);}catch(e){}
+  const btn=document.getElementById('langBtn');
+  if(btn)btn.textContent=l==='en'?'RU':'EN';
+  document.documentElement.lang=l;
+  document.querySelectorAll('[data-en][data-ru]').forEach(function(el){
+    var t=el.getAttribute('data-'+l);
+    if(t!==null){
+      if(el.tagName==='INPUT'||el.tagName==='TEXTAREA')el.placeholder=t;
+      else el.innerHTML=t;
+    }
+  });
+  document.querySelectorAll('img[data-step]').forEach(function(img){
+    var n=img.getAttribute('data-step');
+    img.alt=l==='en'?('Step '+n):('Шаг '+n);
+  });
+  document.title=TITLES[l]||TITLES.ru;
+  var m=document.getElementById('meta-desc');
+  if(m)m.setAttribute('content',DESCS[l]||DESCS.ru);
+}
+
+window.toggleLang=function(){applyLang(currentLang==='en'?'ru':'en');};
+applyLang(currentLang);
+
+document.getElementById('langBtn').addEventListener('click',function(){window.toggleLang();});
+
+/* Step screenshots: try step-NN.png, then img/, then screenshots/ (GitHub folder layouts differ) */
+document.querySelectorAll('img[data-step]').forEach(function(img){
+  var n=String(img.getAttribute('data-step')).padStart(2,'0');
+  var list=['step-'+n+'.png','img/step-'+n+'.png','screenshots/step-'+n+'.png'];
+  var i=0;
+  img.addEventListener('error',function(){
+    i+=1;
+    if(i<list.length)img.src=list[i];
+  });
+});
+
+/* Nav scroll */
+addEventListener('scroll',function(){
+  var n=document.getElementById('nav');
+  if(n)n.classList.toggle('scrolled',scrollY>40);
+},{passive:true});
+
+/* Phase highlight: intersection on phase sections */
+var sections=document.querySelectorAll('.phase-section');
+var fills=[document.getElementById('phaseFill0'),document.getElementById('phaseFill1'),document.getElementById('phaseFill2')];
+var tabs=[document.getElementById('phaseTab0'),document.getElementById('phaseTab1'),document.getElementById('phaseTab2')];
+
+function setPhase(i){
+  fills.forEach(function(f,idx){if(f)f.classList.toggle('is-active',idx===i);});
+  tabs.forEach(function(t,idx){if(t)t.classList.toggle('is-active',idx===i);});
+}
+
+function updatePhaseFromScroll(){
+  var bestIx=-1,bestVis=-1;
+  sections.forEach(function(sec){
+    var r=sec.getBoundingClientRect();
+    var vis=Math.min(r.bottom,window.innerHeight)-Math.max(r.top,0);
+    if(vis>bestVis){bestVis=vis;bestIx=parseInt(sec.getAttribute('data-phase-index'),10);}
+  });
+  if(bestIx>=0)setPhase(bestIx);
+  else setPhase(0);
+}
+
+addEventListener('scroll',updatePhaseFromScroll,{passive:true});
+addEventListener('resize',updatePhaseFromScroll);
+updatePhaseFromScroll();
+
+tabs.forEach(function(tab){
+  tab.addEventListener('click',function(){
+    var sel=tab.getAttribute('data-target');
+    var el=sel?document.querySelector(sel):null;
+    var idx=parseInt(tab.getAttribute('data-phase'),10);
+    if(!isNaN(idx))setPhase(idx);
+    if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+})();
+</script>
+</body>
+</html>
