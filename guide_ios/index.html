@@ -92,16 +92,20 @@ img{max-width:100%;display:block}
 /* Hero */
 .guide-hero{position:relative;z-index:2;padding:28px 24px 8px}
 .guide-hero .container{max-width:1120px}
+.guide-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,300px);gap:20px 28px;align-items:start}
+.guide-hero-main{min-width:0}
 .guide-kicker{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-light);margin-bottom:12px}
 .guide-kicker::before{content:'';width:20px;height:1px;background:var(--accent-light)}
 .guide-hero h1{font-size:clamp(26px,5vw,44px);font-weight:800;line-height:1.08;letter-spacing:-.03em;margin-bottom:14px;max-width:min(28ch,100%)}
-.guide-lead{font-size:clamp(14px,1.8vw,17px);color:var(--text-dim);max-width:560px;margin-bottom:16px}
-.guide-notice{max-width:560px;margin-bottom:20px;padding:14px 16px 16px;border-radius:var(--radius-md);border:1px solid rgba(168,85,247,.22);background:linear-gradient(135deg,rgba(108,92,231,.08),rgba(0,210,160,.05));box-shadow:0 0 0 1px rgba(0,0,0,.15) inset}
-.guide-notice-label{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-light);margin-bottom:8px;padding:3px 8px;border-radius:6px;background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.2)}
-.guide-notice-text{font-size:13px;line-height:1.55;color:rgba(232,232,237,.88)}
+.guide-lead{font-size:clamp(14px,1.8vw,17px);color:var(--text-dim);max-width:42rem;margin-bottom:0}
+.guide-notice{margin:0;padding:12px 14px 14px;border-radius:var(--radius-md);border:1px solid rgba(168,85,247,.22);background:linear-gradient(135deg,rgba(108,92,231,.08),rgba(0,210,160,.05));box-shadow:0 0 0 1px rgba(0,0,0,.15) inset;position:sticky;top:calc(var(--nav-h) + 8px)}
+.guide-notice-label{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-light);margin-bottom:8px;padding:3px 8px;border-radius:6px;background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.2)}
+.guide-notice-text{font-size:12px;line-height:1.5;color:rgba(232,232,237,.88)}
 .guide-notice-text a{color:var(--accent-light);text-decoration:underline;text-underline-offset:3px}
-.guide-meta{display:flex;flex-wrap:wrap;gap:16px 28px;font-size:12px;color:var(--text-muted)}
-.guide-meta strong{display:block;font-size:13px;font-weight:600;color:var(--text);margin-top:2px}
+@media(max-width:900px){
+  .guide-hero-grid{grid-template-columns:1fr}
+  .guide-notice{position:relative;top:auto;max-width:100%}
+}
 
 /* Sections */
 main.guide-main{position:relative;z-index:2;padding-bottom:48px}
@@ -196,17 +200,16 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
 
 <header class="guide-hero">
   <div class="container">
-    <p class="guide-kicker"><span data-en="App Store · step by step" data-ru="App Store · по шагам">App Store · по шагам</span></p>
-    <h1><span data-en="Change <span class='gradient-text'>App Store</span> region" data-ru="Смена региона в <span class='gradient-text'>App Store</span>">Смена региона в <span class="gradient-text">App Store</span></span></h1>
-    <p class="guide-lead" data-en="Canada storefront → V2Box → subscription from Telegram. About 5–10 minutes." data-ru="Регион Канады в магазине → V2Box → подписка из Telegram. Примерно 5–10 минут.">Регион Канады в магазине → V2Box → подписка из Telegram. Примерно 5–10 минут.</p>
-    <aside class="guide-notice" role="note" aria-labelledby="guide-notice-heading">
-      <p class="guide-notice-label" id="guide-notice-heading" data-en="Temporary solution" data-ru="Временное решение">Временное решение</p>
-      <p class="guide-notice-text" data-en="Until the official Marshall app is available on the App Store, this guide uses a third‑party client (V2Box). After release you’ll install Marshall from the store like any other app — you won’t need a separate VPN client." data-ru="Пока официальное приложение Marshall не вышло в App Store, в этом гайде используется сторонний клиент (V2Box). После релиза вы установите Marshall из магазина, как обычное приложение — отдельный VPN‑клиент больше не понадобится.">Пока официальное приложение Marshall не вышло в App Store, в этом гайде используется сторонний клиент (V2Box). После релиза вы установите Marshall из магазина, как обычное приложение — отдельный VPN‑клиент больше не понадобится.</p>
-    </aside>
-    <div class="guide-meta">
-      <div><span data-en="Time" data-ru="Время">Время</span><strong data-en="5–10 min" data-ru="5–10 мин">5–10 мин</strong></div>
-      <div><span data-en="Cost" data-ru="Стоимость">Стоимость</span><strong data-en="Free" data-ru="Бесплатно">Бесплатно</strong></div>
-      <div><span data-en="Device" data-ru="Устройство">Устройство</span><strong>iPhone</strong></div>
+    <div class="guide-hero-grid">
+      <div class="guide-hero-main">
+        <p class="guide-kicker"><span data-en="App Store · step by step" data-ru="App Store · по шагам">App Store · по шагам</span></p>
+        <h1><span data-en="Change <span class='gradient-text'>App Store</span> region" data-ru="Смена региона в <span class='gradient-text'>App Store</span>">Смена региона в <span class="gradient-text">App Store</span></span></h1>
+        <p class="guide-lead" data-en="Canada storefront → V2Box → subscription from Telegram. About 5–10 minutes." data-ru="Регион Канады в магазине → V2Box → подписка из Telegram. Примерно 5–10 минут.">Регион Канады в магазине → V2Box → подписка из Telegram. Примерно 5–10 минут.</p>
+      </div>
+      <aside class="guide-notice" role="note" aria-labelledby="guide-notice-heading">
+        <p class="guide-notice-label" id="guide-notice-heading" data-en="Temporary solution" data-ru="Временное решение">Временное решение</p>
+        <p class="guide-notice-text" data-en="Until the official Marshall app is available on the App Store, this guide uses a third‑party client (V2Box). After release you’ll install Marshall from the store like any other app — you won’t need a separate VPN client." data-ru="Пока официальное приложение Marshall не вышло в App Store, в этом гайде используется сторонний клиент (V2Box). После релиза вы установите Marshall из магазина, как обычное приложение — отдельный VPN‑клиент больше не понадобится.">Пока официальное приложение Marshall не вышло в App Store, в этом гайде используется сторонний клиент (V2Box). После релиза вы установите Marshall из магазина, как обычное приложение — отдельный VPN‑клиент больше не понадобится.</p>
+      </aside>
     </div>
   </div>
 </header>
@@ -241,7 +244,7 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
             <h2 data-en="Open Settings and your Apple Account" data-ru="Откройте «Настройки» и учётную запись Apple">Откройте «Настройки» и учётную запись Apple</h2>
             <p data-en="At the top of Settings, tap your name or photo — this opens your Apple Account (Apple ID)." data-ru="Вверху «Настройки» нажмите своё имя или фото — откроется учётная запись Apple (Apple ID).">Вверху «Настройки» нажмите своё имя или фото — откроется учётная запись Apple (Apple ID).</p>
           </div>
-          <div class="step-media"><div class="phone-frame"><img src="/guide_ios/step-01.png" alt="Шаг 1" data-step="1" loading="eager" width="750" height="1624"></div></div>
+          <div class="step-media"><div class="phone-frame"><img src="./step-01.png" alt="Шаг 1" data-step="1" loading="eager" width="750" height="1624"></div></div>
         </article>
         <article class="step-card" id="step-02">
           <div class="step-num">Step<b>02</b></div>
@@ -249,7 +252,7 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
             <h2 data-en="Open Media &amp; Purchases or Payment &amp; Shipping" data-ru="«Медиа и покупки» или «Оплата и доставка»">«Медиа и покупки» или «Оплата и доставка»</h2>
             <p data-en="Depending on your iOS version, open <strong>Media &amp; Purchases</strong> or <strong>Payment &amp; Shipping</strong>. You need the path that leads to your account’s country or region settings." data-ru="В зависимости от версии iOS откройте <strong>«Медиа и покупки»</strong> или <strong>«Оплата и доставка»</strong> — нужен раздел, откуда можно перейти к стране/региону магазина.">В зависимости от версии iOS откройте <strong>«Медиа и покупки»</strong> или <strong>«Оплата и доставка»</strong> — нужен раздел, откуда можно перейти к стране/региону магазина.</p>
           </div>
-          <div class="step-media"><div class="phone-frame"><img src="/guide_ios/step-02.png" alt="Шаг 2" data-step="2" loading="lazy" width="750" height="1624"></div></div>
+          <div class="step-media"><div class="phone-frame"><img src="./step-02.png" alt="Шаг 2" data-step="2" loading="lazy" width="750" height="1624"></div></div>
         </article>
         <article class="step-card" id="step-03">
           <div class="step-num">Step<b>03</b></div>
@@ -257,7 +260,7 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
             <h2 data-en="Sign in to view account settings" data-ru="Войдите, чтобы открыть данные учётной записи">Войдите, чтобы открыть данные учётной записи</h2>
             <p data-en="If asked, authenticate with Face ID, Touch ID, or your password. Choose the option that <strong>views</strong> or <strong>manages</strong> your account — not Sign Out." data-ru="При запросе подтвердите вход Face ID, Touch ID или паролем. Выберите действие, которое <strong>открывает</strong> или <strong>управляет</strong> учётной записью, а не «Выйти».">При запросе подтвердите вход Face ID, Touch ID или паролем. Выберите действие, которое <strong>открывает</strong> или <strong>управляет</strong> учётной записью, а не «Выйти».</p>
           </div>
-          <div class="step-media"><div class="phone-frame"><img src="/guide_ios/step-03.png" alt="Шаг 3" data-step="3" loading="lazy" width="750" height="1624"></div></div>
+          <div class="step-media"><div class="phone-frame"><img src="./step-03.png" alt="Шаг 3" data-step="3" loading="lazy" width="750" height="1624"></div></div>
         </article>
         <article class="step-card" id="step-04">
           <div class="step-num">Step<b>04</b></div>
@@ -265,7 +268,7 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
             <h2 data-en="Open Country / Region" data-ru="Откройте «Страна или регион»">Откройте «Страна или регион»</h2>
             <p data-en="On the account settings screen, find <strong>Country/Region</strong> (wording may vary slightly) and tap it." data-ru="На экране настроек учётной записи найдите <strong>«Страна или регион»</strong> (формулировка может чуть отличаться) и нажмите.">На экране настроек учётной записи найдите <strong>«Страна или регион»</strong> (формулировка может чуть отличаться) и нажмите.</p>
           </div>
-          <div class="step-media"><div class="phone-frame"><img src="/guide_ios/step-04.png" alt="Шаг 4" data-step="4" loading="lazy" width="750" height="1624"></div></div>
+          <div class="step-media"><div class="phone-frame"><img src="./step-04.png" alt="Шаг 4" data-step="4" loading="lazy" width="750" height="1624"></div></div>
         </article>
         <article class="step-card" id="step-05">
           <div class="step-num">Step<b>05</b></div>
@@ -273,7 +276,7 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
             <h2 data-en="Choose Canada" data-ru="Выберите Канаду">Выберите Канаду</h2>
             <p data-en="Start the change, then search for and select <strong>Canada</strong>." data-ru="Начните смену региона, затем найдите и выберите <strong>Canada</strong> / <strong>Канада</strong>.">Начните смену региона, затем найдите и выберите <strong>Canada</strong> / <strong>Канада</strong>.</p>
           </div>
-          <div class="step-media"><div class="phone-frame"><img src="/guide_ios/step-05.png" alt="Шаг 5" data-step="5" loading="lazy" width="750" height="1624"></div></div>
+          <div class="step-media"><div class="phone-frame"><img src="./step-05.png" alt="Шаг 5" data-step="5" loading="lazy" width="750" height="1624"></div></div>
         </article>
         <article class="step-card" id="step-06">
           <div class="step-num">Step<b>06</b></div>
@@ -281,7 +284,7 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
             <h2 data-en="Continue past the notice" data-ru="Продолжите после предупреждения">Продолжите после предупреждения</h2>
             <p data-en="Read Apple’s notice about subscriptions and content. If you accept the implications, tap <strong>Continue</strong> (or the equivalent)." data-ru="Прочитайте предупреждение Apple о подписках и контенте. Если согласны с последствиями, нажмите <strong>«Продолжить»</strong> (или аналог).">Прочитайте предупреждение Apple о подписках и контенте. Если согласны с последствиями, нажмите <strong>«Продолжить»</strong> (или аналог).</p>
           </div>
-          <div class="step-media"><div class="phone-frame"><img src="/guide_ios/step-06.png" alt="Шаг 6" data-step="6" loading="lazy" width="750" height="1624"></div></div>
+          <div class="step-media"><div class="phone-frame"><img src="./step-06.png" alt="Шаг 6" data-step="6" loading="lazy" width="750" height="1624"></div></div>
         </article>
         <article class="step-card" id="step-07">
           <div class="step-num">Step<b>07</b></div>
@@ -289,7 +292,7 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
             <h2 data-en="Accept the terms" data-ru="Примите условия">Примите условия</h2>
             <p data-en="Accept the Apple Media Services terms when prompted (e.g. <strong>Agree</strong>)." data-ru="Примите условия Apple Media Services — кнопка вроде <strong>«Принять»</strong> / <strong>Agree</strong>.">Примите условия Apple Media Services — кнопка вроде <strong>«Принять»</strong> / <strong>Agree</strong>.</p>
           </div>
-          <div class="step-media"><div class="phone-frame"><img src="/guide_ios/step-07.png" alt="Шаг 7" data-step="7" loading="lazy" width="750" height="1624"></div></div>
+          <div class="step-media"><div class="phone-frame"><img src="./step-07.png" alt="Шаг 7" data-step="7" loading="lazy" width="750" height="1624"></div></div>
         </article>
         <article class="step-card" id="step-08">
           <div class="step-num">Step<b>08</b></div>
@@ -305,7 +308,7 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
             </div>
             <p data-en="Tap <strong>Done</strong> / <strong>Next</strong> when the form is complete." data-ru="Нажмите <strong>«Готово»</strong> / <strong>Done</strong>, когда форма заполнена.">Нажмите <strong>«Готово»</strong> / <strong>Done</strong>, когда форма заполнена.</p>
           </div>
-          <div class="step-media"><div class="phone-frame"><img src="/guide_ios/step-08.png" alt="Шаг 8" data-step="8" loading="lazy" width="750" height="1624"></div></div>
+          <div class="step-media"><div class="phone-frame"><img src="./step-08.png" alt="Шаг 8" data-step="8" loading="lazy" width="750" height="1624"></div></div>
         </article>
       </div>
     </div>
@@ -325,7 +328,7 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
             <h2 data-en="Install V2Box from the App Store" data-ru="Установите V2Box из App Store">Установите V2Box из App Store</h2>
             <p data-en="Open the App Store, search for <code>v2box</code>, then install <strong>V2Box — V2ray Client</strong> (tap <strong>Get</strong> / cloud icon and confirm)." data-ru="Откройте App Store, найдите <code>v2box</code> и установите <strong>V2Box — V2ray Client</strong> (кнопка «Загрузить» / облачко и подтверждение).">Откройте App Store, найдите <code>v2box</code> и установите <strong>V2Box — V2ray Client</strong> (кнопка «Загрузить» / облачко и подтверждение).</p>
           </div>
-          <div class="step-media"><div class="phone-frame"><img src="/guide_ios/step-09.png" alt="Шаг 9" data-step="9" loading="lazy" width="750" height="1624"></div></div>
+          <div class="step-media"><div class="phone-frame"><img src="./step-09.png" alt="Шаг 9" data-step="9" loading="lazy" width="750" height="1624"></div></div>
         </article>
         <article class="step-card" id="step-10">
           <div class="step-num">Step<b>10</b></div>
@@ -333,7 +336,7 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
             <h2 data-en="Open V2Box" data-ru="Откройте V2Box">Откройте V2Box</h2>
             <p data-en="Launch the app. You should see the main screen with no profile selected and a disconnected state — that’s expected until you import your subscription." data-ru="Запустите приложение. На главном экране может быть «конфигурация не выбрана» и статус отключения — так и должно быть до импорта подписки.">Запустите приложение. На главном экране может быть «конфигурация не выбрана» и статус отключения — так и должно быть до импорта подписки.</p>
           </div>
-          <div class="step-media"><div class="phone-frame"><img src="/guide_ios/step-10.png" alt="Шаг 10" data-step="10" loading="lazy" width="750" height="1624"></div></div>
+          <div class="step-media"><div class="phone-frame"><img src="./step-10.png" alt="Шаг 10" data-step="10" loading="lazy" width="750" height="1624"></div></div>
         </article>
       </div>
     </div>
@@ -353,7 +356,7 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
             <h2 data-en="Copy your link from the Telegram bot" data-ru="Скопируйте ссылку в Telegram-боте">Скопируйте ссылку в Telegram-боте</h2>
             <p data-en="Open <a href=&quot;https://t.me/MarshallVPNBot&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Marshall&rsquo;s Telegram bot</a>, send <strong>Start</strong>. The bot sends your personal subscription URL (often a long <code>https://&hellip;/sub/&hellip;</code> link) and may include a QR code. Tap the link once to copy it." data-ru="Откройте <a href=&quot;https://t.me/MarshallVPNBot&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Telegram-бот Marshall</a>, нажмите <strong>Start</strong>. Бот пришлёт персональную ссылку подписки (часто длинный адрес вида <code>https://&hellip;/sub/&hellip;</code>) и может приложить QR. Один тап по ссылке обычно копирует её в буфер.">Откройте <a href="https://t.me/MarshallVPNBot" target="_blank" rel="noopener">Telegram-бот Marshall</a>, нажмите <strong>Start</strong>. Бот пришлёт персональную ссылку подписки (часто длинный адрес вида <code>https://…/sub/…</code>) и может приложить QR. Один тап по ссылке обычно копирует её в буфер.</p>
           </div>
-          <div class="step-media"><div class="phone-frame"><img src="/guide_ios/step-11.png" alt="Шаг 11" data-step="11" loading="lazy" width="750" height="1624"></div></div>
+          <div class="step-media"><div class="phone-frame"><img src="./step-11.png" alt="Шаг 11" data-step="11" loading="lazy" width="750" height="1624"></div></div>
         </article>
         <article class="step-card" id="step-12">
           <div class="step-num">Step<b>12</b></div>
@@ -361,7 +364,7 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
             <h2 data-en="Import subscription in V2Box" data-ru="Импортируйте подписку в V2Box">Импортируйте подписку в V2Box</h2>
             <p data-en="In V2Box, open the <strong>Configurations</strong> / profiles section. Tap <strong>+</strong>, then choose import from clipboard (wording like <strong>Import v2ray URI from clipboard</strong>). If iOS asks to allow paste from Telegram, tap <strong>Allow Paste</strong> — this is normal and may appear once." data-ru="В V2Box откройте раздел <strong>«Конфигурации»</strong> / профили. Нажмите <strong>+</strong> и выберите импорт из буфера (пункт вроде <strong>«Импортировать v2ray URI из буфера»</strong>). Если iOS спросит разрешение на вставку из Telegram — нажмите <strong>«Разрешить вставку»</strong>; это штатный запрос, часто однократный.">В V2Box откройте раздел <strong>«Конфигурации»</strong> / профили. Нажмите <strong>+</strong> и выберите импорт из буфера (пункт вроде <strong>«Импортировать v2ray URI из буфера»</strong>). Если iOS спросит разрешение на вставку из Telegram — нажмите <strong>«Разрешить вставку»</strong>; это штатный запрос, часто однократный.</p>
           </div>
-          <div class="step-media"><div class="phone-frame"><img src="/guide_ios/step-12.png" alt="Шаг 12" data-step="12" loading="lazy" width="750" height="1624"></div></div>
+          <div class="step-media"><div class="phone-frame"><img src="./step-12.png" alt="Шаг 12" data-step="12" loading="lazy" width="750" height="1624"></div></div>
         </article>
         <article class="step-card" id="step-13">
           <div class="step-num">Step<b>13</b></div>
@@ -369,7 +372,7 @@ main.guide-main{position:relative;z-index:2;padding-bottom:48px}
             <h2 data-en="Select a server and connect" data-ru="Выберите сервер и подключитесь">Выберите сервер и подключитесь</h2>
             <p data-en="After the list loads, pick a server, then turn the VPN on using the app’s main toggle (often a swipe on the round control). Wait until the status shows connected." data-ru="Когда список загрузится, выберите сервер и включите VPN основным переключателем в приложении (часто свайп по круглой кнопке). Дождитесь статуса подключения.">Когда список загрузится, выберите сервер и включите VPN основным переключателем в приложении (часто свайп по круглой кнопке). Дождитесь статуса подключения.</p>
           </div>
-          <div class="step-media"><div class="phone-frame"><img src="/guide_ios/step-13.png" alt="Шаг 13" data-step="13" loading="lazy" width="750" height="1624"></div></div>
+          <div class="step-media"><div class="phone-frame"><img src="./step-13.png" alt="Шаг 13" data-step="13" loading="lazy" width="750" height="1624"></div></div>
         </article>
       </div>
     </div>
@@ -456,17 +459,29 @@ applyLang(currentLang);
 
 document.getElementById('langBtn').addEventListener('click',function(){window.toggleLang();});
 
-/* Fallbacks: primary is /guide_ios/step-NN.png (works even when URL is /guide_ios without trailing slash). Then same-dir, img/, screenshots/. */
-document.querySelectorAll('img[data-step]').forEach(function(img){
-  var n=String(img.getAttribute('data-step')).padStart(2,'0');
-  var name='step-'+n+'.png';
-  var list=['/guide_ios/'+name,name,'img/'+name,'screenshots/'+name];
-  var i=0;
-  img.addEventListener('error',function(){
-    i+=1;
-    if(i<list.length)img.src=list[i];
+/* Screenshots: resolve against folder of this page (GitHub Pages project URLs are /REPO_NAME/guide_ios/ — never use /guide_ios/ from site root). */
+(function guideResolveStepImages(){
+  function directoryBaseHref(){
+    var path=location.pathname||'/';
+    if(path==='/'||path==='')return location.origin+'/';
+    if(path.endsWith('/'))return location.origin+path;
+    if(/\/index\.html?$/i.test(path))return location.origin+path.replace(/\/index\.html?$/i,'/');
+    var last=path.substring(path.lastIndexOf('/')+1);
+    if(last.indexOf('.')===-1)return location.origin+path+'/';
+    return location.origin+path.substring(0,path.lastIndexOf('/')+1);
+  }
+  var base=directoryBaseHref();
+  document.querySelectorAll('img[data-step]').forEach(function(img){
+    var n=String(img.getAttribute('data-step')).padStart(2,'0');
+    var name='step-'+n+'.png';
+    img.src=new URL(name,base).href;
+    var k=0;
+    var more=['img/'+name,'screenshots/'+name];
+    img.addEventListener('error',function(){
+      if(k<more.length)img.src=new URL(more[k++],base).href;
+    });
   });
-});
+})();
 
 /* Nav scroll */
 addEventListener('scroll',function(){
