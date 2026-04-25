@@ -498,6 +498,20 @@ img{max-width:100%;display:block}
 .map-legend-item{display:flex;align-items:center;gap:5px;font-size:10px;color:#5a7a9f;font-weight:500}
 .map-legend-dot{width:8px;height:8px;border-radius:3px}
 .map-legend-dot-round{border-radius:50%;width:7px;height:7px}
+.map-info-panel{position:absolute;left:18px;bottom:22px;width:min(290px,28%);background:rgba(10,15,25,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(100,130,180,.13);border-radius:14px;padding:14px 16px 13px;z-index:10;box-shadow:0 12px 40px rgba(0,0,0,.35);opacity:0;visibility:hidden;transform:translateY(8px) scale(.985);transition:opacity .35s ease,transform .35s ease,visibility 0s linear .35s;pointer-events:none}
+.map-info-panel.is-visible{opacity:1;visibility:visible;transform:translateY(0) scale(1);pointer-events:auto;transition:opacity .35s ease,transform .35s ease,visibility 0s linear 0s}
+.map-info-panel-label{display:inline-flex;align-items:center;gap:6px;font-size:9.5px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#00d67e;margin-bottom:8px}
+.map-info-panel-label::before{content:'';width:14px;height:1px;background:#00d67e;opacity:.7}
+.map-info-panel-title{font-size:13px;font-weight:600;color:#e8edf3;line-height:1.3;margin-bottom:5px;letter-spacing:-.005em}
+.map-info-panel-desc{font-size:10.5px;color:#6a84a5;line-height:1.5;margin-bottom:11px}
+.map-info-panel-divider{height:1px;background:linear-gradient(90deg,rgba(100,130,180,.18),rgba(100,130,180,.04));margin-bottom:10px}
+.map-info-panel-list{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(6,auto);grid-auto-flow:column;gap:5px 14px;list-style:none;padding:0;margin:0}
+.map-info-panel-list li{font-size:10.5px;color:#aab7cc;font-weight:500;display:flex;align-items:center;gap:7px;line-height:1.4}
+.map-info-panel-list li::before{content:'';width:3.5px;height:3.5px;border-radius:50%;background:#00d67e;flex-shrink:0;box-shadow:0 0 4px rgba(0,214,126,.55)}
+@media(max-width:768px){
+  .map-info-panel{position:static;width:auto;left:auto;bottom:auto;margin:0 12px;transform:none;box-shadow:none;display:none}
+  .map-info-panel.is-visible{display:block;margin-top:10px}
+}
 @keyframes glowBorder{0%,100%{stroke:rgba(0,214,126,.10)}50%{stroke:rgba(0,214,126,.28)}}
 
 /* Pricing */
@@ -646,11 +660,7 @@ img{max-width:100%;display:block}
   .reveal-right:not(.visible){transform:translate3d(18px,0,0)}
 }
 
-/* =========================================================
-   FOUR DEEP-DIVE BLOCKS — each with its own visual language
-   ========================================================= */
-
-/* ---------- BLOCK A: Shadowsocks "Disguise" — wire inspector ---------- */
+/* ---------- SHADOWSOCKS A: "Disguise" — wire inspector ---------- */
 .ss-wire-section{position:relative;z-index:2;padding:80px 0;overflow-x:clip}
 .ss-wire-grid{margin-top:40px;display:grid;grid-template-columns:1.05fr 1.1fr;gap:48px;align-items:center}
 .ss-wire-copy h3{font-size:clamp(22px,2.6vw,30px);font-weight:800;letter-spacing:-.02em;line-height:1.22;margin-bottom:16px}
@@ -658,13 +668,7 @@ img{max-width:100%;display:block}
 .ss-wire-copy p{font-size:15px;color:var(--text-dim);line-height:1.7;margin-bottom:14px;max-width:480px}
 .ss-wire-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
 .ss-wire-tag{font-family:'JetBrains Mono','SFMono-Regular',ui-monospace,monospace;font-size:11px;letter-spacing:.05em;padding:6px 10px;border-radius:6px;background:rgba(0,210,160,.06);color:var(--success);border:1px solid rgba(0,210,160,.18)}
-.ss-wire{
-  position:relative;border-radius:var(--radius-lg);
-  background:radial-gradient(ellipse at top right,rgba(0,210,160,.08),transparent 55%),linear-gradient(160deg,#070b14 0%,#0a0f1a 60%,#08111a 100%);
-  border:1px solid rgba(0,210,160,.14);
-  overflow:hidden;padding:18px 18px 16px;min-height:340px;
-  box-shadow:0 30px 80px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.02) inset
-}
+.ss-wire{position:relative;border-radius:var(--radius-lg);background:radial-gradient(ellipse at top right,rgba(0,210,160,.08),transparent 55%),linear-gradient(160deg,#070b14 0%,#0a0f1a 60%,#08111a 100%);border:1px solid rgba(0,210,160,.14);overflow:hidden;padding:18px 18px 16px;min-height:340px;box-shadow:0 30px 80px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.02) inset}
 .ss-wire::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 2px,rgba(255,255,255,.014) 2px 3px);pointer-events:none;mix-blend-mode:overlay}
 .ss-wire-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;font-family:'JetBrains Mono','SFMono-Regular',ui-monospace,monospace;position:relative;z-index:1}
 .ss-wire-dots{display:flex;gap:6px}
@@ -687,158 +691,20 @@ img{max-width:100%;display:block}
 .ss-wire-tagm{font-size:9.5px;font-weight:700;letter-spacing:.08em;padding:3px 7px;border-radius:5px;text-transform:uppercase;text-align:center;justify-self:end}
 .ss-wire-tagm--https{background:rgba(0,210,160,.14);color:var(--success);box-shadow:inset 0 0 0 1px rgba(0,210,160,.22)}
 .ss-wire-tagm--unknown{background:rgba(255,255,255,.05);color:rgba(255,255,255,.45);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
-.ss-wire-foot{margin-top:14px;display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;position:relative;z-index:1}
+.ss-wire-foot{margin-top:14px;display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono','SFMono-Regular',ui-monospace,monospace;font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;position:relative;z-index:1}
 .ss-wire-verdict{color:var(--success);font-weight:700;display:inline-flex;align-items:center;gap:6px}
 .ss-wire-verdict svg{width:11px;height:11px}
 @media(max-width:900px){.ss-wire-grid{grid-template-columns:1fr;gap:30px}.ss-wire{min-height:300px}.ss-wire-row{grid-template-columns:48px 1fr 56px}}
 
-/* ---------- BLOCK B: Shadowsocks "Light & Fast" — stat ribbon ---------- */
-.ss-light-section{position:relative;z-index:2;padding:80px 0;overflow:hidden}
-.ss-light-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 35% at 50% 0%,rgba(251,191,36,.07),transparent 60%);pointer-events:none}
-.ss-light-card{margin-top:40px;border-radius:var(--radius-lg);border:1px solid rgba(251,191,36,.16);background:linear-gradient(180deg,rgba(28,22,8,.55),rgba(15,12,6,.4));position:relative;overflow:hidden;padding:46px 36px 0;max-width:1040px;margin-left:auto;margin-right:auto}
-.ss-light-head{text-align:center;margin-bottom:36px;position:relative;z-index:2}
-.ss-light-head h3{font-size:clamp(22px,2.6vw,32px);font-weight:800;letter-spacing:-.025em;line-height:1.18;margin-bottom:10px}
-.ss-light-head h3 .accent{color:#fbbf24}
-.ss-light-head p{font-size:14px;color:var(--text-dim);max-width:540px;margin:0 auto;line-height:1.65}
-.ss-light-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;position:relative;z-index:2}
-.ss-light-stat{padding:0 6px;border-left:1px solid rgba(251,191,36,.14)}
-.ss-light-stat:first-child{border-left:none}
-.ss-light-stat-value{font-size:clamp(34px,5vw,54px);font-weight:800;letter-spacing:-.04em;line-height:1;color:#fbbf24;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:6px}
-.ss-light-stat-unit{font-size:14px;color:rgba(251,191,36,.58);font-weight:600;letter-spacing:.02em}
-.ss-light-stat-label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:10px;font-weight:600}
-.ss-light-stat-sub{font-size:12.5px;color:rgba(255,255,255,.42);line-height:1.55;margin-top:8px;max-width:260px}
-.ss-light-ribbon{margin:36px -36px 0;height:96px;position:relative;overflow:hidden;border-radius:0 0 var(--radius-lg) var(--radius-lg)}
-.ss-light-ribbon::before,.ss-light-ribbon::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:3;pointer-events:none}
-.ss-light-ribbon::before{left:0;background:linear-gradient(90deg,rgba(15,12,6,1),rgba(15,12,6,0))}
-.ss-light-ribbon::after{right:0;background:linear-gradient(-90deg,rgba(15,12,6,1),rgba(15,12,6,0))}
-.ss-light-ribbon::after,.ss-light-ribbon::before{background-color:transparent}
-.ss-ribbon-track{position:absolute;inset:0;display:flex;align-items:center;gap:40px;animation:ssRibbon 38s linear infinite;will-change:transform;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:rgba(251,191,36,.45);white-space:nowrap;padding-left:40px}
-.ss-ribbon-track span{display:inline-flex;align-items:center;gap:10px}
-.ss-ribbon-track span::before{content:'';width:5px;height:5px;border-radius:50%;background:rgba(251,191,36,.55);box-shadow:0 0 10px rgba(251,191,36,.45);flex-shrink:0}
-@keyframes ssRibbon{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@media(max-width:760px){
-  .ss-light-card{padding:32px 22px 0}
-  .ss-light-stats{grid-template-columns:1fr;gap:22px}
-  .ss-light-stat{border-left:none;border-top:1px solid rgba(251,191,36,.12);padding-top:22px}
-  .ss-light-stat:first-child{border-top:none;padding-top:0}
-  .ss-light-stat-sub{max-width:none}
-  .ss-light-ribbon{margin:30px -22px 0;height:74px}
+@media(max-width:600px){
+  .ss-wire-section{padding:56px 0}
 }
 
-/* ---------- BLOCK C: Privacy "Inside your phone" — orbital ---------- */
-.priv-orbit-section{position:relative;z-index:2;padding:80px 0;overflow:hidden}
-.priv-orbit-grid{margin-top:40px;display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:center}
-.priv-orbit-copy h3{font-size:clamp(22px,2.6vw,32px);font-weight:800;letter-spacing:-.025em;line-height:1.2;margin-bottom:18px}
-.priv-orbit-copy h3 .accent{background:linear-gradient(135deg,#A855F7,#6C5CE7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.priv-orbit-copy p{font-size:15px;color:var(--text-dim);line-height:1.7;margin-bottom:14px;max-width:460px}
-.priv-orbit-bullets{margin-top:22px;display:flex;flex-direction:column;gap:11px}
-.priv-orbit-bullet{display:flex;align-items:flex-start;gap:11px;font-size:13.5px;color:rgba(255,255,255,.7);line-height:1.55}
-.priv-orbit-bullet svg{flex-shrink:0;margin-top:3px;color:#A855F7;width:14px;height:14px}
-.priv-orbit-stage{position:relative;height:480px;display:flex;align-items:center;justify-content:center;perspective:1000px}
-.priv-orbit-rings{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
-.priv-orbit-ring{position:absolute;border-radius:50%;border:1px dashed rgba(168,85,247,.18)}
-.priv-orbit-ring--1{width:280px;height:280px;animation:privSpin 36s linear infinite}
-.priv-orbit-ring--2{width:380px;height:380px;animation:privSpin 60s linear infinite reverse;border-color:rgba(108,92,231,.14)}
-.priv-orbit-ring--3{width:480px;height:480px;animation:privSpin 90s linear infinite;border-color:rgba(168,85,247,.08)}
-@keyframes privSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-.priv-orbit-phone{position:relative;width:200px;height:400px;border-radius:42px;border:1.5px solid rgba(168,85,247,.3);background:linear-gradient(160deg,rgba(20,12,40,.7),rgba(8,8,18,.92));box-shadow:0 0 0 1px rgba(255,255,255,.04) inset,0 30px 80px rgba(0,0,0,.55),0 0 80px rgba(108,92,231,.14);overflow:hidden;z-index:3}
-.priv-orbit-phone::before{content:'';position:absolute;top:14px;left:50%;transform:translateX(-50%);width:80px;height:6px;border-radius:3px;background:rgba(255,255,255,.06)}
-.priv-orbit-screen{position:absolute;inset:30px 14px 18px;border-radius:28px;background:radial-gradient(ellipse at center,rgba(108,92,231,.22),transparent 70%);overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px}
-.priv-orbit-screen-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(168,85,247,.7);padding:4px 8px;border:1px solid rgba(168,85,247,.22);border-radius:4px;background:rgba(108,92,231,.06)}
-.priv-orbit-glyph{position:relative;width:72px;height:72px;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,.55) 0%,rgba(108,92,231,.18) 60%,transparent 80%);box-shadow:0 0 50px rgba(168,85,247,.45);animation:privGlyphPulse 3.4s ease-in-out infinite;display:flex;align-items:center;justify-content:center}
-@keyframes privGlyphPulse{0%,100%{transform:scale(1);opacity:.92}50%{transform:scale(1.08);opacity:1}}
-.priv-orbit-glyph::before{content:'';position:absolute;inset:14px;border-radius:50%;background:#0a0a14;box-shadow:0 0 20px rgba(168,85,247,.35) inset}
-.priv-orbit-glyph svg{position:relative;z-index:1;color:#c084fc;filter:drop-shadow(0 0 6px rgba(192,132,252,.5))}
-.priv-orbit-screen-meta{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:rgba(255,255,255,.32);text-align:center;line-height:1.5}
-.priv-orbit-screen-meta strong{color:rgba(168,85,247,.85);font-weight:700}
-.priv-orbit-chip{
-  position:absolute;top:50%;left:50%;
-  transform:translate(-50%,-50%) rotate(var(--ang)) translateY(var(--rad)) rotate(calc(-1 * var(--ang)));
-  font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.04em;
-  padding:6px 11px;border-radius:999px;
-  background:rgba(20,15,40,.85);
-  border:1px solid rgba(168,85,247,.24);
-  color:rgba(255,255,255,.8);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  white-space:nowrap;display:inline-flex;align-items:center;gap:6px;
-  animation:privChipFloat 5s ease-in-out infinite;
-  z-index:2
-}
-.priv-orbit-chip svg{width:10px;height:10px;color:#c084fc}
-@keyframes privChipFloat{0%,100%{filter:brightness(1)}50%{filter:brightness(1.25)}}
-.priv-orbit-chip:nth-of-type(2){animation-delay:-1s}
-.priv-orbit-chip:nth-of-type(3){animation-delay:-2s}
-.priv-orbit-chip:nth-of-type(4){animation-delay:-3s}
-.priv-orbit-chip:nth-of-type(5){animation-delay:-1.5s}
-.priv-orbit-chip:nth-of-type(6){animation-delay:-2.5s}
-.priv-orbit-chip:nth-of-type(7){animation-delay:-3.5s}
+/* shared mobile/desktop visibility helpers for the SS block */
+.ss-mob-only{display:none}
 @media(max-width:900px){
-  .priv-orbit-grid{grid-template-columns:1fr;gap:30px}
-  .priv-orbit-stage{height:420px;order:2}
-  .priv-orbit-copy{order:1}
-  .priv-orbit-ring--3{display:none}
-  .priv-orbit-chip[style*="--rad:-190px"]{--rad:-160px!important}
-}
-@media(max-width:520px){
-  .priv-orbit-stage{height:360px}
-  .priv-orbit-phone{width:160px;height:320px}
-  .priv-orbit-ring--1{width:230px;height:230px}
-  .priv-orbit-ring--2{width:310px;height:310px}
-  .priv-orbit-chip{font-size:9.5px;padding:5px 9px}
-  .priv-orbit-chip[style*="--rad:-140px"]{--rad:-115px!important}
-  .priv-orbit-chip[style*="--rad:-190px"]{--rad:-150px!important}
-}
-
-/* ---------- BLOCK D: Privacy "Audit Ledger" — typographic doc ---------- */
-.ledger-section{position:relative;z-index:2;padding:80px 0}
-.ledger-doc{
-  margin-top:40px;max-width:780px;margin-left:auto;margin-right:auto;
-  background:linear-gradient(180deg,rgba(255,255,255,.028),rgba(255,255,255,.012));
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:8px;
-  padding:40px 50px 36px;position:relative;
-  font-family:'JetBrains Mono','SFMono-Regular',ui-monospace,monospace;
-  box-shadow:0 30px 80px rgba(0,0,0,.4)
-}
-.ledger-doc::before{content:'';position:absolute;left:0;top:18px;bottom:18px;width:3px;border-radius:0 3px 3px 0;background:linear-gradient(180deg,#A855F7 0%,#6C5CE7 50%,transparent 100%)}
-.ledger-doc-head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px dashed rgba(255,255,255,.1);padding-bottom:18px;margin-bottom:22px;gap:20px;flex-wrap:wrap}
-.ledger-doc-htitle{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted)}
-.ledger-doc-htitle strong{display:block;font-family:'Inter',sans-serif;font-size:19px;font-weight:800;letter-spacing:-.02em;color:var(--text);margin-top:5px;text-transform:none}
-.ledger-doc-meta{font-size:10px;letter-spacing:.12em;color:var(--text-muted);text-align:right;line-height:1.85}
-.ledger-doc-meta b{color:rgba(255,255,255,.65);font-weight:600}
-.ledger-rows{display:flex;flex-direction:column;gap:0}
-.ledger-row{display:grid;grid-template-columns:36px 1fr auto;gap:14px;align-items:center;padding:13px 0;border-bottom:1px dashed rgba(255,255,255,.05)}
-.ledger-row:last-child{border-bottom:none}
-.ledger-num{font-size:11px;color:var(--text-muted);font-weight:600;letter-spacing:.05em;font-variant-numeric:tabular-nums}
-.ledger-label{font-family:'Inter',sans-serif;font-size:14.5px;color:rgba(255,255,255,.86);position:relative;letter-spacing:-.005em;line-height:1.4}
-.ledger-stamp{
-  font-size:10px;letter-spacing:.18em;font-weight:800;
-  padding:4px 9px;border:1.5px solid rgba(168,85,247,.5);
-  color:#c084fc;border-radius:3px;background:rgba(108,92,231,.06);
-  transform:scale(0) rotate(-18deg);opacity:0;
-  transition:transform .55s cubic-bezier(.34,1.56,.64,1),opacity .35s ease;
-  white-space:nowrap;font-family:'JetBrains Mono',monospace
-}
-.ledger-doc.visible .ledger-stamp{transform:scale(1) rotate(-3deg);opacity:1}
-.ledger-doc.visible .ledger-row:nth-child(1) .ledger-stamp{transition-delay:.55s}
-.ledger-doc.visible .ledger-row:nth-child(2) .ledger-stamp{transition-delay:.65s}
-.ledger-doc.visible .ledger-row:nth-child(3) .ledger-stamp{transition-delay:.75s}
-.ledger-doc.visible .ledger-row:nth-child(4) .ledger-stamp{transition-delay:.85s}
-.ledger-doc.visible .ledger-row:nth-child(5) .ledger-stamp{transition-delay:.95s}
-.ledger-doc.visible .ledger-row:nth-child(6) .ledger-stamp{transition-delay:1.05s}
-.ledger-doc.visible .ledger-row:nth-child(7) .ledger-stamp{transition-delay:1.15s}
-.ledger-doc.visible .ledger-row:nth-child(8) .ledger-stamp{transition-delay:1.25s}
-.ledger-doc-foot{margin-top:24px;padding-top:18px;border-top:1px dashed rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
-.ledger-doc-foot strong{font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;letter-spacing:-.01em;color:var(--text)}
-.ledger-doc-foot span{font-size:10px;letter-spacing:.16em;color:var(--text-muted);text-transform:uppercase}
-.ledger-doc-foot .ledger-sig{display:inline-flex;align-items:center;gap:7px;color:rgba(168,85,247,.85);font-weight:600;letter-spacing:.05em;font-size:10.5px}
-.ledger-doc-foot .ledger-sig svg{width:12px;height:12px}
-@media(max-width:680px){
-  .ledger-doc{padding:28px 22px 26px}
-  .ledger-row{grid-template-columns:28px 1fr;gap:10px}
-  .ledger-row .ledger-stamp{grid-column:1/-1;justify-self:start;margin-top:2px;margin-left:38px}
-  .ledger-label{font-size:13.5px}
-  .ledger-doc-meta{text-align:left}
+  .ss-desk-only{display:none}
+  .ss-mob-only{display:block}
 }
 </style>
 </head>
@@ -1301,6 +1167,26 @@ img{max-width:100%;display:block}
           </div>
           <div class="map-tooltip-bar"><div class="map-tooltip-bar-fill" id="tt-bar"></div></div>
         </div>
+        <div class="map-info-panel" id="map-info-panel" aria-hidden="true">
+          <div class="map-info-panel-label" data-en="Network" data-ru="Сеть">Network</div>
+          <div class="map-info-panel-title" data-en="Free countries only" data-ru="Только свободные страны">Free countries only</div>
+          <div class="map-info-panel-desc" data-en="Servers only where the internet is free." data-ru="Серверы только там, где интернет свободен.">Servers only where the internet is free.</div>
+          <div class="map-info-panel-divider"></div>
+          <ul class="map-info-panel-list">
+            <li data-en="Germany" data-ru="Германия">Germany</li>
+            <li data-en="United Kingdom" data-ru="Великобритания">United Kingdom</li>
+            <li data-en="Netherlands" data-ru="Нидерланды">Netherlands</li>
+            <li data-en="Sweden" data-ru="Швеция">Sweden</li>
+            <li data-en="Finland" data-ru="Финляндия">Finland</li>
+            <li data-en="Spain" data-ru="Испания">Spain</li>
+            <li data-en="United States" data-ru="США">United States</li>
+            <li data-en="Brazil" data-ru="Бразилия">Brazil</li>
+            <li data-en="Japan" data-ru="Япония">Japan</li>
+            <li data-en="South Korea" data-ru="Южная Корея">South Korea</li>
+            <li data-en="Singapore" data-ru="Сингапур">Singapore</li>
+            <li data-en="Australia" data-ru="Австралия">Australia</li>
+          </ul>
+        </div>
       </div>
       <div class="map-legend" id="map-legend"></div>
     </div>
@@ -1377,6 +1263,74 @@ img{max-width:100%;display:block}
 
 <div class="section-divider"></div>
 
+<!-- ============ BLOCK 6.5: SHADOWSOCKS — wire inspector ============ -->
+<section class="ss-wire-section" id="protocol-disguise">
+  <div class="container">
+    <div style="text-align:center" class="reveal">
+      <div class="section-label" style="justify-content:center" data-en="Protocol · Shadowsocks" data-ru="Протокол · Shadowsocks">Protocol · Shadowsocks</div>
+      <h2 class="section-title" style="margin-left:auto;margin-right:auto;max-width:760px" data-en="Encrypted tunneling with <span class='gradient-text-accent'>modern ciphers.</span>" data-ru="Зашифрованный туннель на <span class='gradient-text-accent'>современных шифрах.</span>">Encrypted tunneling with <span class="gradient-text-accent">modern ciphers.</span></h2>
+      <p class="section-desc ss-desk-only" style="margin-left:auto;margin-right:auto;text-align:center" data-en="Shadowsocks uses AEAD to protect the tunnel between your device and Marshall. Your data is encrypted in transit; we pair it on our own infrastructure with VLESS and Reality in TLS 1.3 — a stack focused on confidentiality, integrity, and a lean, auditable design." data-ru="Shadowsocks использует AEAD, чтобы защищать туннель между устройством и Marshall. Данные шифруются в пути; на собственной инфраструктуре это сочетается с VLESS и Reality в оболочке TLS 1.3 — с упором на конфиденциальность, целостность и прозрачный, обозримый стек.">Shadowsocks uses AEAD to protect the tunnel between your device and Marshall. Your data is encrypted in transit; we pair it on our own infrastructure with VLESS and Reality in TLS 1.3 — a stack focused on confidentiality, integrity, and a lean, auditable design.</p>
+      <p class="section-desc ss-mob-only" style="margin-left:auto;margin-right:auto;text-align:center" data-en="AEAD protects your data in transit. On our servers it runs alongside VLESS, Reality, and TLS 1.3 — for confidentiality and integrity." data-ru="AEAD защищает данные в пути. На наших серверах — вместе с VLESS, Reality и TLS 1.3, с упором на конфиденциальность и целостность.">AEAD protects your data in transit. On our servers it runs alongside VLESS, Reality, and TLS 1.3 — for confidentiality and integrity.</p>
+    </div>
+    <div class="ss-wire-grid">
+      <div class="ss-wire-copy reveal-left">
+        <h3 data-en="Per-packet authentication. <span class='accent'>No logs by design.</span>" data-ru="Попакетная аутентификация. <span class='accent'>Без логов в архитектуре.</span>">Per-packet authentication. <span class="accent">No logs by design.</span></h3>
+        <p class="ss-desk-only" data-en="SOCKS5 transport with ChaCha20-Poly1305 and AES-256-GCM: each frame is cryptographically signed so replays and tampering are caught before your traffic is handled. The protocol keeps encryption and authentication in one place, which helps reduce metadata exposure and keep your side of the path private." data-ru="SOCKS5 с ChaCha20-Poly1305 и AES-256-GCM: каждая единица трафика аутентифицируется, повторы и вмешательства отсекаются до дальнейшей обработки. Шифрование и проверка целостности собраны в одном месте — так меньше утечек сопутствующих сведений и сильнее приватность на стороне клиента.">SOCKS5 transport with ChaCha20-Poly1305 and AES-256-GCM: each frame is cryptographically signed so replays and tampering are caught before your traffic is handled. The protocol keeps encryption and authentication in one place, which helps reduce metadata exposure and keep your side of the path private.</p>
+        <p class="ss-mob-only" data-en="ChaCha20-Poly1305 / AES-GCM: per-packet auth, replays and tampering dropped at the edge. One place for crypto + integrity." data-ru="ChaCha20-Poly1305 / AES-GCM: аутентификация пакетов, повторы и подлог отсекаются на границе. Шифрование и целостность в одном слое.">ChaCha20-Poly1305 / AES-GCM: per-packet auth, replays and tampering dropped at the edge. One place for crypto + integrity.</p>
+        <div class="ss-wire-tags">
+          <span class="ss-wire-tag">AEAD-2022</span>
+          <span class="ss-wire-tag">SOCKS5</span>
+          <span class="ss-wire-tag" data-en="Per-packet auth" data-ru="Пакет за пакетом">Per-packet auth</span>
+          <span class="ss-wire-tag" data-en="UDP support" data-ru="UDP">UDP support</span>
+        </div>
+      </div>
+      <div class="ss-wire reveal-right">
+        <div class="ss-wire-head">
+          <div class="ss-wire-dots"><span></span><span></span><span></span></div>
+          <span class="ss-wire-htitle" data-en="channel · live" data-ru="канал · live">channel · live</span>
+          <span class="ss-wire-status">LIVE</span>
+        </div>
+        <div class="ss-wire-rows">
+          <div class="ss-wire-row">
+            <span class="ss-wire-time">04:21.118</span>
+            <span class="ss-wire-stream"><span>a8 7f 3e b2 c1 09 4d ff 11 e0 8a 6c d4 7b 22 91 0e f3 5d 8b a4 17 c9 26 6f 0b 4a 8e ··· a8 7f 3e b2 c1 09 4d ff 11 e0 8a 6c d4 7b 22 91 0e f3 5d 8b ···</span></span>
+            <span class="ss-wire-tagm ss-wire-tagm--https">HTTPS</span>
+          </div>
+          <div class="ss-wire-row">
+            <span class="ss-wire-time">04:21.124</span>
+            <span class="ss-wire-stream"><span>3c 91 e7 ad 5b 22 6f c4 88 d1 0a 7e 95 32 fe b8 4c 09 71 ee a3 5d 1c 80 6b ff 23 a7 ··· 3c 91 e7 ad 5b 22 6f c4 88 d1 0a 7e 95 32 fe b8 4c 09 71 ee ···</span></span>
+            <span class="ss-wire-tagm ss-wire-tagm--unknown">UNK</span>
+          </div>
+          <div class="ss-wire-row">
+            <span class="ss-wire-time">04:21.131</span>
+            <span class="ss-wire-stream"><span>e2 04 b8 7d 33 9c 5f a1 6d 80 c7 11 4e 0b a9 26 f5 dd 18 4b 92 0a 6c 78 ee 33 b1 4f ··· e2 04 b8 7d 33 9c 5f a1 6d 80 c7 11 4e 0b a9 26 f5 dd 18 4b ···</span></span>
+            <span class="ss-wire-tagm ss-wire-tagm--https">HTTPS</span>
+          </div>
+          <div class="ss-wire-row">
+            <span class="ss-wire-time">04:21.139</span>
+            <span class="ss-wire-stream"><span>5a c0 19 fb 6e 27 d8 84 39 b2 7c e1 03 9d 5e ab 11 6f 24 70 cc 89 02 33 a5 e9 4d 16 ··· 5a c0 19 fb 6e 27 d8 84 39 b2 7c e1 03 9d 5e ab 11 6f 24 70 ···</span></span>
+            <span class="ss-wire-tagm ss-wire-tagm--unknown">UNK</span>
+          </div>
+          <div class="ss-wire-row">
+            <span class="ss-wire-time">04:21.147</span>
+            <span class="ss-wire-stream"><span>d3 7a 14 ee 88 5b 02 c9 6d 4e f2 91 06 b7 28 30 79 a4 cd 1f 8e 35 60 b1 0c 4a 9d 22 ··· d3 7a 14 ee 88 5b 02 c9 6d 4e f2 91 06 b7 28 30 79 a4 cd 1f ···</span></span>
+            <span class="ss-wire-tagm ss-wire-tagm--https">HTTPS</span>
+          </div>
+        </div>
+        <div class="ss-wire-foot">
+          <span data-en="aead-2022 · gcm" data-ru="aead-2022 · gcm">aead-2022 · gcm</span>
+          <span class="ss-wire-verdict">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-en="Integrity protected" data-ru="Целостность защищена">Integrity protected</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
 <!-- Performance: шапка + метрики + XTLS (как в new-blocks.html) — под Pricing, перед CTA; адаптив -->
 <section class="speed-section" id="performance-benchmark">
   <div class="container">
@@ -1447,247 +1401,6 @@ img{max-width:100%;display:block}
             <span data-en="Zero speed throttling by design" data-ru="Нулевое ограничение скорости по архитектуре">Zero speed throttling by design</span>
           </li>
         </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- ============ BLOCK A: Shadowsocks "Disguise" — wire inspector ============ -->
-<section class="ss-wire-section" id="protocol-disguise">
-  <div class="container">
-    <div style="text-align:center" class="reveal">
-      <div class="section-label" style="justify-content:center" data-en="Protocol · Shadowsocks" data-ru="Протокол · Shadowsocks">Protocol · Shadowsocks</div>
-      <h2 class="section-title" style="margin-left:auto;margin-right:auto;max-width:760px" data-en="A protocol that <span class='gradient-text-accent'>hides in plain sight.</span>" data-ru="Протокол, который <span class='gradient-text-accent'>прячется на виду.</span>">A protocol that <span class="gradient-text-accent">hides in plain sight.</span></h2>
-      <p class="section-desc" style="margin-left:auto;margin-right:auto;text-align:center" data-en="Shadowsocks was designed to be invisible. To a network sniffer, your traffic doesn't even look like a VPN — it looks like ordinary, encrypted noise indistinguishable from regular HTTPS." data-ru="Shadowsocks с самого начала проектировался как невидимка. Для сетевого анализатора ваш трафик не выглядит как VPN — это просто зашифрованный шум, неотличимый от обычного HTTPS.">Shadowsocks was designed to be invisible. To a network sniffer, your traffic doesn't even look like a VPN — it looks like ordinary, encrypted noise indistinguishable from regular HTTPS.</p>
-    </div>
-    <div class="ss-wire-grid">
-      <div class="ss-wire-copy reveal-left">
-        <h3 data-en="Same wire. <span class='accent'>Same TLS.</span> Nothing to flag." data-ru="Тот же канал. <span class='accent'>Тот же TLS.</span> Ничего не выдаёт.">Same wire. <span class="accent">Same TLS.</span> Nothing to flag.</h3>
-        <p data-en="Built on a SOCKS5 transport with strong AEAD ciphers, Shadowsocks emits a stream that has no protocol fingerprint, no handshake banner, no fixed packet sizing. There's nothing for deep packet inspection to anchor on." data-ru="Построенный поверх SOCKS5 с современными AEAD-шифрами, Shadowsocks выдаёт поток без протокольного отпечатка — никакого баннера в рукопожатии, никаких фиксированных размеров пакета. DPI просто не за что зацепиться.">Built on a SOCKS5 transport with strong AEAD ciphers, Shadowsocks emits a stream that has no protocol fingerprint, no handshake banner, no fixed packet sizing. There's nothing for deep packet inspection to anchor on.</p>
-        <p data-en="Marshall ships Shadowsocks alongside VLESS Reality and Trojan, so you can swap to whichever blends in best on the network you're standing on right now." data-ru="Marshall везёт Shadowsocks в одной коробке с VLESS Reality и Trojan — переключайтесь на то, что лучше растворяется в сети, в которой вы сейчас находитесь.">Marshall ships Shadowsocks alongside VLESS Reality and Trojan, so you can swap to whichever blends in best on the network you're standing on right now.</p>
-        <div class="ss-wire-tags">
-          <span class="ss-wire-tag">AEAD-2022</span>
-          <span class="ss-wire-tag">SOCKS5</span>
-          <span class="ss-wire-tag">No handshake banner</span>
-          <span class="ss-wire-tag">UDP relay</span>
-        </div>
-      </div>
-      <div class="ss-wire reveal-right">
-        <div class="ss-wire-head">
-          <div class="ss-wire-dots"><span></span><span></span><span></span></div>
-          <span class="ss-wire-htitle" data-en="packet · sniff · live" data-ru="packet · sniff · live">packet · sniff · live</span>
-          <span class="ss-wire-status" data-en="LIVE" data-ru="LIVE">LIVE</span>
-        </div>
-        <div class="ss-wire-rows">
-          <div class="ss-wire-row">
-            <span class="ss-wire-time">04:21.118</span>
-            <span class="ss-wire-stream"><span>a8 7f 3e b2 c1 09 4d ff 11 e0 8a 6c d4 7b 22 91 0e f3 5d 8b a4 17 c9 26 6f 0b 4a 8e ··· a8 7f 3e b2 c1 09 4d ff 11 e0 8a 6c d4 7b 22 91 0e f3 5d 8b ···</span></span>
-            <span class="ss-wire-tagm ss-wire-tagm--https">HTTPS</span>
-          </div>
-          <div class="ss-wire-row">
-            <span class="ss-wire-time">04:21.124</span>
-            <span class="ss-wire-stream"><span>3c 91 e7 ad 5b 22 6f c4 88 d1 0a 7e 95 32 fe b8 4c 09 71 ee a3 5d 1c 80 6b ff 23 a7 ··· 3c 91 e7 ad 5b 22 6f c4 88 d1 0a 7e 95 32 fe b8 4c 09 71 ee ···</span></span>
-            <span class="ss-wire-tagm ss-wire-tagm--unknown" data-en="UNK" data-ru="UNK">UNK</span>
-          </div>
-          <div class="ss-wire-row">
-            <span class="ss-wire-time">04:21.131</span>
-            <span class="ss-wire-stream"><span>e2 04 b8 7d 33 9c 5f a1 6d 80 c7 11 4e 0b a9 26 f5 dd 18 4b 92 0a 6c 78 ee 33 b1 4f ··· e2 04 b8 7d 33 9c 5f a1 6d 80 c7 11 4e 0b a9 26 f5 dd 18 4b ···</span></span>
-            <span class="ss-wire-tagm ss-wire-tagm--https">HTTPS</span>
-          </div>
-          <div class="ss-wire-row">
-            <span class="ss-wire-time">04:21.139</span>
-            <span class="ss-wire-stream"><span>5a c0 19 fb 6e 27 d8 84 39 b2 7c e1 03 9d 5e ab 11 6f 24 70 cc 89 02 33 a5 e9 4d 16 ··· 5a c0 19 fb 6e 27 d8 84 39 b2 7c e1 03 9d 5e ab 11 6f 24 70 ···</span></span>
-            <span class="ss-wire-tagm ss-wire-tagm--unknown">UNK</span>
-          </div>
-          <div class="ss-wire-row">
-            <span class="ss-wire-time">04:21.147</span>
-            <span class="ss-wire-stream"><span>d3 7a 14 ee 88 5b 02 c9 6d 4e f2 91 06 b7 28 30 79 a4 cd 1f 8e 35 60 b1 0c 4a 9d 22 ··· d3 7a 14 ee 88 5b 02 c9 6d 4e f2 91 06 b7 28 30 79 a4 cd 1f ···</span></span>
-            <span class="ss-wire-tagm ss-wire-tagm--https">HTTPS</span>
-          </div>
-        </div>
-        <div class="ss-wire-foot">
-          <span data-en="dpi · classifier" data-ru="dpi · классификатор">dpi · classifier</span>
-          <span class="ss-wire-verdict">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-            <span data-en="No VPN detected" data-ru="VPN не обнаружен">No VPN detected</span>
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- ============ BLOCK B: Shadowsocks "Light & Fast" — stat ribbon ============ -->
-<section class="ss-light-section" id="protocol-light">
-  <div class="container">
-    <div style="text-align:center" class="reveal">
-      <div class="section-label" style="justify-content:center;color:#fbbf24" data-en="Protocol · Footprint" data-ru="Протокол · След">Protocol · Footprint</div>
-    </div>
-    <div class="ss-light-card reveal-scale">
-      <div class="ss-light-head">
-        <h3 data-en="Featherweight by design.<br><span class='accent'>Built to disappear.</span>" data-ru="Невесомый по конструкции.<br><span class='accent'>Создан, чтобы исчезать.</span>">Featherweight by design.<br><span class="accent">Built to disappear.</span></h3>
-        <p data-en="Shadowsocks does one thing — push bytes through a thin, encrypted tunnel — and does it without ceremony. No certificate negotiation, no protocol handshake, no extra headers. Just data." data-ru="Shadowsocks делает одно — гонит байты через тонкий зашифрованный туннель — и делает это без церемоний. Никакого согласования сертификатов, никакого рукопожатия протокола, никаких лишних заголовков. Только данные.">Shadowsocks does one thing — push bytes through a thin, encrypted tunnel — and does it without ceremony. No certificate negotiation, no protocol handshake, no extra headers. Just data.</p>
-      </div>
-      <div class="ss-light-stats">
-        <div class="ss-light-stat">
-          <div class="ss-light-stat-value">~3<span class="ss-light-stat-unit">%</span></div>
-          <div class="ss-light-stat-label" data-en="Header overhead" data-ru="Накладные расходы">Header overhead</div>
-          <div class="ss-light-stat-sub" data-en="A handful of bytes per packet for IV and tag — that's it. Compare to ~6–10% on classic VPN stacks." data-ru="Несколько байт на пакет под IV и тег — и всё. Для сравнения, классические VPN-стеки тратят ~6–10%.">A handful of bytes per packet for IV and tag — that's it. Compare to ~6–10% on classic VPN stacks.</div>
-        </div>
-        <div class="ss-light-stat">
-          <div class="ss-light-stat-value">0<span class="ss-light-stat-unit" data-en="round-trips" data-ru="round-trip">round-trips</span></div>
-          <div class="ss-light-stat-label" data-en="Setup phase" data-ru="Фаза установки">Setup phase</div>
-          <div class="ss-light-stat-sub" data-en="No TLS hello, no certificate, no key exchange round-trip. The first byte you send is already encrypted payload." data-ru="Никакого TLS-приветствия, никакого сертификата, никакого обмена ключами в рукопожатии. Первый отправленный байт — уже зашифрованная полезная нагрузка.">No TLS hello, no certificate, no key exchange round-trip. The first byte you send is already encrypted payload.</div>
-        </div>
-        <div class="ss-light-stat">
-          <div class="ss-light-stat-value">256<span class="ss-light-stat-unit">-bit</span></div>
-          <div class="ss-light-stat-label" data-en="AEAD-2022" data-ru="AEAD-2022">AEAD-2022</div>
-          <div class="ss-light-stat-sub" data-en="ChaCha20-Poly1305 / AES-256-GCM with per-packet authentication. Replays and tampering are rejected at the cipher layer." data-ru="ChaCha20-Poly1305 / AES-256-GCM с попакетной аутентификацией. Повторы и подделки отклоняются на уровне шифра.">ChaCha20-Poly1305 / AES-256-GCM with per-packet authentication. Replays and tampering are rejected at the cipher layer.</div>
-        </div>
-      </div>
-      <div class="ss-light-ribbon" aria-hidden="true">
-        <div class="ss-ribbon-track">
-          <span>0x9F · ENCRYPT</span><span>AEAD-2022</span><span>chacha20-poly1305</span><span>0 RTT</span><span>UDP RELAY</span><span>NO BANNER</span><span>SOCKS5</span><span>~3% OVERHEAD</span><span>STATELESS</span><span>16 BYTE TAG</span>
-          <span>0x9F · ENCRYPT</span><span>AEAD-2022</span><span>chacha20-poly1305</span><span>0 RTT</span><span>UDP RELAY</span><span>NO BANNER</span><span>SOCKS5</span><span>~3% OVERHEAD</span><span>STATELESS</span><span>16 BYTE TAG</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- ============ BLOCK C: Privacy "Inside your phone" — orbital ============ -->
-<section class="priv-orbit-section" id="privacy-onboard">
-  <div class="container">
-    <div style="text-align:center" class="reveal">
-      <div class="section-label" style="justify-content:center" data-en="Privacy · On-device" data-ru="Приватность · На устройстве">Privacy · On-device</div>
-      <h2 class="section-title" style="margin-left:auto;margin-right:auto;max-width:760px" data-en="Your data never leaves<br><span class='gradient-text-accent'>your phone.</span>" data-ru="Ваши данные не покидают<br><span class='gradient-text-accent'>ваш телефон.</span>">Your data never leaves<br><span class="gradient-text-accent">your phone.</span></h2>
-      <p class="section-desc" style="margin-left:auto;margin-right:auto;text-align:center" data-en="Configuration, server selection, ping checks, traffic stats — everything that happens inside Marshall happens on the device, in iOS's protected sandbox. Nothing is ever sent home." data-ru="Конфигурация, выбор сервера, проверка пинга, статистика трафика — всё, что происходит в Marshall, происходит на устройстве, в защищённой песочнице iOS. Никаких отправок «домой».">Configuration, server selection, ping checks, traffic stats — everything that happens inside Marshall happens on the device, in iOS's protected sandbox. Nothing is ever sent home.</p>
-    </div>
-    <div class="priv-orbit-grid">
-      <div class="priv-orbit-stage reveal-scale">
-        <div class="priv-orbit-rings">
-          <div class="priv-orbit-ring priv-orbit-ring--1"></div>
-          <div class="priv-orbit-ring priv-orbit-ring--2"></div>
-          <div class="priv-orbit-ring priv-orbit-ring--3"></div>
-        </div>
-        <span class="priv-orbit-chip" style="--ang:30deg;--rad:-140px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-en="iOS Keychain" data-ru="iOS Keychain">iOS Keychain</span></span>
-        <span class="priv-orbit-chip" style="--ang:160deg;--rad:-140px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg><span data-en="On-device DNS" data-ru="DNS на устройстве">On-device DNS</span></span>
-        <span class="priv-orbit-chip" style="--ang:280deg;--rad:-140px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span data-en="Sandboxed" data-ru="Sandbox iOS">Sandboxed</span></span>
-        <span class="priv-orbit-chip" style="--ang:80deg;--rad:-190px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg><span data-en="Local ping" data-ru="Локальный пинг">Local ping</span></span>
-        <span class="priv-orbit-chip" style="--ang:215deg;--rad:-190px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg><span data-en="Local config" data-ru="Конфиг — локально">Local config</span></span>
-        <span class="priv-orbit-chip" style="--ang:330deg;--rad:-190px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg><span data-en="Stats stay local" data-ru="Статистика — у вас">Stats stay local</span></span>
-        <div class="priv-orbit-phone">
-          <div class="priv-orbit-screen">
-            <span class="priv-orbit-screen-label" data-en="MARSHALL · iOS" data-ru="MARSHALL · iOS">MARSHALL · iOS</span>
-            <div class="priv-orbit-glyph">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <div class="priv-orbit-screen-meta" data-en="ALL STATE<br><strong>ON DEVICE</strong>" data-ru="ВСЁ СОСТОЯНИЕ<br><strong>НА УСТРОЙСТВЕ</strong>">ALL STATE<br><strong>ON DEVICE</strong></div>
-          </div>
-        </div>
-      </div>
-      <div class="priv-orbit-copy reveal-right">
-        <h3 data-en="No console. <span class='accent'>No backend mirror.</span>" data-ru="Никакой консоли. <span class='accent'>Никакой копии на сервере.</span>">No console. <span class="accent">No backend mirror.</span></h3>
-        <p data-en="Most VPN apps are thin clients pointed at a dashboard. Marshall is the opposite: the app is the source of truth. There is no admin portal where someone could look up your sessions — because we never built one." data-ru="Большинство VPN-приложений — это тонкие клиенты, прикрученные к дашборду. Marshall — наоборот: приложение и есть источник правды. Нет никакой админки, где можно было бы посмотреть ваши сессии — потому что мы её просто не делали.">Most VPN apps are thin clients pointed at a dashboard. Marshall is the opposite: the app is the source of truth. There is no admin portal where someone could look up your sessions — because we never built one.</p>
-        <div class="priv-orbit-bullets">
-          <div class="priv-orbit-bullet">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span data-en="Server list, ping results and active connection — all rendered locally from the on-device cache." data-ru="Список серверов, результаты пинга и активное соединение — всё рендерится локально из кэша на устройстве.">Server list, ping results and active connection — all rendered locally from the on-device cache.</span>
-          </div>
-          <div class="priv-orbit-bullet">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span data-en="Subscription state lives in your Apple ID. We never see your account, just an anonymous receipt token." data-ru="Состояние подписки живёт в вашем Apple ID. Мы не видим аккаунт — только анонимный токен чека.">Subscription state lives in your Apple ID. We never see your account, just an anonymous receipt token.</span>
-          </div>
-          <div class="priv-orbit-bullet">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span data-en="Credentials sit inside the iOS Keychain — hardware-backed, encrypted at rest, unreachable to the host process." data-ru="Учётные данные лежат в iOS Keychain — аппаратно-защищённом, зашифрованном на диске, недоступном процессу-хосту.">Credentials sit inside the iOS Keychain — hardware-backed, encrypted at rest, unreachable to the host process.</span>
-          </div>
-          <div class="priv-orbit-bullet">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span data-en="No analytics SDK, no crash reporter that sees your traffic, no third-party tag manager. The build is audited every release." data-ru="Никаких аналитических SDK, никакого крэш-репортера, видящего трафик, никаких сторонних tag-менеджеров. Сборка проверяется каждый релиз.">No analytics SDK, no crash reporter that sees your traffic, no third-party tag manager. The build is audited every release.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- ============ BLOCK D: Privacy "Audit Ledger" — typographic doc ============ -->
-<section class="ledger-section" id="privacy-ledger">
-  <div class="container">
-    <div style="text-align:center" class="reveal">
-      <div class="section-label" style="justify-content:center" data-en="Privacy · The receipt" data-ru="Приватность · Квитанция">Privacy · The receipt</div>
-      <h2 class="section-title" style="margin-left:auto;margin-right:auto;max-width:740px" data-en="What we don't have,<br>nobody can <span class='gradient-text-accent'>take.</span>" data-ru="Чего у нас нет,<br>того нельзя <span class='gradient-text-accent'>забрать.</span>">What we don't have,<br>nobody can <span class="gradient-text-accent">take.</span></h2>
-      <p class="section-desc" style="margin-left:auto;margin-right:auto;text-align:center" data-en="A short, honest receipt of every piece of data Marshall does not write to disk, does not stream to a backend, and does not retain. If a regulator served us a subpoena tomorrow, this is what we'd have to hand over." data-ru="Короткая честная квитанция: вот всё, чего Marshall не пишет на диск, не отправляет на бэкенд и не хранит. Если завтра регулятор предъявит нам запрос — вот всё, что мы могли бы передать.">A short, honest receipt of every piece of data Marshall does not write to disk, does not stream to a backend, and does not retain. If a regulator served us a subpoena tomorrow, this is what we'd have to hand over.</p>
-    </div>
-    <div class="ledger-doc reveal">
-      <div class="ledger-doc-head">
-        <div class="ledger-doc-htitle">
-          <span data-en="Marshall VPN · Data inventory" data-ru="Marshall VPN · Реестр данных">Marshall VPN · Data inventory</span>
-          <strong data-en="The Zero-Knowledge Audit" data-ru="Аудит «Нулевого знания»">The Zero-Knowledge Audit</strong>
-        </div>
-        <div class="ledger-doc-meta">
-          <div data-en="DOC · MV-PRV-2026" data-ru="ДОК · MV-PRV-2026">DOC · MV-PRV-2026</div>
-          <div data-en="POLICY · <b>NO-LOG</b>" data-ru="ПОЛИТИКА · <b>NO-LOG</b>">POLICY · <b>NO-LOG</b></div>
-          <div data-en="JURISDICTION · <b>EU</b>" data-ru="ЮРИСДИКЦИЯ · <b>EU</b>">JURISDICTION · <b>EU</b></div>
-        </div>
-      </div>
-      <div class="ledger-rows">
-        <div class="ledger-row">
-          <span class="ledger-num">01</span>
-          <span class="ledger-label" data-en="Browsing history — sites you visit while connected" data-ru="История браузинга — сайты, которые вы посещаете">Browsing history — sites you visit while connected</span>
-          <span class="ledger-stamp" data-en="NEVER STORED" data-ru="НЕ ХРАНИМ">NEVER STORED</span>
-        </div>
-        <div class="ledger-row">
-          <span class="ledger-num">02</span>
-          <span class="ledger-label" data-en="Origin IP address — where the connection came from" data-ru="IP-адрес источника — откуда пришло подключение">Origin IP address — where the connection came from</span>
-          <span class="ledger-stamp" data-en="NEVER STORED" data-ru="НЕ ХРАНИМ">NEVER STORED</span>
-        </div>
-        <div class="ledger-row">
-          <span class="ledger-num">03</span>
-          <span class="ledger-label" data-en="Connection timestamps — when you connect and disconnect" data-ru="Тайминги соединения — когда вы подключаетесь и отключаетесь">Connection timestamps — when you connect and disconnect</span>
-          <span class="ledger-stamp" data-en="NEVER STORED" data-ru="НЕ ХРАНИМ">NEVER STORED</span>
-        </div>
-        <div class="ledger-row">
-          <span class="ledger-num">04</span>
-          <span class="ledger-label" data-en="Bandwidth attribution — bytes traceable back to a user" data-ru="Атрибуция трафика — байты, привязываемые к пользователю">Bandwidth attribution — bytes traceable back to a user</span>
-          <span class="ledger-stamp" data-en="NEVER STORED" data-ru="НЕ ХРАНИМ">NEVER STORED</span>
-        </div>
-        <div class="ledger-row">
-          <span class="ledger-num">05</span>
-          <span class="ledger-label" data-en="DNS queries — names you resolve" data-ru="DNS-запросы — имена, которые вы разрешаете">DNS queries — names you resolve</span>
-          <span class="ledger-stamp" data-en="NEVER STORED" data-ru="НЕ ХРАНИМ">NEVER STORED</span>
-        </div>
-        <div class="ledger-row">
-          <span class="ledger-num">06</span>
-          <span class="ledger-label" data-en="Personal identity — name, email, phone, ID document" data-ru="Личность — имя, e-mail, телефон, документ">Personal identity — name, email, phone, ID document</span>
-          <span class="ledger-stamp" data-en="NEVER ASKED" data-ru="НЕ ЗАПРАШИВАЕМ">NEVER ASKED</span>
-        </div>
-        <div class="ledger-row">
-          <span class="ledger-num">07</span>
-          <span class="ledger-label" data-en="Payment data — card number, billing address" data-ru="Платёжные данные — номер карты, адрес плательщика">Payment data — card number, billing address</span>
-          <span class="ledger-stamp" data-en="HANDLED BY APPLE" data-ru="У APPLE">HANDLED BY APPLE</span>
-        </div>
-        <div class="ledger-row">
-          <span class="ledger-num">08</span>
-          <span class="ledger-label" data-en="Device fingerprint — IDFA, ad ID, hardware identifiers" data-ru="Отпечаток устройства — IDFA, рекламный ID, идентификаторы железа">Device fingerprint — IDFA, ad ID, hardware identifiers</span>
-          <span class="ledger-stamp" data-en="NEVER READ" data-ru="НЕ ЧИТАЕМ">NEVER READ</span>
-        </div>
-      </div>
-      <div class="ledger-doc-foot">
-        <strong data-en="Total records on file: 0" data-ru="Записей в базе: 0">Total records on file: 0</strong>
-        <span class="ledger-sig">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
-          <span data-en="Sealed · No-log policy" data-ru="Заверено · Политика No-log">Sealed · No-log policy</span>
-        </span>
       </div>
     </div>
   </div>
@@ -2188,52 +1901,18 @@ const lLab={1:"Lowest exposure",2:"Low",3:"Moderate",4:"High",5:"Severe"};
 const lLabRu={1:"Минимальная",2:"Низкая",3:"Средняя",4:"Высокая",5:"Критическая"};
 const hCol={1:"#1a2540",2:"#3b5998",3:"#d4841e",4:"#e04535",5:"#ff2a5e"};
 const GREEN="#00d67e";
-const YELLOW="#fbbf24";
+const ORANGE="#f97316";
 
-/* Active locations — 13 cities currently in production
-   Index map:
-   0  Nuremberg   1  Helsinki   2  Singapore   3  Ashburn
-   4  Tokyo       5  São Paulo  6  Sydney      7  London
-   8  Stockholm   9  Hillsboro  10 Seoul       11 Amsterdam
-   12 Madrid                                                 */
 const servers=[
-  {lat:49.45,lon:11.08, name:"Nuremberg"},
-  {lat:60.17,lon:24.94, name:"Helsinki"},
-  {lat:1.35, lon:103.82,name:"Singapore"},
-  {lat:39.04,lon:-77.49,name:"Ashburn"},
-  {lat:35.68,lon:139.65,name:"Tokyo"},
-  {lat:-23.55,lon:-46.63,name:"São Paulo"},
-  {lat:-33.87,lon:151.21,name:"Sydney"},
-  {lat:51.51,lon:-0.13, name:"London"},
-  {lat:59.33,lon:18.07, name:"Stockholm"},
-  {lat:45.52,lon:-122.99,name:"Hillsboro"},
-  {lat:37.57,lon:126.98,name:"Seoul"},
-  {lat:52.37,lon:4.90,  name:"Amsterdam"},
-  {lat:40.42,lon:-3.70, name:"Madrid"}
+  {lat:49.45,lon:11.08},{lat:60.17,lon:24.94},{lat:1.35,lon:103.82},
+  {lat:39.04,lon:-77.49},{lat:35.68,lon:139.65},{lat:-23.55,lon:-46.63},
+  {lat:-33.87,lon:151.21},{lat:51.51,lon:-0.13},{lat:59.33,lon:18.07},
+  {lat:45.52,lon:-122.99},{lat:37.57,lon:126.98},{lat:52.37,lon:4.90},
+  {lat:40.42,lon:-3.70}
 ];
-/* Coming soon — orange — Johannesburg, Tbilisi, Mexico City */
 const futureServers=[
-  {lat:41.72,lon:44.79, name:"Tbilisi"},
-  {lat:-26.20,lon:28.05,name:"Johannesburg"},
-  {lat:19.43,lon:-99.13,name:"Mexico City"}
+  {lat:-26.20,lon:28.05},{lat:41.72,lon:44.79},{lat:19.43,lon:-99.13}
 ];
-/* Backbone topology — Europe mesh, two trans-Atlantic crossings,
-   trans-Pacific to Asia, Australia, S-America. ~19 hops, balanced. */
-const netLinks=[
-  /* Europe internal */
-  [0,7],[0,11],[7,11],[0,1],[1,8],[8,11],[0,12],[12,7],
-  /* Trans-Atlantic */
-  [7,3],[11,3],[12,3],
-  /* Continental US */
-  [3,9],
-  /* Trans-Pacific & Asia */
-  [9,4],[4,10],[10,2],
-  /* Oceania */
-  [2,6],[6,4],
-  /* South America */
-  [3,5],[12,5]
-];
-
 function topoF(t,n){
   const o=t.objects[n],tf=t.transform;
   function dA(ai){const a=t.arcs[ai<0?~ai:ai],c=[];let x=0,y=0;for(let i=0;i<a.length;i++){x+=a[i][0];y+=a[i][1];c.push([x*tf.scale[0]+tf.translate[0],y*tf.scale[1]+tf.translate[1]])}if(ai<0)c.reverse();return c}
@@ -2300,52 +1979,24 @@ function renderMap(){
 
   const dotBg='#0a1020';
   if(!isH){
-    const sCoords=servers.map(s=>proj([s.lon,s.lat]));
-    /* Backbone links — subtle, premium, with a traveling data packet on each hop */
-    netLinks.forEach(([a,b],i)=>{
-      const[x1,y1]=sCoords[a],[x2,y2]=sCoords[b];
-      /* Static base line — slightly visible, dashed flow */
-      const ln=svg.append("line").attr("x1",x1).attr("y1",y1).attr("x2",x2).attr("y2",y2)
-        .attr("stroke",GREEN).attr("stroke-width",.55).attr("opacity",.22).attr("stroke-dasharray","3 5")
-        .style("pointer-events","none");
-      ln.append("animate").attr("attributeName","stroke-dashoffset").attr("values","0;-16")
-        .attr("dur",(7+i*.35)+"s").attr("repeatCount","indefinite");
-      /* Soft glow underline — even fainter */
-      svg.append("line").attr("x1",x1).attr("y1",y1).attr("x2",x2).attr("y2",y2)
-        .attr("stroke",GREEN).attr("stroke-width",1.6).attr("opacity",.05)
-        .attr("filter","url(#gl)").style("pointer-events","none");
-      /* Traveling data packet — small bright dot tracing the hop */
-      const dur=4.2+(i%5)*.45;
-      const off=-((i*0.83)%dur);
-      const pkt=svg.append("circle").attr("r",1.5).attr("fill",GREEN)
-        .attr("filter","url(#gl)").style("pointer-events","none");
-      pkt.append("animate").attr("attributeName","cx")
-        .attr("values",`${x1};${x2}`).attr("dur",dur+"s")
-        .attr("begin",off+"s").attr("repeatCount","indefinite");
-      pkt.append("animate").attr("attributeName","cy")
-        .attr("values",`${y1};${y2}`).attr("dur",dur+"s")
-        .attr("begin",off+"s").attr("repeatCount","indefinite");
-      pkt.append("animate").attr("attributeName","opacity")
-        .attr("values","0;.85;.85;0").attr("keyTimes","0;.12;.88;1")
-        .attr("dur",dur+"s").attr("begin",off+"s").attr("repeatCount","indefinite");
-    });
-    /* Active server nodes — green */
     servers.forEach((s,i)=>{
       const[px,py]=proj([s.lon,s.lat]);const g=svg.append("g");
-      const pr=g.append("circle").attr("cx",px).attr("cy",py).attr("r",6).attr("fill","none").attr("stroke",GREEN).attr("stroke-width",.4).attr("opacity",.25);
-      pr.append("animate").attr("attributeName","r").attr("values","4;10;4").attr("dur",(3+i*.2)+"s").attr("repeatCount","indefinite");
-      pr.append("animate").attr("attributeName","opacity").attr("values",".25;0;.25").attr("dur",(3+i*.2)+"s").attr("repeatCount","indefinite");
-      g.append("circle").attr("cx",px).attr("cy",py).attr("r",5).attr("fill",GREEN).attr("opacity",.10).attr("filter","url(#gl)");
-      g.append("circle").attr("cx",px).attr("cy",py).attr("r",2.8).attr("fill",GREEN).attr("stroke",dotBg).attr("stroke-width",.8);
+      const pr=g.append("circle").attr("cx",px).attr("cy",py).attr("r",7).attr("fill","none").attr("stroke",GREEN).attr("stroke-width",.42).attr("opacity",.32);
+      pr.append("animate").attr("attributeName","r").attr("values","3;12;3").attr("dur",(2.4+i*.18)+"s").attr("repeatCount","indefinite");
+      pr.append("animate").attr("attributeName","opacity").attr("values",".4;.06;.4").attr("dur",(2.4+i*.18)+"s").attr("repeatCount","indefinite");
+      const glow=g.append("circle").attr("cx",px).attr("cy",py).attr("r",5.5).attr("fill",GREEN).attr("opacity",.12).attr("filter","url(#gl)");
+      glow.append("animate").attr("attributeName","opacity").attr("values",".1;.2;.1").attr("dur",(1.8+i*.15)+"s").attr("repeatCount","indefinite");
+      const core=g.append("circle").attr("cx",px).attr("cy",py).attr("r",2.8).attr("fill",GREEN).attr("stroke",dotBg).attr("stroke-width",.85);
+      core.append("animate").attr("attributeName","r").attr("values","2.5;3.2;2.5").attr("dur",(1.5+i*.12)+"s").attr("repeatCount","indefinite");
     });
-    /* Coming soon — orange/amber */
     futureServers.forEach((s,i)=>{
       const[px,py]=proj([s.lon,s.lat]);const g=svg.append("g");
-      const pr=g.append("circle").attr("cx",px).attr("cy",py).attr("r",4).attr("fill","none").attr("stroke",YELLOW).attr("stroke-width",.35).attr("opacity",.22);
-      pr.append("animate").attr("attributeName","r").attr("values","2.5;6;2.5").attr("dur",(3.5+i*.3)+"s").attr("repeatCount","indefinite");
-      pr.append("animate").attr("attributeName","opacity").attr("values",".22;0;.22").attr("dur",(3.5+i*.3)+"s").attr("repeatCount","indefinite");
-      g.append("circle").attr("cx",px).attr("cy",py).attr("r",3).attr("fill",YELLOW).attr("opacity",.08).attr("filter","url(#gl)");
-      g.append("circle").attr("cx",px).attr("cy",py).attr("r",1.7).attr("fill",YELLOW).attr("stroke",dotBg).attr("stroke-width",.6);
+      const pr=g.append("circle").attr("cx",px).attr("cy",py).attr("r",3.5).attr("fill","none").attr("stroke",ORANGE).attr("stroke-width",.38).attr("opacity",.32);
+      pr.append("animate").attr("attributeName","r").attr("values","2.4;6.2;2.4").attr("dur",(2.7+i*.22)+"s").attr("repeatCount","indefinite");
+      pr.append("animate").attr("attributeName","opacity").attr("values",".38;.08;.38").attr("dur",(2.7+i*.22)+"s").attr("repeatCount","indefinite");
+      g.append("circle").attr("cx",px).attr("cy",py).attr("r",2.8).attr("fill",ORANGE).attr("opacity",.14).attr("filter","url(#gl)");
+      const core=g.append("circle").attr("cx",px).attr("cy",py).attr("r",1.5).attr("fill",ORANGE).attr("stroke",dotBg).attr("stroke-width",.6);
+      core.append("animate").attr("attributeName","r").attr("values","1.35;1.85;1.35").attr("dur",(1.6+i*.2)+"s").attr("repeatCount","indefinite");
     });
   }
 
@@ -2365,7 +2016,7 @@ function renderMap(){
     const srvText=L==='ru'?"Активные серверы":"Active servers";
     const futText=L==='ru'?"Скоро":"Coming soon";
     leg.innerHTML=`<div class="map-legend-item"><div class="map-legend-dot map-legend-dot-round" style="background:${GREEN};box-shadow:0 0 5px rgba(0,214,126,.4)"></div>${srvText}</div>`+
-      `<div class="map-legend-item"><div class="map-legend-dot map-legend-dot-round" style="background:${YELLOW};box-shadow:0 0 5px rgba(251,191,36,.4);width:5px;height:5px"></div>${futText}</div>`;
+      `<div class="map-legend-item"><div class="map-legend-dot map-legend-dot-round" style="background:${ORANGE};box-shadow:0 0 5px rgba(249,115,22,.45);width:5px;height:5px"></div>${futText}</div>`;
   }
   updateMapLabels();
 }
@@ -2374,6 +2025,8 @@ window.setMapMode=function(m){
   mapMode=m;
   document.getElementById("btn-srv").className=m==="servers"?"active-srv":"";
   document.getElementById("btn-heat").className=m==="heatmap"?"active-heat":"";
+  const ip=document.getElementById("map-info-panel");
+  if(ip){ip.classList.toggle("is-visible",m==="servers");ip.setAttribute("aria-hidden",m==="servers"?"false":"true");}
   tooltip.style.display="none";renderMap();
 };
 
