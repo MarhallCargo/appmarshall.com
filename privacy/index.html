@@ -120,11 +120,11 @@ code{font-size:13px;background:rgba(255,255,255,0.06);padding:2px 6px;border-rad
         <div id="en" class="content-block active">
             <div class="logo">Marshall VPN</div>
             <div class="subtitle">Privacy Policy</div>
-            <div class="updated">Last updated: April 12, 2026</div>
+            <div class="updated">Last updated: April 25, 2026</div>
 
             <h2>1. About This App</h2>
-            <p>Marshall VPN is a <strong>VPN application for iOS</strong> developed by Marshall Relay Limited (Hong Kong). The App operates its own VPN server infrastructure and also functions as a universal VPN client, allowing users to import third-party server configurations.</p>
-            <p>Marshall VPN allows users to generate VPN access keys, connect to Marshall-operated servers, import subscription links from third-party providers, view and manage server lists, check server availability, and establish encrypted network connections using the iOS NetworkExtension framework.</p>
+            <p>Marshall VPN is a <strong>VPN application for iOS and Android</strong> developed by Marshall Relay Limited (Hong Kong). The App operates its own VPN server infrastructure and also functions as a universal VPN client, allowing users to import third-party server configurations.</p>
+            <p>Marshall VPN allows users to generate VPN access keys, connect to Marshall-operated servers, import subscription links from third-party providers, view and manage server lists, check server availability, and establish encrypted network connections. On <strong>iOS</strong> this uses Apple&apos;s NetworkExtension; on <strong>Android</strong> it uses the system VPN facility (VpnService). Both platforms use the open-source sing-box engine on the device to build the tunnel.</p>
 
             <h2>2. Core Principle</h2>
             <div class="highlight-box">
@@ -145,24 +145,34 @@ code{font-size:13px;background:rgba(255,255,255,0.06);padding:2px 6px;border-rad
             <h2>4. Data Stored on Your Device</h2>
             <p>The following data is stored <strong>locally on your device only</strong> and is never transmitted to the Developer for tracking or analytics:</p>
 
-            <h3>4.1 Encrypted Storage (iOS Keychain)</h3>
+            <h3>4.1 iOS: Keychain</h3>
             <ul>
-                <li><strong>VPN access key / Subscription URL</strong> — your VPN credentials or the HTTPS subscription link. Protected by iOS Keychain with <code>kSecAttrAccessibleAfterFirstUnlock</code>.</li>
+                <li><strong>VPN access key / Subscription URL</strong> — your VPN credentials or the HTTPS subscription link. Protected by the iOS Keychain with <code>kSecAttrAccessibleAfterFirstUnlock</code>.</li>
                 <li><strong>Server configuration cache</strong> — server names, addresses, ports, protocol parameters (VLESS, VMess, Trojan, Shadowsocks), and connection settings.</li>
             </ul>
 
-            <h3>4.2 Local Preferences (UserDefaults)</h3>
+            <h3>4.2 Android: Encrypted storage</h3>
+            <ul>
+                <li><strong>VPN access key / Subscription URL</strong> and <strong>server configuration cache</strong> — the same classes of data as on iOS, protected using Android <strong>EncryptedSharedPreferences</strong> (AES encryption backed by the Android Keystore where supported).</li>
+            </ul>
+
+            <h3>4.3 Local preferences (both platforms)</h3>
+            <p>On iOS, preferences are stored in UserDefaults; on Android, in standard app preferences. Examples include:</p>
             <ul>
                 <li><strong>Selected server ID</strong> — which server you last selected.</li>
                 <li><strong>Language preference</strong> — your chosen interface language.</li>
+                <li><strong>Transport mode</strong> — your selected protocol mode (for example VLESS or SS (Shadowsocks)) for Marshall subscriptions.</li>
                 <li><strong>Auto-select setting</strong> — whether automatic best-server selection is enabled.</li>
             </ul>
             <p>This data is sandboxed within the App and is automatically deleted when you uninstall Marshall VPN.</p>
 
+            <h3>4.4 Transport modes and protocols</h3>
+            <p>The App <strong>distinguishes</strong> between proxy types in a subscription. You can choose a mode such as <strong>VLESS</strong> or <strong>SS (Shadowsocks)</strong>; the server list and sing-box configuration match that choice. For Marshall&apos;s own subscription, the SS option may use <strong>Shadow-TLS</strong> together with Shadowsocks when the configuration includes the relevant parameters. Imports from third-party providers can include other or additional proxy types depending on the subscription format.</p>
+
             <h2>5. Network Activity</h2>
 
             <h3>5.1 Key Generation</h3>
-            <p>When you generate a VPN key within the App, a request is sent to the Marshall API containing only a unique device identifier. This identifier is used solely to create your VPN access credentials. No personal information (name, email, phone number, Apple ID) is collected or transmitted during this process.</p>
+            <p>When you generate a VPN key within the App, a request is sent to the Marshall API containing only a unique device identifier. This identifier is used solely to create your VPN access credentials. No personal information (name, email, phone number, Apple ID, or Google account) is collected or transmitted during this process.</p>
 
             <h3>5.2 Subscription Fetch</h3>
             <p>When using third-party servers, the App downloads server configuration data directly from the subscription URL you provided. The request goes from your device to the subscription provider.</p>
@@ -174,10 +184,10 @@ code{font-size:13px;background:rgba(255,255,255,0.06);padding:2px 6px;border-rad
             <p>The App can optionally check whether popular internet services are reachable by sending lightweight HTTP HEAD requests directly from your device. No results are collected or transmitted.</p>
 
             <h3>5.5 Network Tunnel</h3>
-            <p>When you connect, Marshall VPN uses the iOS NetworkExtension framework and the open-source <a href="https://github.com/SagerNet/sing-box">sing-box</a> engine to create an encrypted tunnel. All network traffic flows directly between your device and the selected server.</p>
+            <p>When you connect, Marshall VPN uses the <strong>iOS</strong> NetworkExtension framework or <strong>Android</strong> VpnService, together with the open-source <a href="https://github.com/SagerNet/sing-box">sing-box</a> engine running on your device, to create an encrypted tunnel. All network traffic flows directly between your device and the selected server; sing-box is not a remote service operated by the Developer for processing your traffic.</p>
 
             <h2>6. In-App Purchases</h2>
-            <p>Marshall VPN offers subscription plans and one-time purchases through Apple's App Store (StoreKit 2). All payment processing is handled entirely by Apple. The Developer does not collect, process, or store any payment information, credit card details, or Apple ID credentials.</p>
+            <p>On <strong>iOS</strong>, Marshall VPN offers subscription plans and one-time purchases through Apple&apos;s App Store (StoreKit 2). On <strong>Android</strong>, purchases go through <strong>Google Play</strong> and Google Play Billing. Payment processing is handled <strong>entirely by Apple or Google</strong> respectively. The Developer does not collect, process, or store payment card details, full payment credentials, or your Apple ID or Google account information.</p>
 
             <h2>7. Optional Feedback</h2>
             <p>Marshall VPN includes an optional, in-app feedback form. If you choose to submit feedback:</p>
@@ -187,51 +197,56 @@ code{font-size:13px;background:rgba(255,255,255,0.06);padding:2px 6px;border-rad
                 <li>You are never required to use this feature.</li>
             </ul>
 
-            <h2>8. Data We Do NOT Collect</h2>
-            <p>The Developer does not collect, store, process, or have access to:</p>
+            <h2>8. Optional diagnostics and log collection</h2>
+            <p>The App includes a <strong>Diagnostics</strong> screen (iOS: icon in the app header; Android: the same feature from the home screen). There you can turn on <strong>Log collection</strong> to capture technical lines from the VPN stack, including the sing-box engine, on the device. <strong>Logging is off by default.</strong></p>
+            <p>Log content is stored <strong>only on your device</strong> in a local buffer or file. You can copy the text or use <strong>Share</strong> to send a file to someone else (for example to support). <strong>These logs are not uploaded to Marshall automatically.</strong> The Developer does <strong>not</strong> receive them unless you choose a channel to send them yourself. Turning off log collection stops further writes; you can also clear the buffer in the same screen. Because diagnostic logs can contain hostnames, destination addresses, or config fragments, you should only enable this feature when you need a technical trace for troubleshooting.</p>
+
+            <h2>9. Data We Do NOT Collect</h2>
+            <p>The Developer does not collect, store, process, or have access to (including automatic upload):</p>
             <ul>
-                <li>Personal identification information (name, email, phone number, Apple ID)</li>
+                <li>Personal identification information (name, email, phone number, Apple ID, or Google account)</li>
                 <li>Device identifiers (IDFA, IDFV, serial number)</li>
                 <li>IP addresses or geographic location data</li>
                 <li>Browsing history, DNS queries, or network traffic content</li>
                 <li>Connection logs, session timestamps, durations, or bandwidth usage</li>
                 <li>App usage patterns or behavioral analytics</li>
-                <li>Crash reports or diagnostic data</li>
-                <li>Payment information or financial data</li>
+                <li>Remote crash-reporting or remote diagnostic data sent to the Developer; optional in-app log collection (see Section 8) is local and never sent automatically to Marshall</li>
+                <li>Payment information or financial data (payments are processed by Apple or Google)</li>
             </ul>
 
-            <h2>9. Third-Party Code and SDKs</h2>
+            <h2>10. Third-Party Code and SDKs</h2>
             <p>Marshall VPN does not include advertising frameworks, analytics services, crash reporting SDKs, social media SDKs, or attribution tracking SDKs.</p>
             <p>The only third-party component is the open-source <strong>sing-box</strong> library (Libbox), which runs entirely on your device.</p>
 
-            <h2>10. Third-Party Servers</h2>
+            <h2>11. Third-Party Servers</h2>
             <p>When using third-party server configurations (imported via subscription links), the servers you connect to are operated by your subscription provider, not by the Developer. The Developer does not control, operate, or monitor these third-party servers and bears no responsibility for their data handling practices.</p>
 
-            <h2>11. Data Security</h2>
+            <h2>12. Data Security</h2>
             <ul>
-                <li>Sensitive data is stored in the <strong>iOS Keychain</strong>, Apple's hardware-backed encrypted storage.</li>
-                <li>Network tunnel configurations use modern encryption protocols (VLESS + Reality, TLS 1.3).</li>
-                <li>The App enforces HTTPS for subscription links.</li>
+                <li>On <strong>iOS</strong>, sensitive data is stored in the <strong>Keychain</strong>, Apple&apos;s hardware-backed encrypted storage.</li>
+                <li>On <strong>Android</strong>, the equivalent material is protected with <strong>EncryptedSharedPreferences</strong> (Keystore-backed encryption on supported devices).</li>
+                <li>Network tunnel configurations use modern encryption protocols (for example VLESS with Reality, TLS 1.3, Shadow-TLS, or Shadowsocks) depending on the server and mode you select.</li>
+                <li>The App enforces HTTPS for subscription links where applicable.</li>
             </ul>
 
-            <h2>12. Children's Privacy</h2>
+            <h2>13. Children's Privacy</h2>
             <p>Marshall VPN is not directed at children under the age of 13. The Developer does not knowingly collect personal information from children.</p>
 
-            <h2>13. Your Rights and Data Control</h2>
+            <h2>14. Your Rights and Data Control</h2>
             <ul>
                 <li><strong>Delete all data</strong> — uninstall the App. All locally stored data is automatically removed.</li>
-                <li><strong>Reset subscription</strong> — use the "Change subscription" button within the App.</li>
-                <li><strong>Remove VPN configuration</strong> — go to iOS Settings → General → VPN & Device Management.</li>
-                <li><strong>Manage subscriptions</strong> — go to iOS Settings → Apple ID → Subscriptions.</li>
+                <li><strong>Reset subscription</strong> — use the &quot;Change subscription&quot; button within the App where available.</li>
+                <li><strong>Remove VPN configuration</strong> — on iOS: Settings → General → VPN &amp; Device Management; on Android: Settings → Network &amp; internet (or Connections) → VPN, depending on your device.</li>
+                <li><strong>Manage App Store / Play subscriptions</strong> — on iOS: Settings → Apple ID → Subscriptions; on Android: Google Play → Payments &amp; subscriptions → Subscriptions (or the Play Store listing for Marshall VPN).</li>
             </ul>
 
-            <h2>14. Changes to This Policy</h2>
+            <h2>15. Changes to This Policy</h2>
             <p>This Privacy Policy may be updated to reflect changes in the App's functionality or applicable regulations. The "Last updated" date at the top indicates the most recent revision.</p>
 
-            <h2>15. Transparency and security assessments</h2>
+            <h2>16. Transparency and security assessments</h2>
             <p>Marshall may commission independent security reviews of the app, API, or infrastructure as the service matures and publish summaries when practical. VPN client software has no universal mandatory certification; such reviews are voluntary transparency measures, distinct from optional industry certifications (for example ISO 27001) that organizations sometimes pursue separately.</p>
 
-            <h2>16. Contact</h2>
+            <h2>17. Contact</h2>
             <p>If you have questions about this Privacy Policy:</p>
             <p>Email: <a href="mailto:support@appmarshall.com">support@appmarshall.com</a></p>
             <p class="contact-extra">Registered address: Unit 2A, 17/F, Glenealy Tower, No.1 Glenealy Central, Hong Kong S.A.R</p>
@@ -241,11 +256,11 @@ code{font-size:13px;background:rgba(255,255,255,0.06);padding:2px 6px;border-rad
         <div id="ru" class="content-block">
             <div class="logo">Marshall VPN</div>
             <div class="subtitle">Политика конфиденциальности</div>
-            <div class="updated">Последнее обновление: 12 апреля 2026 г.</div>
+            <div class="updated">Последнее обновление: 25 апреля 2026 г.</div>
 
             <h2>1. О приложении</h2>
-            <p>Marshall VPN — это <strong>VPN-приложение для iOS</strong>, разработанное Marshall Relay Limited (Гонконг). Приложение управляет собственной VPN-инфраструктурой и также работает как универсальный VPN-клиент, позволяя импортировать конфигурации сторонних серверов.</p>
-            <p>Marshall VPN позволяет генерировать ключи VPN-доступа, подключаться к серверам Marshall, импортировать ссылки подписки от сторонних провайдеров, управлять списком серверов, проверять доступность серверов и устанавливать зашифрованные сетевые соединения через iOS NetworkExtension.</p>
+            <p>Marshall VPN — это <strong>VPN-приложение для iOS и Android</strong>, разработанное Marshall Relay Limited (Гонконг). Приложение управляет собственной VPN-инфраструктурой и также работает как универсальный VPN-клиент, позволяя импортировать конфигурации сторонних серверов.</p>
+            <p>Marshall VPN позволяет генерировать ключи VPN-доступа, подключаться к серверам Marshall, импортировать ссылки подписки от сторонних провайдеров, управлять списком серверов, проверять доступность серверов и устанавливать зашифрованные сетевые соединения. На <strong>iOS</strong> для этого используется NetworkExtension; на <strong>Android</strong> — системный VPN (VpnService). На обеих платформах движок <strong>sing-box</strong> с открытым кодом работает на устройстве и строит туннель локально.</p>
 
             <h2>2. Основной принцип</h2>
             <div class="highlight-box">
@@ -266,24 +281,34 @@ code{font-size:13px;background:rgba(255,255,255,0.06);padding:2px 6px;border-rad
             <h2>4. Данные на вашем устройстве</h2>
             <p>Следующие данные хранятся <strong>только локально</strong> и никогда не передаются Разработчику для отслеживания или аналитики:</p>
 
-            <h3>4.1 Зашифрованное хранилище (iOS Keychain)</h3>
+            <h3>4.1 iOS: Keychain</h3>
             <ul>
                 <li><strong>Ключ VPN / URL подписки</strong> — ваши учётные данные или HTTPS-ссылка подписки. Защищены iOS Keychain.</li>
-                <li><strong>Кэш конфигурации серверов</strong> — названия серверов, адреса, порты, параметры протоколов и настройки подключения.</li>
+                <li><strong>Кэш конфигурации серверов</strong> — названия серверов, адреса, порты, параметры протоколов (VLESS, VMess, Trojan, Shadowsocks) и настройки подключения.</li>
             </ul>
 
-            <h3>4.2 Локальные настройки (UserDefaults)</h3>
+            <h3>4.2 Android: зашифрованное хранилище</h3>
+            <ul>
+                <li><strong>Ключ VPN / URL подписки</strong> и <strong>кэш конфигурации серверов</strong> — те же категории данных, что и на iOS, защищены с помощью Android <strong>EncryptedSharedPreferences</strong> (шифрование AES, при поддержке — через Keystore).</li>
+            </ul>
+
+            <h3>4.3 Локальные настройки (обе платформы)</h3>
+            <p>На iOS — в UserDefaults; на Android — в настройках приложения. К ним относятся:</p>
             <ul>
                 <li><strong>ID выбранного сервера</strong></li>
                 <li><strong>Язык интерфейса</strong></li>
+                <li><strong>Режим передачи</strong> — выбранный вами режим протокола (например VLESS или SS (Shadowsocks)) для подписки Marshall</li>
                 <li><strong>Настройка автовыбора</strong></li>
             </ul>
             <p>Эти данные изолированы и автоматически удаляются при удалении Marshall VPN.</p>
 
+            <h3>4.4 Режимы и протоколы</h3>
+            <p>Приложение <strong>различает</strong> типы прокси в подписке. Можно выбрать режим, например <strong>VLESS</strong> или <strong>SS (Shadowsocks)</strong>; список серверов и конфигурация sing-box соответствуют выбору. Для подписки Marshall в варианте SS при заданных в конфигурации параметрах может применяться <strong>Shadow-TLS</strong> вместе с Shadowsocks. Сторонние подписки могут содержать и иные типы прокси в зависимости от формата.</p>
+
             <h2>5. Сетевая активность</h2>
 
             <h3>5.1 Генерация ключа</h3>
-            <p>При генерации VPN-ключа в приложении отправляется запрос к API Marshall, содержащий только уникальный идентификатор устройства. Он используется исключительно для создания VPN-доступа. Никакая личная информация не собирается.</p>
+            <p>При генерации VPN-ключа в приложении отправляется запрос к API Marshall, содержащий только уникальный идентификатор устройства. Он используется исключительно для создания VPN-доступа. Персональные данные (имя, email, телефон, Apple ID, учётная запись Google) не собираются и не передаются.</p>
 
             <h3>5.2 Загрузка подписки</h3>
             <p>При использовании сторонних серверов приложение загружает конфигурацию непосредственно с указанного вами URL.</p>
@@ -295,10 +320,10 @@ code{font-size:13px;background:rgba(255,255,255,0.06);padding:2px 6px;border-rad
             <p>Приложение может проверять доступность популярных сервисов путём HTTP HEAD-запросов с вашего устройства. Результаты не собираются.</p>
 
             <h3>5.5 Сетевой туннель</h3>
-            <p>При подключении Marshall VPN использует iOS NetworkExtension и движок <a href="https://github.com/SagerNet/sing-box">sing-box</a> для создания зашифрованного туннеля. Весь трафик проходит напрямую между вашим устройством и сервером.</p>
+            <p>При подключении Marshall VPN на <strong>iOS</strong> используется NetworkExtension, на <strong>Android</strong> — VpnService, а движок <a href="https://github.com/SagerNet/sing-box">sing-box</a> с открытым кодом работает <strong>на устройстве</strong> и создаёт зашифрованный туннель. Весь трафик идёт напрямую между вашим устройством и сервером; sing-box не является удалённым сервисом Разработчика для обработки вашего трафика.</p>
 
             <h2>6. Встроенные покупки</h2>
-            <p>Marshall VPN предлагает подписки и разовые покупки через App Store (StoreKit 2). Вся обработка платежей осуществляется Apple. Разработчик не собирает, не обрабатывает и не хранит платёжную информацию.</p>
+            <p>На <strong>iOS</strong> подписки и разовые покупки оформляются через App Store (StoreKit 2). На <strong>Android</strong> — через <strong>Google Play</strong> и Google Play Billing. Обработка платежей целиком выполняется <strong>Apple</strong> или <strong>Google</strong> соответственно. Разработчик не собирает, не обрабатывает и не хранит данные банковских карт, полные платёжные реквизиты и не получает учётные данные Apple ID или Google-аккаунта.</p>
 
             <h2>7. Обратная связь</h2>
             <p>Marshall VPN содержит опциональную форму обратной связи. При отправке:</p>
@@ -308,50 +333,56 @@ code{font-size:13px;background:rgba(255,255,255,0.06);padding:2px 6px;border-rad
                 <li>Использование не является обязательным.</li>
             </ul>
 
-            <h2>8. Данные, которые мы НЕ собираем</h2>
+            <h2>8. Диагностика и ведение логов (по выбору)</h2>
+            <p>В приложении есть экран <strong>«Диагностика»</strong> (iOS: иконка в шапке; Android: тот же сценарий с главного экрана). В нём можно включить <strong>«Ведение логов»</strong> (Log collection), чтобы на устройстве записывались технические строки стека VPN, в том числе от sing-box. <strong>По умолчанию логирование выключено.</strong></p>
+            <p>Текст логов хранится <strong>только на устройстве</strong> (локальный буфер или файл). Вы можете скопировать текст или поделиться файлом через стандартные функции «Поделиться». <strong>Эти логи не загружаются в Marshall автоматически</strong> — Разработчик <strong>не получает</strong> их, пока вы сами не отправите их, например, в поддержку. При отключении ведения логов новые записи не добавляются; буфер можно очистить на том же экране. Поскольку в логах могут встречаться имена хостов, адреса и фрагменты конфигурации, включайте логирование только при необходимости разобрать техническую проблему.</p>
+
+            <h2>9. Данные, которые мы НЕ собираем</h2>
+            <p>Разработчик не собирает, не хранит, не обрабатывает и не получает (включая автоматическую передачу):</p>
             <ul>
-                <li>Персональную информацию (имя, email, телефон, Apple ID)</li>
+                <li>Персональную информацию (имя, email, телефон, Apple ID, учётная запись Google)</li>
                 <li>Идентификаторы устройства (IDFA, IDFV, серийный номер)</li>
                 <li>IP-адреса или данные геолокации</li>
                 <li>Историю просмотров, DNS-запросы или содержимое трафика</li>
                 <li>Журналы подключений, временные метки, длительность или объём трафика</li>
                 <li>Паттерны использования или поведенческую аналитику</li>
-                <li>Отчёты о сбоях или диагностические данные</li>
-                <li>Платёжную или финансовую информацию</li>
+                <li>Удалённую отправку отчётов о сбоях или диагностики Разработчику; опциональные логи в приложении (см. раздел 8) остаются локальными и <strong>никогда</strong> не уходят в Marshall без вашего действия</li>
+                <li>Платёжную или финансовую информацию (платежи обрабатывают Apple и Google)</li>
             </ul>
 
-            <h2>9. Сторонний код и SDK</h2>
+            <h2>10. Сторонний код и SDK</h2>
             <p>Marshall VPN не содержит рекламных фреймворков, аналитических сервисов, SDK отчётов о сбоях, SDK социальных сетей или SDK атрибуции.</p>
             <p>Единственный сторонний компонент — библиотека <strong>sing-box</strong> (Libbox) с открытым кодом, работающая на устройстве.</p>
 
-            <h2>10. Сторонние серверы</h2>
+            <h2>11. Сторонние серверы</h2>
             <p>При использовании сторонних конфигураций серверы управляются вашим провайдером подписки. Разработчик не контролирует и не несёт ответственности за их практики обработки данных.</p>
 
-            <h2>11. Безопасность данных</h2>
+            <h2>12. Безопасность данных</h2>
             <ul>
-                <li>Конфиденциальные данные хранятся в <strong>iOS Keychain</strong>.</li>
-                <li>Конфигурации туннеля используют современные протоколы (VLESS + Reality, TLS 1.3).</li>
-                <li>Приложение требует HTTPS для ссылок подписки.</li>
+                <li>На <strong>iOS</strong> конфиденциальные данные хранятся в <strong>Keychain</strong> (зашифрованное хранилище с аппаратной поддержкой).</li>
+                <li>На <strong>Android</strong> аналогичные данные защищены <strong>EncryptedSharedPreferences</strong> (при поддержке — через Keystore).</li>
+                <li>Конфигурации туннеля используют современные протоколы (например VLESS с Reality, TLS 1.3, Shadow-TLS, Shadowsocks) в зависимости от сервера и выбранного режима.</li>
+                <li>Для ссылок подписки, где применимо, требуется HTTPS.</li>
             </ul>
 
-            <h2>12. Конфиденциальность детей</h2>
+            <h2>13. Конфиденциальность детей</h2>
             <p>Marshall VPN не предназначен для детей младше 13 лет. Разработчик не собирает персональную информацию детей.</p>
 
-            <h2>13. Ваши права</h2>
+            <h2>14. Ваши права и контроль над данными</h2>
             <ul>
-                <li><strong>Удалить все данные</strong> — удалите приложение.</li>
-                <li><strong>Сбросить подписку</strong> — используйте кнопку «Сменить подписку».</li>
-                <li><strong>Удалить VPN-конфигурацию</strong> — Настройки iOS → Основные → VPN.</li>
-                <li><strong>Управление подписками</strong> — Настройки iOS → Apple ID → Подписки.</li>
+                <li><strong>Удалить все данные</strong> — удалите приложение; локальные данные будут стёрты.</li>
+                <li><strong>Сбросить подписку</strong> — используйте кнопку «Сменить подписку» в приложении, если она доступна.</li>
+                <li><strong>Удалить VPN-конфигурацию</strong> — iOS: Настройки → Основные → VPN и управление устройством; Android: Настройки → Сеть и интернет (или Подключения) → VPN (зависит от устройства).</li>
+                <li><strong>Подписки в App Store / Google Play</strong> — iOS: Настройки → Apple ID → Подписки; Android: Google Play → Платежи и подписки → Подписки (или страница Marshall VPN в Play Маркет).</li>
             </ul>
 
-            <h2>14. Изменения политики</h2>
+            <h2>15. Изменения политики</h2>
             <p>Политика может обновляться. Дата «Последнее обновление» указывает на последнюю редакцию.</p>
 
-            <h2>15. Прозрачность и оценки безопасности</h2>
+            <h2>16. Прозрачность и оценки безопасности</h2>
             <p>По мере развития сервиса Marshall может заказывать независимые проверки приложения, API или инфраструктуры и публиковать краткие итоги, когда это целесообразно. Универсальной обязательной сертификации именно VPN-клиентов не существует; такие проверки — добровольная прозрачность, в отличие от отдельных отраслевых сертификаций (например ISO 27001), которые организации иногда проходят дополнительно.</p>
 
-            <h2>16. Контакты</h2>
+            <h2>17. Контакты</h2>
             <p>Email: <a href="mailto:support@appmarshall.com">support@appmarshall.com</a></p>
             <p class="contact-extra">Юридический адрес: Unit 2A, 17/F, Glenealy Tower, No.1 Glenealy Central, Hong Kong S.A.R</p>
         </div>
@@ -363,7 +394,7 @@ code{font-size:13px;background:rgba(255,255,255,0.06);padding:2px 6px;border-rad
 </footer>
 
     <script>
-        var privacyLang = (function(){try{return localStorage.getItem('mvpn-lang')||'ru';}catch(e){return'ru';}})();
+        var privacyLang = (function(){try{return localStorage.getItem('mvpn-lang')||'en';}catch(e){return'en';}})();
         function applyPrivacyLang(l) {
             privacyLang = l;
             try{localStorage.setItem('mvpn-lang',l);}catch(e){}
