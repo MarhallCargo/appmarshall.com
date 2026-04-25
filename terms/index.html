@@ -71,6 +71,7 @@ a:hover{color:#c084fc}
 
 .section{margin-bottom:36px}
 .section h2{font-size:17px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.section h3{font-size:15px;font-weight:600;margin-top:18px;margin-bottom:8px;color:var(--text-dim)}
 .section p,.section li{font-size:14px;color:var(--text-dim);line-height:1.8}
 .section ul,.section ol{padding:0;margin-top:8px;list-style:none}
 .section ul li,.section ol li{padding:4px 0 4px 20px;position:relative}
@@ -113,7 +114,7 @@ a:hover{color:#c084fc}
 <main class="content">
   <div class="page-header">
     <h1 data-en="Terms of <span class='accent'>Use</span>" data-ru="Условия <span class='accent'>использования</span>">Terms of <span class="accent">Use</span></h1>
-    <p class="meta" data-en="Last updated: April 10, 2026" data-ru="Последнее обновление: 10 апреля 2026">Last updated: April 10, 2026</p>
+    <p class="meta" data-en="Last updated: April 25, 2026" data-ru="Последнее обновление: 25 апреля 2026">Last updated: April 25, 2026</p>
   </div>
 
   <div class="section">
@@ -122,14 +123,16 @@ a:hover{color:#c084fc}
 
   <div class="section">
     <h2 data-en="1. Description of the App" data-ru="1. Описание приложения">1. Description of the App</h2>
-    <p data-en="Marshall is a VPN client application for iOS developed by Marshall Relay Limited (Hong Kong) that functions as a network configuration utility. The App allows users to:" data-ru="Marshall — это VPN-клиент для iOS, разработанный Marshall Relay Limited (Гонконг), выполняющий функции сетевой утилиты. Приложение позволяет:">Marshall is a VPN client application for iOS developed by Marshall Relay Limited (Hong Kong) that functions as a network configuration utility. The App allows users to:</p>
+    <p data-en="Marshall is a VPN client application for iOS and Android developed by Marshall Relay Limited (Hong Kong) that functions as a network configuration utility. The App allows users to:" data-ru="Marshall — это VPN-клиент для iOS и Android, разработанный Marshall Relay Limited (Гонконг), выполняющий функции сетевой утилиты. Приложение позволяет:">Marshall is a VPN client application for iOS and Android developed by Marshall Relay Limited (Hong Kong) that functions as a network configuration utility. The App allows users to:</p>
     <ul>
       <li data-en="Generate VPN access keys directly within the App" data-ru="Генерировать ключи VPN-доступа непосредственно в приложении">Generate VPN access keys directly within the App</li>
       <li data-en="Import server configurations via subscription links" data-ru="Импортировать конфигурации серверов через ссылки на подписку">Import server configurations via subscription links</li>
       <li data-en="View and manage a list of proxy servers" data-ru="Просматривать и управлять списком прокси-серверов">View and manage a list of proxy servers</li>
       <li data-en="Test server latency and service availability" data-ru="Тестировать задержку серверов и доступность сервисов">Test server latency and service availability</li>
-      <li data-en="Establish encrypted network connections using the iOS NetworkExtension framework and the open-source sing-box engine" data-ru="Устанавливать зашифрованные сетевые соединения с использованием iOS NetworkExtension и открытого движка sing-box">Establish encrypted network connections using the iOS NetworkExtension framework and the open-source sing-box engine</li>
+      <li data-en="Establish encrypted network connections: on iOS, via Apple&apos;s NetworkExtension and the open-source sing-box engine; on Android, via the system VPN (VpnService) with the same sing-box engine running locally on your device" data-ru="Устанавливать зашифрованные сетевые соединения: на iOS — через NetworkExtension и открытый движок sing-box; на Android — через системный VPN (VpnService) с тем же движком sing-box, работающим локально на устройстве">Establish encrypted network connections: on iOS, via Apple's NetworkExtension and the open-source sing-box engine; on Android, via the system VPN (VpnService) with the same sing-box engine running locally on your device</li>
     </ul>
+    <h3 data-en="1.1 Transport modes" data-ru="1.1 Режимы передачи">1.1 Transport modes</h3>
+    <p data-en="The App distinguishes between proxy types in your subscription. You can choose a transport mode such as VLESS or SS (Shadowsocks). For Marshall&apos;s own subscription, Shadowsocks may be combined with Shadow-TLS obfuscation when the server configuration provides the required parameters. Third-party imports may list additional proxy types (for example VLESS, VMess, Trojan, or Shadowsocks) according to the subscription format." data-ru="Приложение различает типы прокси в подписке. Вы можете выбрать режим передачи, например VLESS или SS (Shadowsocks). Для подписки Marshall Shadowsocks при необходимости может сочетаться с обфускацией Shadow-TLS, если конфигурация сервера содержит нужные параметры. Сторонние импорты могут включать и другие типы прокси (например VLESS, VMess, Trojan, Shadowsocks) в зависимости от формата подписки.">The App distinguishes between proxy types in your subscription. You can choose a transport mode such as VLESS or SS (Shadowsocks). For Marshall's own subscription, Shadowsocks may be combined with Shadow-TLS obfuscation when the server configuration provides the required parameters. Third-party imports may list additional proxy types (for example VLESS, VMess, Trojan, or Shadowsocks) according to the subscription format.</p>
     <div class="highlight-box">
       <p data-en="Marshall operates its own VPN server infrastructure and also functions as a universal VPN client, accepting subscription links from third-party providers. The Developer is responsible only for its own servers and bears no responsibility for third-party infrastructure." data-ru="Marshall управляет собственной VPN-инфраструктурой и также работает как универсальный VPN-клиент, принимающий ссылки подписки от сторонних провайдеров. Разработчик несёт ответственность только за собственные серверы.">Marshall operates its own VPN server infrastructure and also functions as a universal VPN client, accepting subscription links from third-party providers. The Developer is responsible only for its own servers and bears no responsibility for third-party infrastructure.</p>
     </div>
@@ -173,7 +176,7 @@ a:hover{color:#c084fc}
       <li data-en="Reverse engineer, decompile, or disassemble the App (except to the extent permitted by applicable law)" data-ru="Осуществлять обратную разработку, декомпиляцию или дизассемблирование Приложения (кроме случаев, разрешённых законом)">Reverse engineer, decompile, or disassemble the App (except to the extent permitted by applicable law)</li>
       <li data-en="Use the Marshall name, logo, or branding without prior written consent" data-ru="Использовать название Marshall, логотип или брендинг без предварительного письменного согласия">Use the Marshall name, logo, or branding without prior written consent</li>
     </ul>
-    <p style="margin-top:12px" data-en="The sing-box (Libbox) component is licensed under its own open-source license terms." data-ru="Компонент sing-box (Libbox) распространяется под собственной лицензией с открытым кодом.">The sing-box (Libbox) component is licensed under its own open-source license terms.</p>
+    <p style="margin-top:12px" data-en="The sing-box (Libbox) component is open-source, licensed under its own terms, and runs entirely on your device; it is not a remote service operated by the Developer." data-ru="Компонент sing-box (Libbox) с открытым кодом распространяется на условиях собственной лицензии и выполняется полностью на вашем устройстве; это не удалённый сервис, управляемый Разработчиком.">The sing-box (Libbox) component is open-source, licensed under its own terms, and runs entirely on your device; it is not a remote service operated by the Developer.</p>
   </div>
 
   <div class="section">
@@ -261,7 +264,7 @@ a:hover{color:#c084fc}
 <script>
 (function(){
 'use strict';
-let currentLang=(function(){try{return localStorage.getItem('mvpn-lang')||'ru';}catch(e){return'ru';}})();
+let currentLang=(function(){try{return localStorage.getItem('mvpn-lang')||'en';}catch(e){return'en';}})();
 function applyLang(l){
   currentLang=l;
   try{localStorage.setItem('mvpn-lang',l);}catch(e){}
