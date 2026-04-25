@@ -498,7 +498,7 @@ img{max-width:100%;display:block}
 .map-legend-item{display:flex;align-items:center;gap:5px;font-size:10px;color:#5a7a9f;font-weight:500}
 .map-legend-dot{width:8px;height:8px;border-radius:3px}
 .map-legend-dot-round{border-radius:50%;width:7px;height:7px}
-.map-info-panel{position:absolute;left:18px;bottom:22px;width:min(290px,28%);background:rgba(10,15,25,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(100,130,180,.13);border-radius:14px;padding:14px 16px 13px;z-index:10;box-shadow:0 12px 40px rgba(0,0,0,.35);opacity:0;visibility:hidden;transform:translateY(8px) scale(.985);transition:opacity .35s ease,transform .35s ease,visibility 0s linear .35s;pointer-events:none}
+.map-info-panel{position:absolute;left:18px;bottom:12px;width:min(290px,28%);background:rgba(10,15,25,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(100,130,180,.13);border-radius:14px;padding:14px 16px 13px;z-index:10;box-shadow:0 12px 40px rgba(0,0,0,.35);opacity:0;visibility:hidden;transform:translateY(8px) scale(.985);transition:opacity .35s ease,transform .35s ease,visibility 0s linear .35s;pointer-events:none}
 .map-info-panel.is-visible{opacity:1;visibility:visible;transform:translateY(0) scale(1);pointer-events:auto;transition:opacity .35s ease,transform .35s ease,visibility 0s linear 0s}
 .map-info-panel-label{display:inline-flex;align-items:center;gap:6px;font-size:9.5px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#00d67e;margin-bottom:8px}
 .map-info-panel-label::before{content:'';width:14px;height:1px;background:#00d67e;opacity:.7}
@@ -507,10 +507,11 @@ img{max-width:100%;display:block}
 .map-info-panel-divider{height:1px;background:linear-gradient(90deg,rgba(100,130,180,.18),rgba(100,130,180,.04));margin-bottom:10px}
 .map-info-panel-list{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(6,auto);grid-auto-flow:column;gap:5px 14px;list-style:none;padding:0;margin:0}
 .map-info-panel-list li{font-size:10.5px;color:#aab7cc;font-weight:500;display:flex;align-items:center;gap:7px;line-height:1.4}
-.map-info-panel-list li::before{content:'';width:3.5px;height:3.5px;border-radius:50%;background:#00d67e;flex-shrink:0;box-shadow:0 0 4px rgba(0,214,126,.55)}
+.map-info-panel-list .map-info-flag{width:18px;height:13px;object-fit:cover;border-radius:2px;flex-shrink:0;box-shadow:0 0 0 1px rgba(255,255,255,.1)}
+.map-info-panel-list .map-info-country{min-width:0}
 @media(max-width:768px){
   .map-info-panel{position:static;width:auto;left:auto;bottom:auto;margin:0 12px;transform:none;box-shadow:none;display:none}
-  .map-info-panel.is-visible{display:block;margin-top:10px}
+  .map-info-panel.is-visible{display:block;margin-top:5px}
 }
 @keyframes glowBorder{0%,100%{stroke:rgba(0,214,126,.10)}50%{stroke:rgba(0,214,126,.28)}}
 
@@ -705,6 +706,7 @@ img{max-width:100%;display:block}
 @media(max-width:900px){
   .ss-desk-only{display:none}
   .ss-mob-only{display:block}
+  .ss-wire-tag--hide-on-mobile{display:none!important}
 }
 </style>
 </head>
@@ -822,7 +824,7 @@ img{max-width:100%;display:block}
         <div class="hero-mobile-download-row">
           <button type="button" class="btn-primary" onclick="openIosComingSoonModal()">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" preserveAspectRatio="xMidYMid meet"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            <span data-en="for iOS and macOS" data-ru="для iOS и macOS">for iOS and macOS</span>
+            <span data-en="for iOS" data-ru="для iOS">for iOS</span>
           </button>
           <button type="button" class="btn-primary" onclick="window.open('https://play.google.com/apps/testing/com.marshallvpn.app','_blank','noopener')">
             <svg class="icon-android" width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg>
@@ -1173,18 +1175,54 @@ img{max-width:100%;display:block}
           <div class="map-info-panel-desc" data-en="Servers only where the internet is free." data-ru="Серверы только там, где интернет свободен.">Servers only where the internet is free.</div>
           <div class="map-info-panel-divider"></div>
           <ul class="map-info-panel-list">
-            <li data-en="Germany" data-ru="Германия">Germany</li>
-            <li data-en="United Kingdom" data-ru="Великобритания">United Kingdom</li>
-            <li data-en="Netherlands" data-ru="Нидерланды">Netherlands</li>
-            <li data-en="Sweden" data-ru="Швеция">Sweden</li>
-            <li data-en="Finland" data-ru="Финляндия">Finland</li>
-            <li data-en="Spain" data-ru="Испания">Spain</li>
-            <li data-en="United States" data-ru="США">United States</li>
-            <li data-en="Brazil" data-ru="Бразилия">Brazil</li>
-            <li data-en="Japan" data-ru="Япония">Japan</li>
-            <li data-en="South Korea" data-ru="Южная Корея">South Korea</li>
-            <li data-en="Singapore" data-ru="Сингапур">Singapore</li>
-            <li data-en="Australia" data-ru="Австралия">Australia</li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/de.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="Germany" data-ru="Германия">Germany</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/gb.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="United Kingdom" data-ru="Великобритания">United Kingdom</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/nl.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="Netherlands" data-ru="Нидерланды">Netherlands</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/se.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="Sweden" data-ru="Швеция">Sweden</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/fi.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="Finland" data-ru="Финляндия">Finland</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/es.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="Spain" data-ru="Испания">Spain</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/us.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="United States" data-ru="США">United States</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/br.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="Brazil" data-ru="Бразилия">Brazil</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/jp.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="Japan" data-ru="Япония">Japan</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/kr.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="South Korea" data-ru="Южная Корея">South Korea</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/sg.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="Singapore" data-ru="Сингапур">Singapore</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/au.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="Australia" data-ru="Австралия">Australia</span>
+            </li>
           </ul>
         </div>
       </div>
@@ -1280,7 +1318,7 @@ img{max-width:100%;display:block}
         <div class="ss-wire-tags">
           <span class="ss-wire-tag">AEAD-2022</span>
           <span class="ss-wire-tag">SOCKS5</span>
-          <span class="ss-wire-tag" data-en="Per-packet auth" data-ru="Пакет за пакетом">Per-packet auth</span>
+          <span class="ss-wire-tag ss-wire-tag--hide-on-mobile" data-en="Per-packet auth" data-ru="Пакет за пакетом">Per-packet auth</span>
           <span class="ss-wire-tag" data-en="UDP support" data-ru="UDP">UDP support</span>
         </div>
       </div>
@@ -1418,7 +1456,8 @@ img{max-width:100%;display:block}
         <div class="cta-download-stack">
           <button type="button" class="btn-primary" onclick="openIosComingSoonModal()">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" preserveAspectRatio="xMidYMid meet"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            <span data-en="Download for iOS or macOS" data-ru="Скачать для iOS и macOS">Download for iOS or macOS</span>
+            <span class="ss-desk-only" data-en="Download for iOS or macOS" data-ru="Скачать для iOS и macOS">Download for iOS or macOS</span>
+            <span class="ss-mob-only" data-en="Download for iOS" data-ru="Скачать для iOS">Download for iOS</span>
           </button>
           <button type="button" class="btn-primary" onclick="window.open('https://play.google.com/apps/testing/com.marshallvpn.app','_blank','noopener')">
             <svg class="icon-android" width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg>
