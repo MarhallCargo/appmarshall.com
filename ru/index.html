@@ -11,7 +11,7 @@
   gtag('js', new Date());
   gtag('config', 'G-RGDQ35MMZB');
 </script>
-<meta name="description" content="Marshall VPN — Fast, private VPN for iOS. Our servers worldwide, modern encryption, 30 days free.">
+<meta name="description" content="Marshall VPN — Fast, private VPN for iOS and Android. Our servers worldwide, modern encryption, 30 days free.">
 <meta name="theme-color" content="#0A0A0F">
 <title>Marshall VPN — Your Connection. Your Rules.</title>
 <link rel="icon" type="image/png" href="../assets/logo.png">
@@ -85,8 +85,7 @@ img{max-width:100%;display:block}
 .nav-links a:hover{color:var(--text)}
 .nav-cta{height:36px;min-height:36px;padding:0 16px;border-radius:20px;font-size:12px;font-weight:600;background:linear-gradient(135deg,var(--accent),var(--accent-light));color:#fff;border:none;cursor:pointer;transition:transform .3s,box-shadow .3s;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;font-family:'Inter',sans-serif;white-space:nowrap}
 .nav-cta:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(108,92,231,.3)}
-.nav-lang{height:36px;min-height:36px;padding:0 12px;border-radius:8px;font-size:11px;font-weight:600;background:var(--surface);color:var(--text-dim);border:1px solid var(--border-light);cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif;letter-spacing:1px;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;text-decoration:none}
-a.nav-lang,a.nav-mobile-lang{color:var(--text-dim)!important}
+.nav-lang{height:36px;min-height:36px;padding:0 12px;border-radius:8px;font-size:11px;font-weight:600;background:var(--surface);color:var(--text-dim);border:1px solid var(--border-light);cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif;letter-spacing:1px;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box}
 .nav-lang:hover{background:var(--surface-hover);color:var(--text)}
 .nav-mobile-right{display:none;align-items:center;gap:10px}
 .nav-mobile-lang{height:32px;min-height:32px;padding:0 11px;border-radius:7px;font-size:10px;font-weight:600;background:rgba(255,255,255,.05);color:var(--text-dim);border:1px solid rgba(255,255,255,.12);cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif;letter-spacing:1px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box}
@@ -499,6 +498,21 @@ a.nav-lang,a.nav-mobile-lang{color:var(--text-dim)!important}
 .map-legend-item{display:flex;align-items:center;gap:5px;font-size:10px;color:#5a7a9f;font-weight:500}
 .map-legend-dot{width:8px;height:8px;border-radius:3px}
 .map-legend-dot-round{border-radius:50%;width:7px;height:7px}
+.map-info-panel{position:absolute;left:18px;bottom:12px;width:min(290px,28%);background:rgba(10,15,25,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(100,130,180,.13);border-radius:14px;padding:14px 16px 13px;z-index:10;box-shadow:0 12px 40px rgba(0,0,0,.35);opacity:0;visibility:hidden;transform:translateY(8px) scale(.985);transition:opacity .35s ease,transform .35s ease,visibility 0s linear .35s;pointer-events:none}
+.map-info-panel.is-visible{opacity:1;visibility:visible;transform:translateY(0) scale(1);pointer-events:auto;transition:opacity .35s ease,transform .35s ease,visibility 0s linear 0s}
+.map-info-panel-label{display:inline-flex;align-items:center;gap:6px;font-size:9.5px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#00d67e;margin-bottom:8px}
+.map-info-panel-label::before{content:'';width:14px;height:1px;background:#00d67e;opacity:.7}
+.map-info-panel-title{font-size:13px;font-weight:600;color:#e8edf3;line-height:1.3;margin-bottom:5px;letter-spacing:-.005em}
+.map-info-panel-desc{font-size:10.5px;color:#6a84a5;line-height:1.5;margin-bottom:11px}
+.map-info-panel-divider{height:1px;background:linear-gradient(90deg,rgba(100,130,180,.18),rgba(100,130,180,.04));margin-bottom:10px}
+.map-info-panel-list{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(6,auto);grid-auto-flow:column;gap:5px 14px;list-style:none;padding:0;margin:0}
+.map-info-panel-list li{font-size:10.5px;color:#aab7cc;font-weight:500;display:flex;align-items:center;gap:7px;line-height:1.4}
+.map-info-panel-list .map-info-flag{width:18px;height:13px;object-fit:cover;border-radius:2px;flex-shrink:0;box-shadow:0 0 0 1px rgba(255,255,255,.1)}
+.map-info-panel-list .map-info-country{min-width:0}
+@media(max-width:768px){
+  .map-info-panel{position:static;width:auto;left:auto;bottom:auto;margin:0 12px;transform:none;box-shadow:none;display:none}
+  .map-info-panel.is-visible{display:block;margin-top:5px}
+}
 @keyframes glowBorder{0%,100%{stroke:rgba(0,214,126,.10)}50%{stroke:rgba(0,214,126,.28)}}
 
 /* Pricing */
@@ -646,6 +660,54 @@ a.nav-lang,a.nav-mobile-lang{color:var(--text-dim)!important}
   .reveal-left:not(.visible){transform:translate3d(-18px,0,0)}
   .reveal-right:not(.visible){transform:translate3d(18px,0,0)}
 }
+
+/* ---------- SHADOWSOCKS A: "Disguise" — wire inspector ---------- */
+.ss-wire-section{position:relative;z-index:2;padding:80px 0;overflow-x:clip}
+.ss-wire-grid{margin-top:40px;display:grid;grid-template-columns:1.05fr 1.1fr;gap:48px;align-items:center}
+.ss-wire-copy h3{font-size:clamp(22px,2.6vw,30px);font-weight:800;letter-spacing:-.02em;line-height:1.22;margin-bottom:16px}
+.ss-wire-copy h3 .accent{color:var(--success)}
+.ss-wire-copy p{font-size:15px;color:var(--text-dim);line-height:1.7;margin-bottom:14px;max-width:480px}
+.ss-wire-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.ss-wire-tag{font-family:'JetBrains Mono','SFMono-Regular',ui-monospace,monospace;font-size:11px;letter-spacing:.05em;padding:6px 10px;border-radius:6px;background:rgba(0,210,160,.06);color:var(--success);border:1px solid rgba(0,210,160,.18)}
+.ss-wire{position:relative;border-radius:var(--radius-lg);background:radial-gradient(ellipse at top right,rgba(0,210,160,.08),transparent 55%),linear-gradient(160deg,#070b14 0%,#0a0f1a 60%,#08111a 100%);border:1px solid rgba(0,210,160,.14);overflow:hidden;padding:18px 18px 16px;min-height:340px;box-shadow:0 30px 80px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.02) inset}
+.ss-wire::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 2px,rgba(255,255,255,.014) 2px 3px);pointer-events:none;mix-blend-mode:overlay}
+.ss-wire-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;font-family:'JetBrains Mono','SFMono-Regular',ui-monospace,monospace;position:relative;z-index:1}
+.ss-wire-dots{display:flex;gap:6px}
+.ss-wire-dots span{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.14)}
+.ss-wire-dots span:nth-child(1){background:#ff5f56}.ss-wire-dots span:nth-child(2){background:#ffbd2e}.ss-wire-dots span:nth-child(3){background:#27c93f}
+.ss-wire-htitle{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.34)}
+.ss-wire-status{font-size:10px;color:var(--success);display:inline-flex;align-items:center;gap:6px;letter-spacing:.05em}
+.ss-wire-status::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--success);box-shadow:0 0 8px var(--success);animation:ssDotPulse 1.6s ease-in-out infinite}
+@keyframes ssDotPulse{0%,100%{opacity:.55}50%{opacity:1}}
+.ss-wire-rows{display:flex;flex-direction:column;gap:7px;font-family:'JetBrains Mono','SFMono-Regular',ui-monospace,monospace;font-size:11.5px;line-height:1.5;position:relative;z-index:1}
+.ss-wire-row{display:grid;grid-template-columns:54px 1fr 64px;gap:10px;align-items:center;padding:7px 10px;border-radius:8px;background:rgba(255,255,255,.018);border:1px solid rgba(255,255,255,.03);overflow:hidden}
+.ss-wire-time{color:rgba(255,255,255,.32);font-size:10.5px;font-variant-numeric:tabular-nums}
+.ss-wire-stream{color:rgba(255,255,255,.46);overflow:hidden;white-space:nowrap;letter-spacing:.02em;position:relative}
+.ss-wire-stream span{display:inline-block;padding-right:30px;animation:ssStreamShift 9s linear infinite}
+.ss-wire-row:nth-child(2) .ss-wire-stream span{animation-duration:11s;animation-delay:-2s}
+.ss-wire-row:nth-child(3) .ss-wire-stream span{animation-duration:13s;animation-delay:-5s}
+.ss-wire-row:nth-child(4) .ss-wire-stream span{animation-duration:10s;animation-delay:-3.5s}
+.ss-wire-row:nth-child(5) .ss-wire-stream span{animation-duration:12s;animation-delay:-7s}
+@keyframes ssStreamShift{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ss-wire-tagm{font-size:9.5px;font-weight:700;letter-spacing:.08em;padding:3px 7px;border-radius:5px;text-transform:uppercase;text-align:center;justify-self:end}
+.ss-wire-tagm--https{background:rgba(0,210,160,.14);color:var(--success);box-shadow:inset 0 0 0 1px rgba(0,210,160,.22)}
+.ss-wire-tagm--unknown{background:rgba(255,255,255,.05);color:rgba(255,255,255,.45);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.ss-wire-foot{margin-top:14px;display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono','SFMono-Regular',ui-monospace,monospace;font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;position:relative;z-index:1}
+.ss-wire-verdict{color:var(--success);font-weight:700;display:inline-flex;align-items:center;gap:6px}
+.ss-wire-verdict svg{width:11px;height:11px}
+@media(max-width:900px){.ss-wire-grid{grid-template-columns:1fr;gap:30px}.ss-wire{min-height:300px}.ss-wire-row{grid-template-columns:48px 1fr 56px}}
+
+@media(max-width:600px){
+  .ss-wire-section{padding:56px 0}
+}
+
+/* shared mobile/desktop visibility helpers for the SS block */
+.ss-mob-only{display:none}
+@media(max-width:900px){
+  .ss-desk-only{display:none}
+  .ss-mob-only{display:block}
+  .ss-wire-tag--hide-on-mobile{display:none!important}
+}
 </style>
 </head>
 <body>
@@ -663,11 +725,11 @@ a.nav-lang,a.nav-mobile-lang{color:var(--text-dim)!important}
     </a>
     <div class="nav-links">
       <button class="nav-cta" onclick="smoothScrollTo('#cta')" data-en="Get Started" data-ru="Начать">Get Started</button>
-      <a href="../index.html" class="nav-lang" id="langBtn">EN</a>
+      <button class="nav-lang" onclick="toggleLang()" id="langBtn">RU</button>
     </div>
     <div class="nav-mobile-right">
       <button type="button" class="nav-cta" onclick="smoothScrollTo('#cta')" data-en="Get Started" data-ru="Начать">Get Started</button>
-      <a href="../index.html" class="nav-mobile-lang" id="langBtnMobile">EN</a>
+      <button class="nav-mobile-lang" onclick="toggleLang()" id="langBtnMobile">RU</button>
     </div>
   </div>
 </nav>
@@ -685,7 +747,7 @@ a.nav-lang,a.nav-mobile-lang{color:var(--text-dim)!important}
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" preserveAspectRatio="xMidYMid meet"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
               <span data-en="Download for iOS" data-ru="Скачать для iOS">Download for iOS</span>
             </button>
-            <button type="button" class="btn-primary" onclick="window.open('https://play.google.com/apps/testing/com.marshallvpn.app','_blank','noopener')">
+            <button type="button" class="btn-primary" onclick="openAndroidComingSoonModal()">
               <svg class="icon-android" width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg>
               <span data-en="Download for Android" data-ru="Скачать для Android">Download for Android</span>
             </button>
@@ -762,9 +824,9 @@ a.nav-lang,a.nav-mobile-lang{color:var(--text-dim)!important}
         <div class="hero-mobile-download-row">
           <button type="button" class="btn-primary" onclick="openIosComingSoonModal()">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" preserveAspectRatio="xMidYMid meet"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            <span data-en="for iOS and macOS" data-ru="для iOS и macOS">for iOS and macOS</span>
+            <span data-en="for iOS" data-ru="для iOS">for iOS</span>
           </button>
-          <button type="button" class="btn-primary" onclick="window.open('https://play.google.com/apps/testing/com.marshallvpn.app','_blank','noopener')">
+          <button type="button" class="btn-primary" onclick="openAndroidComingSoonModal()">
             <svg class="icon-android" width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg>
             <span data-en="for Android" data-ru="для Android">for Android</span>
           </button>
@@ -1107,6 +1169,62 @@ a.nav-lang,a.nav-mobile-lang{color:var(--text-dim)!important}
           </div>
           <div class="map-tooltip-bar"><div class="map-tooltip-bar-fill" id="tt-bar"></div></div>
         </div>
+        <div class="map-info-panel" id="map-info-panel" aria-hidden="true">
+          <div class="map-info-panel-label" data-en="Network" data-ru="Сеть">Network</div>
+          <div class="map-info-panel-title" data-en="Free countries only" data-ru="Только свободные страны">Free countries only</div>
+          <div class="map-info-panel-desc" data-en="Servers only where the internet is free." data-ru="Серверы только там, где интернет свободен.">Servers only where the internet is free.</div>
+          <div class="map-info-panel-divider"></div>
+          <ul class="map-info-panel-list">
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/de.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="Germany" data-ru="Германия">Germany</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/gb.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="United Kingdom" data-ru="Великобритания">United Kingdom</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/nl.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="Netherlands" data-ru="Нидерланды">Netherlands</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/se.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="Sweden" data-ru="Швеция">Sweden</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/fi.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="Finland" data-ru="Финляндия">Finland</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/es.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="Spain" data-ru="Испания">Spain</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/us.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="United States" data-ru="США">United States</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/br.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="Brazil" data-ru="Бразилия">Brazil</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/jp.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="Japan" data-ru="Япония">Japan</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/kr.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="South Korea" data-ru="Южная Корея">South Korea</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/sg.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="Singapore" data-ru="Сингапур">Singapore</span>
+            </li>
+            <li>
+              <img class="map-info-flag" src="https://flagcdn.com/w20/au.png" width="20" height="15" alt="" loading="lazy" decoding="async" />
+              <span class="map-info-country" data-en="Australia" data-ru="Австралия">Australia</span>
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="map-legend" id="map-legend"></div>
     </div>
@@ -1177,6 +1295,74 @@ a.nav-lang,a.nav-mobile-lang{color:var(--text-dim)!important}
         </div>
       </div>
       <div class="pricing-trial reveal" data-en="<strong>14-day free trial</strong> included. All app features work without limits." data-ru="<strong>14 дней бесплатно</strong>. Все функции приложения работают без ограничений."><strong>14-day free trial</strong> included. All app features work without limits.</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ============ BLOCK 6.5: SHADOWSOCKS — wire inspector ============ -->
+<section class="ss-wire-section" id="protocol-disguise">
+  <div class="container">
+    <div style="text-align:center" class="reveal">
+      <div class="section-label" style="justify-content:center" data-en="Protocol · Shadowsocks" data-ru="Протокол · Shadowsocks">Protocol · Shadowsocks</div>
+      <h2 class="section-title" style="margin-left:auto;margin-right:auto;max-width:760px" data-en="Encrypted tunneling with <span class='gradient-text-accent'>modern ciphers.</span>" data-ru="Зашифрованный туннель на <span class='gradient-text-accent'>современных шифрах.</span>">Encrypted tunneling with <span class="gradient-text-accent">modern ciphers.</span></h2>
+      <p class="section-desc ss-desk-only" style="margin-left:auto;margin-right:auto;text-align:center" data-en="Shadowsocks uses AEAD to protect the tunnel between your device and Marshall. Your data is encrypted in transit; we pair it on our own infrastructure with VLESS and Reality in TLS 1.3 — a stack focused on confidentiality, integrity, and a lean, auditable design." data-ru="Shadowsocks использует AEAD, чтобы защищать туннель между устройством и Marshall. Данные шифруются в пути; на собственной инфраструктуре это сочетается с VLESS и Reality в оболочке TLS 1.3 — с упором на конфиденциальность, целостность и прозрачный, обозримый стек.">Shadowsocks uses AEAD to protect the tunnel between your device and Marshall. Your data is encrypted in transit; we pair it on our own infrastructure with VLESS and Reality in TLS 1.3 — a stack focused on confidentiality, integrity, and a lean, auditable design.</p>
+      <p class="section-desc ss-mob-only" style="margin-left:auto;margin-right:auto;text-align:center" data-en="AEAD protects your data in transit. On our servers it runs alongside VLESS, Reality, and TLS 1.3 — for confidentiality and integrity." data-ru="AEAD защищает данные в пути. На наших серверах — вместе с VLESS, Reality и TLS 1.3, с упором на конфиденциальность и целостность.">AEAD protects your data in transit. On our servers it runs alongside VLESS, Reality, and TLS 1.3 — for confidentiality and integrity.</p>
+    </div>
+    <div class="ss-wire-grid">
+      <div class="ss-wire-copy reveal-left">
+        <h3 data-en="Per-packet authentication. <span class='accent'>No logs by design.</span>" data-ru="Попакетная аутентификация. <span class='accent'>Без логов в архитектуре.</span>">Per-packet authentication. <span class="accent">No logs by design.</span></h3>
+        <p class="ss-desk-only" data-en="SOCKS5 transport with ChaCha20-Poly1305 and AES-256-GCM: each frame is cryptographically signed so replays and tampering are caught before your traffic is handled. The protocol keeps encryption and authentication in one place, which helps reduce metadata exposure and keep your side of the path private." data-ru="SOCKS5 с ChaCha20-Poly1305 и AES-256-GCM: каждая единица трафика аутентифицируется, повторы и вмешательства отсекаются до дальнейшей обработки. Шифрование и проверка целостности собраны в одном месте — так меньше утечек сопутствующих сведений и сильнее приватность на стороне клиента.">SOCKS5 transport with ChaCha20-Poly1305 and AES-256-GCM: each frame is cryptographically signed so replays and tampering are caught before your traffic is handled. The protocol keeps encryption and authentication in one place, which helps reduce metadata exposure and keep your side of the path private.</p>
+        <p class="ss-mob-only" data-en="ChaCha20-Poly1305 / AES-GCM: per-packet auth, replays and tampering dropped at the edge. One place for crypto + integrity." data-ru="ChaCha20-Poly1305 / AES-GCM: аутентификация пакетов, повторы и подлог отсекаются на границе. Шифрование и целостность в одном слое.">ChaCha20-Poly1305 / AES-GCM: per-packet auth, replays and tampering dropped at the edge. One place for crypto + integrity.</p>
+        <div class="ss-wire-tags">
+          <span class="ss-wire-tag">AEAD-2022</span>
+          <span class="ss-wire-tag">SOCKS5</span>
+          <span class="ss-wire-tag ss-wire-tag--hide-on-mobile" data-en="Per-packet auth" data-ru="Пакет за пакетом">Per-packet auth</span>
+          <span class="ss-wire-tag" data-en="UDP support" data-ru="UDP">UDP support</span>
+        </div>
+      </div>
+      <div class="ss-wire reveal-right">
+        <div class="ss-wire-head">
+          <div class="ss-wire-dots"><span></span><span></span><span></span></div>
+          <span class="ss-wire-htitle" data-en="channel · live" data-ru="канал · live">channel · live</span>
+          <span class="ss-wire-status">LIVE</span>
+        </div>
+        <div class="ss-wire-rows">
+          <div class="ss-wire-row">
+            <span class="ss-wire-time">04:21.118</span>
+            <span class="ss-wire-stream"><span>a8 7f 3e b2 c1 09 4d ff 11 e0 8a 6c d4 7b 22 91 0e f3 5d 8b a4 17 c9 26 6f 0b 4a 8e ··· a8 7f 3e b2 c1 09 4d ff 11 e0 8a 6c d4 7b 22 91 0e f3 5d 8b ···</span></span>
+            <span class="ss-wire-tagm ss-wire-tagm--https">HTTPS</span>
+          </div>
+          <div class="ss-wire-row">
+            <span class="ss-wire-time">04:21.124</span>
+            <span class="ss-wire-stream"><span>3c 91 e7 ad 5b 22 6f c4 88 d1 0a 7e 95 32 fe b8 4c 09 71 ee a3 5d 1c 80 6b ff 23 a7 ··· 3c 91 e7 ad 5b 22 6f c4 88 d1 0a 7e 95 32 fe b8 4c 09 71 ee ···</span></span>
+            <span class="ss-wire-tagm ss-wire-tagm--unknown">UNK</span>
+          </div>
+          <div class="ss-wire-row">
+            <span class="ss-wire-time">04:21.131</span>
+            <span class="ss-wire-stream"><span>e2 04 b8 7d 33 9c 5f a1 6d 80 c7 11 4e 0b a9 26 f5 dd 18 4b 92 0a 6c 78 ee 33 b1 4f ··· e2 04 b8 7d 33 9c 5f a1 6d 80 c7 11 4e 0b a9 26 f5 dd 18 4b ···</span></span>
+            <span class="ss-wire-tagm ss-wire-tagm--https">HTTPS</span>
+          </div>
+          <div class="ss-wire-row">
+            <span class="ss-wire-time">04:21.139</span>
+            <span class="ss-wire-stream"><span>5a c0 19 fb 6e 27 d8 84 39 b2 7c e1 03 9d 5e ab 11 6f 24 70 cc 89 02 33 a5 e9 4d 16 ··· 5a c0 19 fb 6e 27 d8 84 39 b2 7c e1 03 9d 5e ab 11 6f 24 70 ···</span></span>
+            <span class="ss-wire-tagm ss-wire-tagm--unknown">UNK</span>
+          </div>
+          <div class="ss-wire-row">
+            <span class="ss-wire-time">04:21.147</span>
+            <span class="ss-wire-stream"><span>d3 7a 14 ee 88 5b 02 c9 6d 4e f2 91 06 b7 28 30 79 a4 cd 1f 8e 35 60 b1 0c 4a 9d 22 ··· d3 7a 14 ee 88 5b 02 c9 6d 4e f2 91 06 b7 28 30 79 a4 cd 1f ···</span></span>
+            <span class="ss-wire-tagm ss-wire-tagm--https">HTTPS</span>
+          </div>
+        </div>
+        <div class="ss-wire-foot">
+          <span data-en="aead-2022 · gcm" data-ru="aead-2022 · gcm">aead-2022 · gcm</span>
+          <span class="ss-wire-verdict">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-en="Integrity protected" data-ru="Целостность защищена">Integrity protected</span>
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1270,9 +1456,10 @@ a.nav-lang,a.nav-mobile-lang{color:var(--text-dim)!important}
         <div class="cta-download-stack">
           <button type="button" class="btn-primary" onclick="openIosComingSoonModal()">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" preserveAspectRatio="xMidYMid meet"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            <span data-en="Download for iOS or macOS" data-ru="Скачать для iOS и macOS">Download for iOS or macOS</span>
+            <span class="ss-desk-only" data-en="Download for iOS or macOS" data-ru="Скачать для iOS и macOS">Download for iOS or macOS</span>
+            <span class="ss-mob-only" data-en="Download for iOS" data-ru="Скачать для iOS">Download for iOS</span>
           </button>
-          <button type="button" class="btn-primary" onclick="window.open('https://play.google.com/apps/testing/com.marshallvpn.app','_blank','noopener')">
+          <button type="button" class="btn-primary" onclick="openAndroidComingSoonModal()">
             <svg class="icon-android" width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/></svg>
             <span data-en="Download for Android" data-ru="Скачать для Android">Download for Android</span>
           </button>
@@ -1309,9 +1496,9 @@ a.nav-lang,a.nav-mobile-lang{color:var(--text-dim)!important}
         <h4 data-en="Contact" data-ru="Контакты">Contact</h4>
         <a href="mailto:support@appmarshall.com" data-en="Email Us" data-ru="Написать нам">Email Us</a>
         <a href="https://t.me/MarshallVPNBot" target="_blank">Telegram</a>
-        <a href="privacy/" data-en="Privacy Policy" data-ru="Конфиденциальность">Privacy Policy</a>
-        <a href="terms/" data-en="Terms of Use" data-ru="Условия использования">Terms of Use</a>
-        <a href="../index.html" data-en="English site" data-ru="Сайт на английском">Сайт на английском</a>
+        <a href="../privacy/" data-en="Privacy Policy" data-ru="Конфиденциальность">Privacy Policy</a>
+        <a href="../terms/" data-en="Terms of Use" data-ru="Условия использования">Terms of Use</a>
+        <a href="https://appmarshall.com/" data-en="English site" data-ru="Сайт на английском">Сайт на английском</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -1391,16 +1578,14 @@ const MARSHALL_APK_URL='https://marshallcargo.pythonanywhere.com/static/appmarsh
   if(a)a.href=u;
 })();
 
-/* ===== LANGUAGE (RU page — default Russian; use EN link in header for English site) ===== */
-let currentLang='ru';
-try{localStorage.setItem('mvpn-lang','ru');}catch(e){}
+/* ===== LANGUAGE ===== */
+let currentLang=(function(){try{return localStorage.getItem('mvpn-lang')||'ru';}catch(e){return'ru';}}());
 function applyLang(l){
   currentLang=l;
   try{localStorage.setItem('mvpn-lang',l);}catch(e){}
   const btn=l==='en'?'RU':'EN';
   const lb=document.getElementById('langBtn'),lm=document.getElementById('langBtnMobile');
-  if(lb&&lb.tagName!=='A')lb.textContent=btn;
-  if(lm&&lm.tagName!=='A')lm.textContent=btn;
+  if(lb)lb.textContent=btn;if(lm)lm.textContent=btn;
   document.documentElement.lang=l;
   document.querySelectorAll('[data-en][data-ru]').forEach(el=>{
     const t=el.getAttribute('data-'+l);
@@ -1411,7 +1596,7 @@ function applyLang(l){
   if(typeof updateMapLabels==='function')updateMapLabels();
   try{if(geo)renderMap();}catch(e){}
 }
-window.toggleLang=function(){location.href='../index.html';};
+window.toggleLang=function(){applyLang(currentLang==='en'?'ru':'en');};
 applyLang(currentLang);
 
 /* ===== SCROLL TO ===== */
@@ -1755,23 +1940,18 @@ const lLab={1:"Lowest exposure",2:"Low",3:"Moderate",4:"High",5:"Severe"};
 const lLabRu={1:"Минимальная",2:"Низкая",3:"Средняя",4:"Высокая",5:"Критическая"};
 const hCol={1:"#1a2540",2:"#3b5998",3:"#d4841e",4:"#e04535",5:"#ff2a5e"};
 const GREEN="#00d67e";
-const YELLOW="#fbbf24";
+const ORANGE="#f97316";
 
 const servers=[
-  {lat:43.30,lon:5.37},{lat:52.37,lon:4.90},{lat:49.45,lon:11.08},
-  {lat:-33.87,lon:151.21},{lat:60.17,lon:24.94},{lat:13.76,lon:100.50},
-  {lat:43.65,lon:-79.38},{lat:39.04,lon:-77.49},{lat:1.35,lon:103.82},
-  {lat:35.68,lon:139.65},{lat:-23.55,lon:-46.63},{lat:51.51,lon:-0.13}
+  {lat:49.45,lon:11.08},{lat:60.17,lon:24.94},{lat:1.35,lon:103.82},
+  {lat:39.04,lon:-77.49},{lat:35.68,lon:139.65},{lat:-23.55,lon:-46.63},
+  {lat:-33.87,lon:151.21},{lat:51.51,lon:-0.13},{lat:59.33,lon:18.07},
+  {lat:45.52,lon:-122.99},{lat:37.57,lon:126.98},{lat:52.37,lon:4.90},
+  {lat:40.42,lon:-3.70}
 ];
 const futureServers=[
-  {lat:37.57,lon:126.98},{lat:19.43,lon:-99.13},
-  {lat:-26.20,lon:28.05},{lat:22.32,lon:114.17}
+  {lat:-26.20,lon:28.05},{lat:41.72,lon:44.79},{lat:19.43,lon:-99.13}
 ];
-const netLinks=[
-  [0,1],[0,2],[0,11],[1,2],[1,4],[1,11],[4,2],
-  [11,6],[6,7],[7,10],[5,8],[5,9],[8,9],[8,3],[9,3]
-];
-
 function topoF(t,n){
   const o=t.objects[n],tf=t.transform;
   function dA(ai){const a=t.arcs[ai<0?~ai:ai],c=[];let x=0,y=0;for(let i=0;i<a.length;i++){x+=a[i][0];y+=a[i][1];c.push([x*tf.scale[0]+tf.translate[0],y*tf.scale[1]+tf.translate[1]])}if(ai<0)c.reverse();return c}
@@ -1838,29 +2018,24 @@ function renderMap(){
 
   const dotBg='#0a1020';
   if(!isH){
-    const sCoords=servers.map(s=>proj([s.lon,s.lat]));
-    netLinks.forEach(([a,b],i)=>{
-      const[x1,y1]=sCoords[a],[x2,y2]=sCoords[b];
-      const ln=svg.append("line").attr("x1",x1).attr("y1",y1).attr("x2",x2).attr("y2",y2)
-        .attr("stroke",GREEN).attr("stroke-width",.35).attr("opacity",.1).attr("stroke-dasharray","4 6");
-      ln.append("animate").attr("attributeName","stroke-dashoffset").attr("values","0;-20")
-        .attr("dur",(4+i*.3)+"s").attr("repeatCount","indefinite");
-    });
     servers.forEach((s,i)=>{
       const[px,py]=proj([s.lon,s.lat]);const g=svg.append("g");
-      const pr=g.append("circle").attr("cx",px).attr("cy",py).attr("r",6).attr("fill","none").attr("stroke",GREEN).attr("stroke-width",.3).attr("opacity",.2);
-      pr.append("animate").attr("attributeName","r").attr("values","4;9;4").attr("dur",(3+i*.2)+"s").attr("repeatCount","indefinite");
-      pr.append("animate").attr("attributeName","opacity").attr("values",".2;0;.2").attr("dur",(3+i*.2)+"s").attr("repeatCount","indefinite");
-      g.append("circle").attr("cx",px).attr("cy",py).attr("r",5).attr("fill",GREEN).attr("opacity",.08).attr("filter","url(#gl)");
-      g.append("circle").attr("cx",px).attr("cy",py).attr("r",2.8).attr("fill",GREEN).attr("stroke",dotBg).attr("stroke-width",.8);
+      const pr=g.append("circle").attr("cx",px).attr("cy",py).attr("r",7).attr("fill","none").attr("stroke",GREEN).attr("stroke-width",.42).attr("opacity",.32);
+      pr.append("animate").attr("attributeName","r").attr("values","3;12;3").attr("dur",(2.4+i*.18)+"s").attr("repeatCount","indefinite");
+      pr.append("animate").attr("attributeName","opacity").attr("values",".4;.06;.4").attr("dur",(2.4+i*.18)+"s").attr("repeatCount","indefinite");
+      const glow=g.append("circle").attr("cx",px).attr("cy",py).attr("r",5.5).attr("fill",GREEN).attr("opacity",.12).attr("filter","url(#gl)");
+      glow.append("animate").attr("attributeName","opacity").attr("values",".1;.2;.1").attr("dur",(1.8+i*.15)+"s").attr("repeatCount","indefinite");
+      const core=g.append("circle").attr("cx",px).attr("cy",py).attr("r",2.8).attr("fill",GREEN).attr("stroke",dotBg).attr("stroke-width",.85);
+      core.append("animate").attr("attributeName","r").attr("values","2.5;3.2;2.5").attr("dur",(1.5+i*.12)+"s").attr("repeatCount","indefinite");
     });
     futureServers.forEach((s,i)=>{
       const[px,py]=proj([s.lon,s.lat]);const g=svg.append("g");
-      const pr=g.append("circle").attr("cx",px).attr("cy",py).attr("r",3.5).attr("fill","none").attr("stroke",YELLOW).attr("stroke-width",.25).attr("opacity",.18);
-      pr.append("animate").attr("attributeName","r").attr("values","2;5;2").attr("dur",(3.5+i*.25)+"s").attr("repeatCount","indefinite");
-      pr.append("animate").attr("attributeName","opacity").attr("values",".18;0;.18").attr("dur",(3.5+i*.25)+"s").attr("repeatCount","indefinite");
-      g.append("circle").attr("cx",px).attr("cy",py).attr("r",2.5).attr("fill",YELLOW).attr("opacity",.06).attr("filter","url(#gl)");
-      g.append("circle").attr("cx",px).attr("cy",py).attr("r",1.4).attr("fill",YELLOW).attr("stroke",dotBg).attr("stroke-width",.6);
+      const pr=g.append("circle").attr("cx",px).attr("cy",py).attr("r",3.5).attr("fill","none").attr("stroke",ORANGE).attr("stroke-width",.38).attr("opacity",.32);
+      pr.append("animate").attr("attributeName","r").attr("values","2.4;6.2;2.4").attr("dur",(2.7+i*.22)+"s").attr("repeatCount","indefinite");
+      pr.append("animate").attr("attributeName","opacity").attr("values",".38;.08;.38").attr("dur",(2.7+i*.22)+"s").attr("repeatCount","indefinite");
+      g.append("circle").attr("cx",px).attr("cy",py).attr("r",2.8).attr("fill",ORANGE).attr("opacity",.14).attr("filter","url(#gl)");
+      const core=g.append("circle").attr("cx",px).attr("cy",py).attr("r",1.5).attr("fill",ORANGE).attr("stroke",dotBg).attr("stroke-width",.6);
+      core.append("animate").attr("attributeName","r").attr("values","1.35;1.85;1.35").attr("dur",(1.6+i*.2)+"s").attr("repeatCount","indefinite");
     });
   }
 
@@ -1880,7 +2055,7 @@ function renderMap(){
     const srvText=L==='ru'?"Активные серверы":"Active servers";
     const futText=L==='ru'?"Скоро":"Coming soon";
     leg.innerHTML=`<div class="map-legend-item"><div class="map-legend-dot map-legend-dot-round" style="background:${GREEN};box-shadow:0 0 5px rgba(0,214,126,.4)"></div>${srvText}</div>`+
-      `<div class="map-legend-item"><div class="map-legend-dot map-legend-dot-round" style="background:${YELLOW};box-shadow:0 0 5px rgba(251,191,36,.4);width:5px;height:5px"></div>${futText}</div>`;
+      `<div class="map-legend-item"><div class="map-legend-dot map-legend-dot-round" style="background:${ORANGE};box-shadow:0 0 5px rgba(249,115,22,.45);width:5px;height:5px"></div>${futText}</div>`;
   }
   updateMapLabels();
 }
@@ -1889,6 +2064,8 @@ window.setMapMode=function(m){
   mapMode=m;
   document.getElementById("btn-srv").className=m==="servers"?"active-srv":"";
   document.getElementById("btn-heat").className=m==="heatmap"?"active-heat":"";
+  const ip=document.getElementById("map-info-panel");
+  if(ip){ip.classList.toggle("is-visible",m==="servers");ip.setAttribute("aria-hidden",m==="servers"?"false":"true");}
   tooltip.style.display="none";renderMap();
 };
 
