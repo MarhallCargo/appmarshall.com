@@ -574,16 +574,6 @@ img{max-width:100%;display:block}
 .cta-download-stack .btn-primary{width:100%;justify-content:center;box-sizing:border-box}
 .cta-download-stack .btn-primary > svg:first-of-type{width:18px;height:18px;min-width:18px;min-height:18px;max-width:18px;max-height:18px}
 .cta-download-stack .btn-primary .icon-android{width:18px;height:18px;min-width:18px;min-height:18px;max-width:18px;max-height:18px}
-.cta-buttons .btn-telegram{width:100%;max-width:400px;justify-content:center;box-sizing:border-box}
-.btn-telegram{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border-radius:14px;font-size:15px;font-weight:600;text-decoration:none;box-sizing:border-box;background:rgba(0,136,204,.15);color:#29b6f6;border:1px solid rgba(0,136,204,.25);cursor:pointer;transition:background .3s,border-color .3s,transform .3s,color .2s}
-.btn-telegram:hover{background:rgba(0,136,204,.25);border-color:rgba(0,136,204,.4);transform:translateY(-2px)}
-.btn-telegram:focus-visible{outline:2px solid rgba(41,182,246,.7);outline-offset:3px}
-.btn-telegram:active{transform:translateY(0)}
-.btn-telegram--footer{padding:10px 18px;font-size:13px;border-radius:12px;gap:8px;align-self:flex-start;max-width:100%}
-.btn-telegram--footer svg{width:16px;height:16px;min-width:16px;min-height:16px;flex-shrink:0}
-.footer-col--contact .btn-telegram--footer{margin-top:2px}
-.footer-col a.btn-telegram{color:#29b6f6}
-.footer-col a.btn-telegram:hover{color:#7fd8f9}
 
 /* iOS App Store — coming soon modal */
 .ios-soon-modal{position:fixed;inset:0;z-index:10050;display:none;align-items:center;justify-content:center;padding:20px;padding-bottom:max(20px,env(safe-area-inset-bottom));box-sizing:border-box}
@@ -1471,10 +1461,6 @@ img{max-width:100%;display:block}
             <span data-en="Download for Android" data-ru="Скачать для Android">Download for Android</span>
           </button>
         </div>
-        <a href="https://t.me/MarshallVPNBot" target="_blank" class="btn-telegram" rel="noopener noreferrer">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-          <span data-en="Get Started via Telegram" data-ru="Начать через Telegram">Get Started via Telegram</span>
-        </a>
       </div>
     </div>
   </div>
@@ -1502,10 +1488,6 @@ img{max-width:100%;display:block}
       <div class="footer-col footer-col--contact">
         <h4 data-en="Contact" data-ru="Контакты">Contact</h4>
         <a href="mailto:support@appmarshall.com" data-en="Email Us" data-ru="Написать нам">Email Us</a>
-        <a href="https://t.me/MarshallVPNBot" id="footerTelegramLink" class="btn-telegram btn-telegram--footer" target="_blank" rel="noopener noreferrer">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-          <span data-en="Open in Telegram" data-ru="Открыть в Telegram">Open in Telegram</span>
-        </a>
         <a href="privacy/" data-en="Privacy Policy" data-ru="Конфиденциальность">Privacy Policy</a>
         <a href="terms/" data-en="Terms of Use" data-ru="Условия использования">Terms of Use</a>
       </div>
@@ -1600,8 +1582,6 @@ function applyLang(l){
     const t=el.getAttribute('data-'+l);
     if(t!==null){if(el.tagName==='INPUT'||el.tagName==='TEXTAREA')el.placeholder=t;else el.innerHTML=t}
   });
-  const footerTg=document.getElementById('footerTelegramLink');
-  if(footerTg)footerTg.setAttribute('aria-label',l==='en'?'Open Marshall subscription assistant in Telegram (new tab)':'Помощник подписки Marshall в Telegram (новая вкладка)');
   syncIosSoonModalAria();
   syncAndroidSoonModalAria();
   if(typeof updateMapLabels==='function')updateMapLabels();
